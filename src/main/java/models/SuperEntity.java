@@ -11,7 +11,7 @@ public abstract class SuperEntity {
         this.id = id;
     }
 
-    @Column(name="id")
+  //  @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
