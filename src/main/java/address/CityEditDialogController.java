@@ -49,12 +49,12 @@ public class CityEditDialogController {
             region.getItems().add(ter.getName());
             indexTer.put(ter.getName(),ter);
         }
-
+        AutoCompleteComboBoxListener autoRegion = new AutoCompleteComboBoxListener(region);
         for (RefTypeCityEntity type:farm.getTypeCityData()) {
             typeLocality.getItems().add(type.getName());
             indexType.put(type.getName(),type);
         }
-
+        AutoCompleteComboBoxListener autoType = new AutoCompleteComboBoxListener(typeLocality);
         if (isNew) {
             name.setText("");
         } else {
@@ -62,6 +62,7 @@ public class CityEditDialogController {
             typeLocality.setValue(city.getRefTypeCityByTypeCityId().getName());
             region.setValue(city.getRefTerritoryByTerId().getName());
         }
+
     }
 
     public boolean isOkClicked() {

@@ -2,10 +2,7 @@ package address;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import models.RefCityEntity;
-import models.RefTerritoryEntity;
-import models.RefTypeCityEntity;
-import models.SuperEntity;
+import models.*;
 import services.EntityService;
 
 public class RootLayoutController {
@@ -33,6 +30,26 @@ public class RootLayoutController {
             farm.getTypeCityData().add(type);
         }
         farm.showTerritoryOverview();
+    }
+    @FXML
+    private void handleContragent() {
+        farm.getContragentData().clear();
+        farm.getCitiesData().clear();
+        farm.getPriceData().clear();
+        EntityService service = new EntityService();
+        for (SuperEntity contragent:service.getAllRows(new RefContragentEntity())) {
+            RefContragentEntity contra = (RefContragentEntity) contragent;
+            farm.getContragentData().add(contra);
+        }
+        for (SuperEntity city:service.getAllRows(new RefCityEntity())) {
+            RefCityEntity cities = (RefCityEntity) city;
+            farm.getCitiesData().add(cities);
+        }
+        for (SuperEntity pr:service.getAllRows(new RefPriceEntity())) {
+            RefPriceEntity priceEntity = (RefPriceEntity) pr;
+            farm.getPriceData().add(priceEntity);
+        }
+        farm.showContragentOverview();
     }
     @FXML
     private void handleExit() {

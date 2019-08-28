@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ public class RefCityEntity extends SuperEntity{
     private String name;
     private RefTerritoryEntity refTerritoryByTerId;
     private RefTypeCityEntity refTypeCityByTypeCityId;
+    private Collection<RefContragentEntity> refContragentsById;
 
     public RefCityEntity(){
         super();
@@ -61,5 +63,14 @@ public class RefCityEntity extends SuperEntity{
 
     public void setRefTypeCityByTypeCityId(RefTypeCityEntity refTypeCityByTypeCityId) {
         this.refTypeCityByTypeCityId = refTypeCityByTypeCityId;
+    }
+
+    @OneToMany(mappedBy = "refCityByCityId")
+    public Collection<RefContragentEntity> getRefContragentsById() {
+        return refContragentsById;
+    }
+
+    public void setRefContragentsById(Collection<RefContragentEntity> refContragentsById) {
+        this.refContragentsById = refContragentsById;
     }
 }

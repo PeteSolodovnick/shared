@@ -9,9 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import models.RefCityEntity;
-import models.RefTerritoryEntity;
-import models.RefTypeCityEntity;
+import models.*;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
@@ -22,6 +21,9 @@ public class FarmFX extends Application {
     private ObservableList<RefTerritoryEntity> territoryData = FXCollections.observableArrayList();
     private ObservableList<RefCityEntity> citiesData = FXCollections.observableArrayList();
     private ObservableList<RefTypeCityEntity> typeCityData = FXCollections.observableArrayList();
+    private ObservableList<RefContragentEntity> contragentData = FXCollections.observableArrayList();
+    private ObservableList<RefTypeContragentEntity> typeContragentData = FXCollections.observableArrayList();
+    private ObservableList<RefPriceEntity> priceData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
@@ -74,6 +76,26 @@ public class FarmFX extends Application {
         }
     }
 
+    public void showContragentOverview() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(FarmFX.class.getResource("/contragentOverview.fxml"));
+            AnchorPane contragentOverview = (AnchorPane) loader.load();
+            Stage referenceStage = new Stage();
+            referenceStage.setTitle("View References");
+            referenceStage.initModality(Modality.WINDOW_MODAL);
+            referenceStage.initOwner(primaryStage);
+            Scene referenceScene = new Scene(contragentOverview);
+            referenceStage.setScene(referenceScene);
+            ContragentOverviewController controller = loader.getController();
+            controller.setFarmFX(this);
+            controller.setReferenceStage(referenceStage);
+            referenceStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -86,6 +108,15 @@ public class FarmFX extends Application {
     }
     public ObservableList<RefTypeCityEntity> getTypeCityData() {
         return typeCityData;
+    }
+    public ObservableList<RefContragentEntity> getContragentData() {
+        return contragentData;
+    }
+    public ObservableList<RefTypeContragentEntity> getTypeContragentData() {
+        return typeContragentData;
+    }
+    public ObservableList<RefPriceEntity> getPriceData() {
+        return priceData;
     }
 
     public File getPersonFilePath() {

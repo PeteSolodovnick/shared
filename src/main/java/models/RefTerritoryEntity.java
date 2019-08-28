@@ -1,9 +1,7 @@
 package models;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
-import java.util.Observer;
 import java.util.Set;
 
 @Entity

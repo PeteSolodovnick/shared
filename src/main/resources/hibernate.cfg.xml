@@ -16,6 +16,10 @@
     <mapping class="models.RefCityEntity"/>
     <mapping class="models.RefTerritoryEntity"/>
       <mapping class="models.RefTypeCityEntity"/>
+      <mapping class="models.RefContragentEntity"/>
+      <mapping class="models.RefMarketViewEntity"/>
+      <mapping class="models.RefPriceEntity"/>
+      <mapping class="models.RefTypeContragentEntity"/>
 
 
       <!-- DB schema will be updated if needed -->

@@ -1,13 +1,9 @@
 package dao.implDAO;
 
 import dao.DAO;
-import models.RefTerritoryEntity;
 import models.SuperEntity;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.annotations.Entity;
-import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactoryUtil;
 
 import java.util.List;
@@ -22,11 +18,8 @@ public class EntityDaoImpl implements DAO<SuperEntity,Long> {
 
     @Override
     public void create(SuperEntity entity) {
-        System.out.println("IN EntityDaoInp create");
         try (final Session session = sessionFactory.openSession()) {
-            System.out.println("session opened");
             session.beginTransaction();
-            System.out.println("yayayayayayayya");
             session.save(entity);
             session.getTransaction().commit();
             session.close();

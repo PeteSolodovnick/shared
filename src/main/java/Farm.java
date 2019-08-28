@@ -1,35 +1,16 @@
-import models.RefTerritoryEntity;
-import models.SuperEntity;
-import services.EntityService;
+import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Farm {
+public class Farm  {
+    public ComboBox comboBox;
     public static void main(String[] args) {
-        List<SuperEntity> territories = new ArrayList<>();
-        EntityService service = new EntityService();
-        territories = service.getAllRows(new RefTerritoryEntity());
-        for (SuperEntity ter:territories) {
-            RefTerritoryEntity terr = (RefTerritoryEntity) ter;
-            System.out.println(terr.getName());
-        }
-    /*    Set<RefCityEntity> citiesTemp = new HashSet<RefCityEntity>();
-        EntityService territoryServiceTemp = new EntityService();
-        RefTerritoryEntity kyivska = new RefTerritoryEntity();
-        kyivska.setName("Kyivska");
-        RefCityEntity kyiv = new RefCityEntity();
-        kyiv.setName("Kyiv");
-        kyiv.setRefTerritoryByTerId(kyivska);
-        citiesTemp.add(kyiv);
-        RefCityEntity vyshneve = new RefCityEntity();
-        vyshneve.setName("Vyshneve");
-        vyshneve.setRefTerritoryByTerId(kyivska);
-        citiesTemp.add(vyshneve);
-        kyivska.setRefCitiesById(citiesTemp);
-        territoryServiceTemp.create(kyivska);
-        territoryServiceTemp.exit(); */
-    //    RootForm rootForm = new RootForm();
-      //  rootForm.setVisible(true);
+
     }
+
 }

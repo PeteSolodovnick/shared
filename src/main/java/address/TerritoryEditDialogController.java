@@ -26,7 +26,9 @@ public class TerritoryEditDialogController {
     public void setTerritory(RefTerritoryEntity territory, boolean isNew) {
         this.territory = territory;
         this.isNew = isNew;
-        region.setText(territory.getName());
+        if (isNew)
+            region.setText("");
+        else region.setText(territory.getName());
     }
     public boolean isOkClicked() {
         return okClicked;
