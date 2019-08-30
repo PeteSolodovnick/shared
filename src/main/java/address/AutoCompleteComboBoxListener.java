@@ -1,11 +1,11 @@
 package address;
 
-import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
@@ -35,7 +35,7 @@ public class AutoCompleteComboBoxListener<T> implements EventHandler<KeyEvent> {
 
     @Override
     public void handle(KeyEvent event) {
-        ListView lv = ((ComboBoxListViewSkin) comboBox.getSkin()).getListView();
+        ListView<?> lv = (ListView<?>) ((ComboBoxListViewSkin<?>) comboBox.getSkin()).getPopupContent();
 
         if(event.getCode() == KeyCode.UP) {
             caretPos = -1;
