@@ -24,6 +24,7 @@ public class FarmFX extends Application {
     private ObservableList<RefContragentEntity> contragentData = FXCollections.observableArrayList();
     private ObservableList<RefTypeContragentEntity> typeContragentData = FXCollections.observableArrayList();
     private ObservableList<RefPriceEntity> priceData = FXCollections.observableArrayList();
+    private ObservableList<RefMarketViewEntity> marketViewData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
@@ -117,6 +118,9 @@ public class FarmFX extends Application {
     }
     public ObservableList<RefPriceEntity> getPriceData() {
         return priceData;
+    }
+    public ObservableList<RefMarketViewEntity> getMarketViewData() {
+        return marketViewData;
     }
 
     public File getPersonFilePath() {

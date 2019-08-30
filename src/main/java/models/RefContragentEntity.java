@@ -14,6 +14,7 @@ public class RefContragentEntity extends SuperEntity{
     private RefTypeContragentEntity refTypeContragentByTypeContraId;
     private RefCityEntity refCityByCityId;
     private RefPriceEntity refPriceByPriceId;
+    private RefMarketViewEntity refMarketViewByMarketViewId;
 
     @Basic
     @Column(name = "name", nullable = true, length = 100)
@@ -91,6 +92,16 @@ public class RefContragentEntity extends SuperEntity{
 
     public void setRefTypeContragentByTypeContraId(RefTypeContragentEntity refTypeContragentByTypeContraId) {
         this.refTypeContragentByTypeContraId = refTypeContragentByTypeContraId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "market_view_id", referencedColumnName = "id", nullable = false)
+    public RefMarketViewEntity getRefMarketViewByMarketViewId() {
+        return refMarketViewByMarketViewId;
+    }
+
+    public void setRefMarketViewByMarketViewId(RefMarketViewEntity refMarketViewByMarketViewId) {
+        this.refMarketViewByMarketViewId = refMarketViewByMarketViewId;
     }
 
     @ManyToOne

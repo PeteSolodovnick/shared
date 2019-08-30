@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "ref_market_view", schema = "public", catalog = "farm")
 public class RefMarketViewEntity extends SuperEntity{
     private String name;
-    private Collection<RefTypeContragentEntity> refTypeContragentsById;
+    private Collection<RefContragentEntity> refContragentsById;
 
     @Basic
     @Column(name = "name", nullable = true, length = 50)
@@ -35,11 +35,11 @@ public class RefMarketViewEntity extends SuperEntity{
     }
 
     @OneToMany(mappedBy = "refMarketViewByMarketViewId")
-    public Collection<RefTypeContragentEntity> getRefTypeContragentsById() {
-        return refTypeContragentsById;
+    public Collection<RefContragentEntity> getRefContragentsById() {
+        return refContragentsById;
     }
 
-    public void setRefTypeContragentsById(Collection<RefTypeContragentEntity> refTypeContragentsById) {
-        this.refTypeContragentsById = refTypeContragentsById;
+    public void setRefContragentsById(Collection<RefContragentEntity> refContragentsById) {
+        this.refContragentsById = refContragentsById;
     }
 }

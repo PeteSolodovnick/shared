@@ -10,7 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.RefContragentEntity;
-import models.RefTerritoryEntity;
 import services.EntityService;
 
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class ContragentOverviewController {
     @FXML
     private TableColumn<RefContragentEntity,Long> idContragent;
     @FXML
-    private TableColumn<RefTerritoryEntity,String> nameContragent;
+    private TableColumn<RefContragentEntity,String> nameContragent;
 
     @FXML
     private Label idLabel;
@@ -40,6 +39,10 @@ public class ContragentOverviewController {
     private Label localityLabel;
     @FXML
     private Label priceLabel;
+    @FXML
+    private Label marketViewLabel;
+    @FXML
+    private TextArea comments;
 
     private Stage referenceStage;
     private FarmFX farm;
@@ -91,6 +94,9 @@ public class ContragentOverviewController {
             typeContragentLabel.setText(contragentEntity.getRefTypeContragentByTypeContraId().getName());
             priceLabel.setText(contragentEntity.getRefPriceByPriceId().getName());
             localityLabel.setText(contragentEntity.getRefCityByCityId().getName());
+            marketViewLabel.setText(contragentEntity.getRefMarketViewByMarketViewId().getName());
+            comments.setText(contragentEntity.getComments());
+
         } else {
             idLabel.setText("");
             nameLabel.setText("");
@@ -100,6 +106,8 @@ public class ContragentOverviewController {
             typeContragentLabel.setText("");
             priceLabel.setText("");
             localityLabel.setText("");
+            marketViewLabel.setText("");
+            comments.setText("");
         }
     }
     @FXML
@@ -161,6 +169,7 @@ public class ContragentOverviewController {
             if (okClicked) {
                 //обновляем отображение таблицы с новыми данными
                 contragentTable.refresh();
+                showContragentDetails(contragentEntity);
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

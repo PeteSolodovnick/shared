@@ -49,6 +49,14 @@ public class RootLayoutController {
             RefPriceEntity priceEntity = (RefPriceEntity) pr;
             farm.getPriceData().add(priceEntity);
         }
+        for (SuperEntity mv:service.getAllRows(new RefMarketViewEntity())) {
+            RefMarketViewEntity marketEntity = (RefMarketViewEntity) mv;
+            farm.getMarketViewData().add(marketEntity);
+        }
+        for (SuperEntity typeContra:service.getAllRows(new RefTypeContragentEntity())) {
+            RefTypeContragentEntity typeEntity = (RefTypeContragentEntity) typeContra;
+            farm.getTypeContragentData().add(typeEntity);
+        }
         farm.showContragentOverview();
     }
     @FXML

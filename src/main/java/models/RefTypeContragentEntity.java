@@ -9,7 +9,6 @@ import java.util.Objects;
 public class RefTypeContragentEntity extends SuperEntity {
     private String name;
     private Collection<RefContragentEntity> refContragentsById;
-    private RefMarketViewEntity refMarketViewByMarketViewId;
 
     @Basic
     @Column(name = "name", nullable = true, length = 50)
@@ -42,15 +41,5 @@ public class RefTypeContragentEntity extends SuperEntity {
 
     public void setRefContragentsById(Collection<RefContragentEntity> refContragentsById) {
         this.refContragentsById = refContragentsById;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "market_view_id", referencedColumnName = "id", nullable = false)
-    public RefMarketViewEntity getRefMarketViewByMarketViewId() {
-        return refMarketViewByMarketViewId;
-    }
-
-    public void setRefMarketViewByMarketViewId(RefMarketViewEntity refMarketViewByMarketViewId) {
-        this.refMarketViewByMarketViewId = refMarketViewByMarketViewId;
     }
 }
