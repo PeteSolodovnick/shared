@@ -45,8 +45,11 @@ public class FarmFX extends Application {
 
     public void initRootLayout() {
         try {
+            System.out.println("In init root");
             FXMLLoader loader = new FXMLLoader();
+            System.out.println("loader before");
             loader.setLocation(FarmFX.class.getResource("/rootLayout.fxml"));
+            System.out.println("loader");
             rootLayout = (BorderPane) loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
