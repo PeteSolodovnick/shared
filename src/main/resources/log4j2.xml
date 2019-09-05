@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="FS">${sys:file.separator}</Property>
+        <Property name="UserLogsPath">${sys:user.home}${FS}.farm${FS}</Property>
+        <Property name="LogFileName">farm.log</Property>
+        <Property name="DebugLogFileName">farm.debug.log</Property>
+        <Property name="HibernateLogFileName">hibernate.log</Property>
+        <Property name="SQLLogFileName">sql.log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console">
+            <PatternLayout pattern="%d{yyyyMMdd-HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="SizeRollingLogFile" fileName="${UserLogsPath}${LogFileName}" filePattern="${UserLogsPath}${LogFileName}.%i.gz" immediateFlush="true" append="true">
+            <PatternLayout pattern="%d{yyyyMMdd-HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="25 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+        <RollingFile name="SizeRollingDebugLogFile" fileName="${UserLogsPath}${DebugLogFileName}" filePattern="${UserLogsPath}${DebugLogFileName}.%i.gz" immediateFlush="true">
+            <PatternLayout pattern="%d{yyyyMMdd-HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="25 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+        <RollingFile name="SizeRollingHibernateLogFile" fileName="${UserLogsPath}${HibernateLogFileName}" filePattern="${UserLogsPath}${HibernateLogFileName}.%i.gz" immediateFlush="true" append="true">
+            <PatternLayout pattern="%d{yyyyMMdd-HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="25 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+        <RollingFile name="SizeRollingSQLLogFile" fileName="${UserLogsPath}${SQLLogFileName}" filePattern="${UserLogsPath}${SQLLogFileName}.%i.gz" immediateFlush="true" append="true">
+            <PatternLayout pattern="%d{yyyyMMdd-HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="25 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="org.hibernate" level="debug" additivity="false">
+            <AppenderRef ref="SizeRollingHibernateLogFile"/>
+        </Logger>
+        <Logger name="org.hibernate.SQL" level="debug" additivity="false">
+            <AppenderRef ref="SizeRollingSQLLogFile"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="SizeRollingLogFile" level="info"/>
+            <AppenderRef ref="SizeRollingDebugLogFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
