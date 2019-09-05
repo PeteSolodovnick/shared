@@ -4,12 +4,14 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/farm</property>
-    <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">PtSlDvNcK1981</property>
-    <property name="dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
-    <property name="show_sql">true</property>
+    <!-- hibernate connection settings were moved into conf/hibernate.db.properties file. For example:
+      hibernate.connection.driver_class = org.postgresql.Driver
+      hibernate.connection.url = jdbc:postgresql://myhost:5432/farm
+      hibernate.connection.username = mylogin
+      hibernate.connection.password = mypwd
+      hibernate.dialect = org.hibernate.dialect.PostgreSQL95Dialect
+      hibernate.show_sql = true
+     -->
 
     <!--  <mapping class="forDeleting.RefTerritoryEntityOldTemp"/>
       <mapping class="forDeleting.RefCityEntityOldTemp"/>-->
