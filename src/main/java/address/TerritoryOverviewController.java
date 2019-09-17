@@ -117,19 +117,19 @@ public class TerritoryOverviewController {
             cityTable.setItems(citiesOfTerritory);
         }
     }
-    private void showCitiesDetails(RefCityEntity cityEntity) {
-        if (cityEntity != null) {
-            idLabel.setText(cityEntity.getId().toString());
-            nameLabel.setText(cityEntity.getName());
-            regionLabel.setText(cityEntity.getRefTerritoryByTerId().getName());
-            typeLabel.setText(cityEntity.getRefTypeCityByTypeCityId().getName());
-        } else {
-            idLabel.setText("");
-            nameLabel.setText("");
-            typeLabel.setText("");
-            regionLabel.setText("");
+        private void showCitiesDetails(RefCityEntity cityEntity) {
+            if (cityEntity != null) {
+                idLabel.setText(cityEntity.getId().toString());
+                nameLabel.setText(cityEntity.getName());
+                regionLabel.setText(cityEntity.getRefTerritoryByTerId().getName());
+                typeLabel.setText(cityEntity.getRefTypeCityByTypeCityId().getName());
+            } else {
+                idLabel.setText("");
+                nameLabel.setText("");
+                typeLabel.setText("");
+                regionLabel.setText("");
+            }
         }
-    }
     @FXML
     private void handleCloseReferences() {
         referenceStage.close();

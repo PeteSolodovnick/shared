@@ -25,6 +25,9 @@ public class FarmFX extends Application {
     private ObservableList<RefTypeContragentEntity> typeContragentData = FXCollections.observableArrayList();
     private ObservableList<RefPriceEntity> priceData = FXCollections.observableArrayList();
     private ObservableList<RefMarketViewEntity> marketViewData = FXCollections.observableArrayList();
+    private ObservableList<RefNomenklEntity> productsData = FXCollections.observableArrayList();
+    private ObservableList<RefClassificationEntity> classificationData = FXCollections.observableArrayList();
+    private ObservableList<RefSizeEntity> sizeEntitiesData = FXCollections.observableArrayList();
 
     public static void main(String[] args) {
         launch(args);
@@ -45,11 +48,8 @@ public class FarmFX extends Application {
 
     public void initRootLayout() {
         try {
-            System.out.println("In init root");
             FXMLLoader loader = new FXMLLoader();
-            System.out.println("loader before");
             loader.setLocation(FarmFX.class.getResource("/rootLayout.fxml"));
-            System.out.println("loader");
             rootLayout = (BorderPane) loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
@@ -100,6 +100,33 @@ public class FarmFX extends Application {
         }
     }
 
+    public void showClassificationOverview() {
+        try {
+       //     System.out.println("show classification");
+            FXMLLoader loader = new FXMLLoader();
+      //      System.out.println("before loader");
+            loader.setLocation(FarmFX.class.getResource("/classificationOverview.fxml"));
+            System.out.println("after load fxml");
+            AnchorPane classificationOverview = (AnchorPane) loader.load();
+       //     System.out.println("load anchor panel");
+            Stage referenceStage = new Stage();
+            referenceStage.setTitle("View References");
+            referenceStage.initModality(Modality.WINDOW_MODAL);
+            referenceStage.initOwner(primaryStage);
+            Scene referenceScene = new Scene(classificationOverview);
+            referenceStage.setScene(referenceScene);
+        //    System.out.println("before controller");
+            ClassificationOverviewController controller = loader.getController();
+         //   System.out.println("controller");
+            controller.setFarmFX(this);
+          //  System.out.println("after set");
+            controller.setReferenceStage(referenceStage);
+            referenceStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -124,6 +151,13 @@ public class FarmFX extends Application {
     }
     public ObservableList<RefMarketViewEntity> getMarketViewData() {
         return marketViewData;
+    }
+    public ObservableList<RefNomenklEntity> getProductsData() {
+        return productsData;
+    }
+    public ObservableList<RefClassificationEntity> getClassificationData() {return classificationData;}
+    public ObservableList<RefSizeEntity> getSizeEntitiesData() {
+        return sizeEntitiesData;
     }
 
     public File getPersonFilePath() {

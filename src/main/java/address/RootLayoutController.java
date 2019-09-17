@@ -36,6 +36,8 @@ public class RootLayoutController {
         farm.getContragentData().clear();
         farm.getCitiesData().clear();
         farm.getPriceData().clear();
+        farm.getTypeContragentData().clear();
+        farm.getMarketViewData().clear();
         EntityService service = new EntityService();
         for (SuperEntity contragent:service.getAllRows(new RefContragentEntity())) {
             RefContragentEntity contra = (RefContragentEntity) contragent;
@@ -58,6 +60,26 @@ public class RootLayoutController {
             farm.getTypeContragentData().add(typeEntity);
         }
         farm.showContragentOverview();
+    }
+    @FXML
+    private void handleClassification() {
+        farm.getSizeEntitiesData().clear();
+        farm.getClassificationData().clear();
+        farm.getProductsData().clear();
+        EntityService service = new EntityService();
+        for (SuperEntity size:service.getAllRows(new RefSizeEntity())) {
+            RefSizeEntity s = (RefSizeEntity) size;
+            farm.getSizeEntitiesData().add(s);
+        }
+        for (SuperEntity cl:service.getAllRows(new RefClassificationEntity())) {
+            RefClassificationEntity classification = (RefClassificationEntity) cl;
+            farm.getClassificationData().add(classification);
+        }
+        for (SuperEntity nom:service.getAllRows(new RefNomenklEntity())) {
+            RefNomenklEntity product = (RefNomenklEntity) nom;
+            farm.getProductsData().add(product);
+        }
+        farm.showClassificationOverview();
     }
     @FXML
     private void handleExit() {

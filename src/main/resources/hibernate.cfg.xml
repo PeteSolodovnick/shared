@@ -20,6 +20,9 @@
       <mapping class="models.RefMarketViewEntity"/>
       <mapping class="models.RefPriceEntity"/>
       <mapping class="models.RefTypeContragentEntity"/>
+      <mapping class="models.RefClassificationEntity"/>
+      <mapping class="models.RefNomenklEntity"/>
+      <mapping class="models.RefSizeEntity"/>
 
 
       <!-- DB schema will be updated if needed -->

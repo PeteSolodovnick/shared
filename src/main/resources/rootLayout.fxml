@@ -23,6 +23,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleLocality" text="Locality" />
                   <MenuItem mnemonicParsing="false" onAction="#handleContragent" text="Contragents" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleClassification" text="Classifications" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

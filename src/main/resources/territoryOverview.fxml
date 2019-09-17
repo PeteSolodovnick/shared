@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="929.0" prefWidth="1192.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.TerritoryOverviewController">
    <children>
-      <SplitPane dividerPositions="0.2687074829931973, 0.6335034013605442" prefHeight="929.0" prefWidth="1178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.2687074829931973, 0.6377551020408163" prefHeight="929.0" prefWidth="1178.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
          <items>
             <AnchorPane prefHeight="791.0" prefWidth="297.0">
                <children>
@@ -36,13 +36,13 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Column" textFill="#000001">
+                        <Label text="Columns" textFill="#000001">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Label>
                         <Label text="Id" GridPane.rowIndex="1" />
                         <Label text="Name" GridPane.rowIndex="2" />
-                        <Label text="Value" textFill="#000001" GridPane.columnIndex="1">
+                        <Label text="Values" textFill="#000001" GridPane.columnIndex="1">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></Label>
