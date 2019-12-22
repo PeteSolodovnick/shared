@@ -32,7 +32,7 @@ public class TerritoryDialogController extends SuperDialogEntityController {
         if (getFarm().getConfigDialogController().getTerritoryTableController() != null) {
             getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().getItems().add(territoryEntity);
         }
-        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().add(new TreeItem<>(territoryEntity.getName()));
+        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().add(new TreeItem<>(territoryEntity));
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().add(territoryEntity);
     }
 
@@ -43,7 +43,7 @@ public class TerritoryDialogController extends SuperDialogEntityController {
             getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getLocalityOverviewController().initRoot();
-        } else getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity.getName());
+        } else getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
         for (int i = 0; i < getFarm().getReferences().getCitiesData().size(); i++) {
           if (getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().getId() == entity.getId()) {
               getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().setName(entity.getName());

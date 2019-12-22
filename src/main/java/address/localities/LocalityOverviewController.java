@@ -6,7 +6,9 @@ import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TreeItem;
 import models.RefCityEntity;
+import models.RefTerritoryEntity;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -18,7 +20,7 @@ public class LocalityOverviewController extends SuperEntityTreeController implem
 
     @FXML @Override
     protected void initialize() {
-            getRootItem().setValue("Territory");
+            getRootItem().setValue(new TreeItem<RefTerritoryEntity>().getValue());
             super.initialize();
             typeLocality.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTypeCityByTypeCityId().getName()));
             territory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTerritoryByTerId().getName()));

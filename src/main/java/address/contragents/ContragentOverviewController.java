@@ -6,7 +6,9 @@ import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TreeItem;
 import models.RefContragentEntity;
+import models.SuperEntity;
 
 public class ContragentOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -24,7 +26,7 @@ public class ContragentOverviewController extends SuperEntityTreeController impl
 
     @FXML @Override
     protected void initialize() {
-        getRootItem().setValue("Type of Contragents");
+        getRootItem().setValue(new TreeItem<SuperEntity>().getValue());
         super.initialize();
         city.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefCityByCityId().getName()));
         address.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));

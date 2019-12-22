@@ -17,8 +17,8 @@ import java.util.Optional;
 
 public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
-    private TreeView<String> treeView;
-    private TreeItem <String> rootItem = new TreeItem("Entity");
+    private TreeView<SuperEntity> treeView;
+    private TreeItem <SuperEntity> rootItem = new TreeItem("Entity");
     private ObservableList<SuperEntity> entitiesTree = FXCollections.observableArrayList();
     private String fileTree;
 
@@ -39,12 +39,12 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     protected void initRoot() {
         for (SuperEntity entity:entitiesTree) {
             if (entity != null) {
-                rootItem.getChildren().add(new TreeItem<>(entity.getName()));
+                rootItem.getChildren().add(new TreeItem<SuperEntity>(entity));
             }
         }
     }
 
-    private void showEntities(TreeItem<String> entity) {
+    private void showEntities(TreeItem<SuperEntity> entity) {
         ObservableList<SuperEntity> entities = FXCollections.observableArrayList();
         if (entity != null) {
             if (entity.getValue().equals(rootItem.getValue())) {
@@ -80,7 +80,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
     public void handleDeleteTreeEntity() {
         int selectedId = treeView.getSelectionModel().getSelectedIndex();
-        String name = treeView.getTreeItem(selectedId).getValue();
+        SuperEntity name = treeView.getTreeItem(selectedId).getValue();
         logger.info("name for delete " + name);
         if (selectedId>0) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -92,7 +92,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
                 EntityService service = new EntityService();
                 try {
                     for (int i = 0; i < entitiesTree.size(); i++) {
-                        if (entitiesTree.get(i).getName().equals(name)) {
+                        if (entitiesTree.get(i).getId() == name.getId()) {
                             service.delete(entitiesTree.get(i));
                             entitiesTree.remove(i);
                             rootItem.getChildren().remove(selectedId-1);
@@ -138,11 +138,11 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
         }
     }
 
-    public TreeView<String> getTreeView() {
+    public TreeView<SuperEntity> getTreeView() {
         return treeView;
     }
 
-    public TreeItem<String> getRootItem() {
+    public TreeItem<SuperEntity> getRootItem() {
         return rootItem;
     }
 

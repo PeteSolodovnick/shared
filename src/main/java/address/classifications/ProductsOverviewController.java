@@ -22,7 +22,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
 
     @FXML @Override
     protected void initialize() {
-        getRootItem().setValue("Classification");
+        getRootItem().setValue(new TreeItem<RefClassificationEntity>().getValue());
         super.initialize();
         size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefSizeBySizeId().getName()));
         classification.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefClassificationByClassificationId().getName()));
@@ -47,18 +47,18 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         for (SuperEntity entity : getEntitiesTree()) {
             RefClassificationEntity classification = (RefClassificationEntity) entity;
             if (classification.getRefClassificationByParentId() == null) {
-                TreeItem<String> newRoot = new TreeItem(classification.getName());
+                TreeItem<SuperEntity> newRoot = new TreeItem(classification);
                 initializeClassification(newRoot, classification);
                 getRootItem().getChildren().add(newRoot);
             }
         }
     }
-    private void initializeClassification(TreeItem<String> root, RefClassificationEntity classification) {
+    private void initializeClassification(TreeItem<SuperEntity> root, RefClassificationEntity classification) {
         if (classification != null) {
             for (SuperEntity entity : getEntitiesTree()) {
                 RefClassificationEntity classif = (RefClassificationEntity) entity;
                 if (classif.getRefClassificationByParentId() != null && classif.getRefClassificationByParentId().getId() == classification.getId()) {
-                    TreeItem<String> newRoot = new TreeItem(classif.getName());
+                    TreeItem<SuperEntity> newRoot = new TreeItem(classif);
                     initializeClassification(newRoot, classif);
                     root.getChildren().add(newRoot);
                 }
@@ -87,8 +87,8 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         setTitle("Edit Classification...");
         int selectedId = getTreeView().getSelectionModel().getSelectedIndex();
         if (selectedId > 0) {
-            String findItem = getTreeView().getSelectionModel().getSelectedItem().getValue();
-            String parent = getTreeView().getSelectionModel().getSelectedItem().getParent().getValue();
+            RefClassificationEntity findItem = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getValue();
+            RefClassificationEntity parent = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getParent().getValue();
             for (int i = 0; i < getEntitiesTree().size(); i++) {
                 RefClassificationEntity classificationEntity = (RefClassificationEntity) getEntitiesTree().get(i);
                 if (getEntitiesTree().get(i).getName().equals(findItem)) {

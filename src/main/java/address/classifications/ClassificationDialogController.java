@@ -54,7 +54,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
         if (getFarm().getConfigDialogController().getClassificationProductTableController() != null) {
             getFarm().getConfigDialogController().getClassificationProductTableController().getEntityTable().getItems().add(classificationEntity);
         }
-        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().add(new TreeItem<>(classificationEntity.getName()));
+        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().add(new TreeItem<>(classificationEntity));
         getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesTree().add(classificationEntity);
     }
 
@@ -66,7 +66,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
             getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getProductsOverviewController().initRoot();
         } else {
-            getFarm().getConfigDialogController().getProductsOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity.getName());
+            getFarm().getConfigDialogController().getProductsOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
         }
         for (int i = 0; i < getFarm().getReferences().getProductsData().size(); i++) {
             if (getFarm().getReferences().getProductsData().get(i).getRefClassificationByClassificationId().getId() == entity.getId()) {
