@@ -6,30 +6,52 @@ import java.util.Objects;
 @Entity
 @Table(name = "ref_contragent", schema = "public", catalog = "farm")
 public class RefContragentEntity extends SuperEntity{
-    private String name;
     private String address;
     private String contact;
     private String phone;
     private String comments;
+    private String okpo;
+    private String inn;
+    private Boolean nds;
     private RefTypeContragentEntity refTypeContragentByTypeContraId;
     private RefCityEntity refCityByCityId;
     private RefPriceEntity refPriceByPriceId;
     private RefMarketViewEntity refMarketViewByMarketViewId;
-
-    @Basic
-    @Column(name = "name", nullable = true, length = 100)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    private RefKindContragentEntity refKindContragentByKindContraId;
 
     @Basic
     @Column(name = "address", nullable = true, length = 150)
     public String getAddress() {
         return address;
+    }
+
+    @Basic
+    @Column(name = "okpo", nullable = true, length = 50)
+    public String getOkpo() {
+        return okpo;
+    }
+
+    public void setOkpo(String okpo) {
+        this.okpo = okpo;
+    }
+
+    @Basic
+    @Column(name = "inn", nullable = true, length = 30)
+    public String getInn() {
+        return inn;
+    }
+
+    public void setInn(String inn) {
+        this.inn = inn;
+    }
+    @Basic
+    @Column(name = "nds")
+    public Boolean getNds() {
+        return nds;
+    }
+
+    public void setNds(Boolean nds) {
+        this.nds = nds;
     }
 
     public void setAddress(String address) {
@@ -66,24 +88,6 @@ public class RefContragentEntity extends SuperEntity{
         this.comments = comments;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RefContragentEntity that = (RefContragentEntity) o;
-        return getId() == that.getId() &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(contact, that.contact) &&
-                Objects.equals(phone, that.phone) &&
-                Objects.equals(comments, that.comments);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, address, contact, phone, comments, getId());
-    }
-
     @ManyToOne
     @JoinColumn(name = "type_contra_id", referencedColumnName = "id", nullable = false)
     public RefTypeContragentEntity getRefTypeContragentByTypeContraId() {
@@ -92,6 +96,16 @@ public class RefContragentEntity extends SuperEntity{
 
     public void setRefTypeContragentByTypeContraId(RefTypeContragentEntity refTypeContragentByTypeContraId) {
         this.refTypeContragentByTypeContraId = refTypeContragentByTypeContraId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "kind_contra_id", referencedColumnName = "id", nullable = false)
+    public RefKindContragentEntity getRefKindContragentByKindContraId() {
+        return refKindContragentByKindContraId;
+    }
+
+    public void setRefKindContragentByKindContraId(RefKindContragentEntity refKindContragentByKindContraId) {
+        this.refKindContragentByKindContraId = refKindContragentByKindContraId;
     }
 
     @ManyToOne

@@ -8,27 +8,12 @@ import java.util.Set;
 @Entity
 @Table(name = "ref_city", schema = "public", catalog = "farm")
 public class RefCityEntity extends SuperEntity{
-    private String name;
     private RefTerritoryEntity refTerritoryByTerId;
     private RefTypeCityEntity refTypeCityByTypeCityId;
     private Collection<RefContragentEntity> refContragentsById;
 
     public RefCityEntity(){
         super();
-    }
-
-    public RefCityEntity(Long id) {
-        super(id);
-    }
-
-    @Basic
-    @Column(name = "name", nullable = true, length = 50)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @ManyToOne
@@ -39,20 +24,6 @@ public class RefCityEntity extends SuperEntity{
 
     public void setRefTerritoryByTerId(RefTerritoryEntity refTerritoryByTerId) {
         this.refTerritoryByTerId = refTerritoryByTerId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RefCityEntity that = (RefCityEntity) o;
-        return getId() == that.getId() &&
-                Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, getId());
     }
 
     @ManyToOne
