@@ -60,7 +60,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
                 }
                 dialogStage.close();
             } catch (Exception e) {
-                showAlert("One or more fields are empty or already exist");
+                showAlert("One or more fields are empty");
             }
         }
     }

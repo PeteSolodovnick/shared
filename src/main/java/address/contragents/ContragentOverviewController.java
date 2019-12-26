@@ -3,16 +3,15 @@ package address.contragents;
 import address.mains.ControllerReference;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TreeItem;
-import models.RefContragentEntity;
-import models.SuperEntity;
+import models.*;
 
 public class ContragentOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefContragentEntity, String> city;
+    private TableColumn<RefContragentEntity, RefCityEntity> city;
     @FXML
     private TableColumn<RefContragentEntity, String> address;
     @FXML
@@ -20,17 +19,19 @@ public class ContragentOverviewController extends SuperEntityTreeController impl
     @FXML
     private TableColumn<RefContragentEntity, String> phone;
     @FXML
-    private TableColumn<RefContragentEntity, String> market;
+    private TableColumn<RefContragentEntity, RefMarketViewEntity> market;
 
     public ContragentOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-        getRootItem().setValue(new TreeItem<SuperEntity>().getValue());
+        RefTypeContragentEntity rootTypeContragent = new RefTypeContragentEntity();
+        rootTypeContragent.setName("Type Contragent");
+        getRootItem().setValue(rootTypeContragent);
         super.initialize();
-        city.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefCityByCityId().getName()));
+        city.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefCityByCityId()));
         address.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
-        market.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefMarketViewByMarketViewId().getName()));
+        market.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefMarketViewByMarketViewId()));
         contact.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContact()));
         phone.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhone()));
     }

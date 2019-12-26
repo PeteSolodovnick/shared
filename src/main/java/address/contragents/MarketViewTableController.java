@@ -2,6 +2,8 @@ package address.contragents;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import models.RefMarketViewEntity;
+import models.RefTypeCityEntity;
 
 public class MarketViewTableController extends SuperTableEntityController {
     public MarketViewTableController() {
@@ -14,6 +16,7 @@ public class MarketViewTableController extends SuperTableEntityController {
     }
     @Override
     public void setTextEdit() {
+        getFarm().getConfigDialogController().getContragentDialogController().setMarketViewEntity((RefMarketViewEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getContragentDialogController().getMarketView().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

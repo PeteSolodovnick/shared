@@ -1,12 +1,12 @@
 package address.mains;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import models.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,9 +21,9 @@ public abstract class SuperEntityController implements ControllerReference {
     @FXML
     private TableColumn<SuperEntity,Long> idEntity;
     @FXML
-    private TableColumn<SuperEntity,String> nameEntity;
+    private TableColumn<SuperEntity,SuperEntity> nameEntity;
     @FXML
-    private ComboBox<String> entitiesName;
+    private ComboBox<SuperEntity> entitiesName;
 
     private Stage referenceStage;
     private FarmFX farm;
@@ -41,8 +41,30 @@ public abstract class SuperEntityController implements ControllerReference {
     protected void initialize() {
         try {
             idEntity.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(cellData.getValue().getId()));
-            nameEntity.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+            nameEntity.setCellValueFactory(cellData -> new SimpleObjectProperty<SuperEntity>(cellData.getValue()));
             entitiesName.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->showEntities(newValue));
+            entitiesName.setConverter(new StringConverter<SuperEntity>(){
+                @Override
+                public String toString(SuperEntity superEntity) {
+                    if (superEntity != null) {
+                        return superEntity.toString();
+                    }
+                    return null;
+                }
+                @Override
+                public SuperEntity fromString(String s) {
+                    if (s != null) {
+                        for (SuperEntity item : entitiesName.getItems()) {
+                            if (item.toString().equals(s)) {
+                                return item;
+                            }
+                        }
+                    }
+                    //Not sure what to do here, return null if item wasn't found in list or add a new one...
+                    //return (new SuperEntity(0,s));
+                    return null;
+                }
+            });
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
@@ -50,8 +72,9 @@ public abstract class SuperEntityController implements ControllerReference {
     public void setFarmFX(FarmFX farm) {
         this.farm = farm;
         entityTable.setItems(entities);
-        for (SuperEntity entity:this.entities)
-            entitiesName.getItems().add(entity.getName());
+    //    for (SuperEntity entity:this.entities)
+    //        entitiesName.getItems().add(entity.getName());
+        entitiesName.setItems(entities);
         AutoCompleteComboBoxListener autoEntity = new AutoCompleteComboBoxListener(entitiesName);
     }
     @Override
@@ -59,79 +82,80 @@ public abstract class SuperEntityController implements ControllerReference {
         this.referenceStage = referenceStage;
     }
 
-    private void showEntities(String nameEntity) {
+    private void showEntities(SuperEntity nameEntity) {
         ObservableList<SuperEntity> entities = FXCollections.observableArrayList();
         if (nameEntity != null) {
                 for (SuperEntity someEntity : this.entities) {
-                    logger.info(someEntity.getClass().getName());
-                    switch (someEntity.getClass().getName()) {
+                    if (someEntity.getName().equals(nameEntity.getName()))
+                        entities.add(someEntity);
+                /*    switch (someEntity.getClass().getName()) {
                         case "models.RefCityEntity":
                             RefCityEntity cityEntity = (RefCityEntity) someEntity;
-                            if (cityEntity.getName().equals(nameEntity)) {
+                            if (cityEntity.getName().equals(nameEntity.getName())) {
                                 entities.add(cityEntity);
                             }
                             break;
                         case "models.RefTerritoryEntity":
                             RefTerritoryEntity territoryEntity = (RefTerritoryEntity) someEntity;
-                            if (territoryEntity.getName().equals(nameEntity)) {
+                            if (territoryEntity.getName().equals(nameEntity.getName())) {
                                 entities.add(territoryEntity);
                             }
                             break;
                         case "models.RefContragentEntity":
                             RefContragentEntity contragentEntity = (RefContragentEntity) someEntity;
-                            if (contragentEntity.getName().equals(nameEntity)) {
+                            if (contragentEntity.getName().equals(nameEntity.getName())) {
                                 entities.add(contragentEntity);
                             }
                             break;
                         case "models.RefTypeCityEntity":
                             RefTypeCityEntity typeCity = (RefTypeCityEntity) someEntity;
-                            if (typeCity.getName().equals(nameEntity)) {
+                            if (typeCity.getName().equals(nameEntity.getName())) {
                                 entities.add(typeCity);
                             }
                             break;
                         case "models.RefSizeEntity":
                             RefSizeEntity size = (RefSizeEntity) someEntity;
-                            if (size.getName().equals(nameEntity)) {
+                            if (size.getName().equals(nameEntity.getName())) {
                                 entities.add(size);
                             }
                             break;
                         case "models.RefTypeContragentEntity":
                             RefTypeContragentEntity typeContra = (RefTypeContragentEntity) someEntity;
-                            if (typeContra.getName().equals(nameEntity)) {
+                            if (typeContra.getName().equals(nameEntity.getName())) {
                                 entities.add(typeContra);
                             }
                             break;
                         case "models.RefPriceEntity":
                             RefPriceEntity price = (RefPriceEntity) someEntity;
-                            if (price.getName().equals(nameEntity)) {
+                            if (price.getName().equals(nameEntity.getName())) {
                                 entities.add(price);
                             }
                             break;
                         case "models.RefNomenklEntity":
                             RefNomenklEntity nomenkl = (RefNomenklEntity) someEntity;
-                            if (nomenkl.getName().equals(nameEntity)) {
+                            if (nomenkl.getName().equals(nameEntity.getName())) {
                                 entities.add(nomenkl);
                             }
                             break;
                         case "models.RefMarketViewEntity":
                             RefMarketViewEntity marketView = (RefMarketViewEntity) someEntity;
-                            if (marketView.getName().equals(nameEntity)) {
+                            if (marketView.getName().equals(nameEntity.getName())) {
                                 entities.add(marketView);
                             }
                             break;
                         case "models.RefKindContrgentEntity":
                             RefKindContragentEntity kindContragentEntity = (RefKindContragentEntity) someEntity;
-                            if (kindContragentEntity.getName().equals(nameEntity)) {
+                            if (kindContragentEntity.getName().equals(nameEntity.getName())) {
                                 entities.add(kindContragentEntity);
                             }
                             break;
                         case "models.RefClassificationEntity":
                             RefClassificationEntity classificationEntity = (RefClassificationEntity) someEntity;
-                            if (classificationEntity.getName().equals(nameEntity)) {
+                            if (classificationEntity.getName().equals(nameEntity.getName())) {
                                 entities.add(classificationEntity);
                             }
                             break;
-                    }
+                    } */
                 }
                 entityTable.setItems(entities);
         }
@@ -187,7 +211,6 @@ public abstract class SuperEntityController implements ControllerReference {
     public void handleEditEntity() {
         SuperEntity entity = entityTable.getSelectionModel().getSelectedItem();
         if (entity != null) {
-            logger.info(entity.getName());
             farm.showEntityDialog(entity, referenceStage, file, title);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -244,5 +267,9 @@ public abstract class SuperEntityController implements ControllerReference {
 
     public void setFileInfo(String fileInfo) {
         this.fileInfo = fileInfo;
+    }
+
+    public ComboBox<SuperEntity> getEntitiesName() {
+        return entitiesName;
     }
 }

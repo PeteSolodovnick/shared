@@ -2,22 +2,25 @@ package address.localities;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.RefCityEntity;
+import models.RefTerritoryEntity;
+import models.RefTypeCityEntity;
 
 public abstract class SuperCityTableController extends SuperTableEntityController {
     @FXML
-    private TableColumn<RefCityEntity, String> territory;
+    private TableColumn<RefCityEntity, RefTerritoryEntity> territory;
     @FXML
-    private TableColumn<RefCityEntity, String> typeCity;
+    private TableColumn<RefCityEntity, RefTypeCityEntity> typeCity;
 
     @FXML
     protected void initialize() {
             super.initialize();
-            territory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTerritoryByTerId().getName()));
-            typeCity.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTypeCityByTypeCityId().getName()));
+            territory.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefTerritoryByTerId()));
+            typeCity.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefTypeCityByTypeCityId()));
     }
     public SuperCityTableController() {}
 

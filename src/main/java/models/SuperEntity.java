@@ -43,4 +43,9 @@ public abstract class SuperEntity {
     public int hashCode() {
         return Objects.hash(name, getId());
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

@@ -54,19 +54,19 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
                     switch (someEntity.getClass().getName()) {
                         case "models.RefCityEntity":
                             RefCityEntity cityEntity = (RefCityEntity) someEntity;
-                            if (cityEntity.getRefTerritoryByTerId().getName().equals(entity.getValue())) {
+                            if (cityEntity.getRefTerritoryByTerId().getId() == entity.getValue().getId()) {
                                 entities.add(cityEntity);
                             }
                             break;
                         case "models.RefContragentEntity":
                             RefContragentEntity contragentEntity = (RefContragentEntity) someEntity;
-                            if (contragentEntity.getRefTypeContragentByTypeContraId().getName().equals(entity.getValue())) {
+                            if (contragentEntity.getRefTypeContragentByTypeContraId().getId() == entity.getValue().getId()) {
                                 entities.add(contragentEntity);
                             }
                             break;
                         case "models.RefNomenklEntity":
                             RefNomenklEntity productEntity = (RefNomenklEntity) someEntity;
-                            if (productEntity.getRefClassificationByClassificationId().getName().equals(entity.getValue())) {
+                            if (productEntity.getRefClassificationByClassificationId().getId() == entity.getValue().getId()) {
                                 entities.add(productEntity);
                             }
                             break;

@@ -3,27 +3,31 @@ package address.localities;
 import address.mains.ControllerReference;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TreeItem;
 import models.RefCityEntity;
 import models.RefTerritoryEntity;
+import models.RefTypeCityEntity;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefCityEntity, String> typeLocality;
+    private TableColumn<RefCityEntity, RefTypeCityEntity> typeLocality;
     @FXML
-    private TableColumn<RefCityEntity, String> territory;
+    private TableColumn<RefCityEntity, RefTerritoryEntity> territory;
 
     public LocalityOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-            getRootItem().setValue(new TreeItem<RefTerritoryEntity>().getValue());
+            RefTerritoryEntity rootTer = new RefTerritoryEntity();
+            rootTer.setName("Territories");
+            getRootItem().setValue(rootTer);
             super.initialize();
-            typeLocality.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTypeCityByTypeCityId().getName()));
-            territory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefTerritoryByTerId().getName()));
+            typeLocality.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefTypeCityByTypeCityId()));
+            territory.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefTerritoryByTerId()));
     }
 
     @Override

@@ -2,6 +2,7 @@ package address.contragents;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import models.RefKindContragentEntity;
 
 public class KindContragentTableController extends SuperTableEntityController {
     public KindContragentTableController(){
@@ -15,6 +16,7 @@ public class KindContragentTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
+        getFarm().getConfigDialogController().getContragentDialogController().setKindContragentEntity((RefKindContragentEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getContragentDialogController().getKind().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

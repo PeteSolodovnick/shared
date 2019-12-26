@@ -2,6 +2,7 @@ package address.localities;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import models.RefTypeCityEntity;
 
 public class TypeCityTableController extends SuperTableEntityController {
     public TypeCityTableController() {}
@@ -15,6 +16,7 @@ public class TypeCityTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
+        getFarm().getConfigDialogController().getLocalityDialogController().setTypeCityEntity((RefTypeCityEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getLocalityDialogController().getTypeOfLocality().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

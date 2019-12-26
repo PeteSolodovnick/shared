@@ -3,8 +3,12 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import models.RefCityEntity;
+import models.RefTerritoryEntity;
+import models.RefTypeCityEntity;
 import models.SuperEntity;
 
 public class LocalityDialogController extends SuperDialogEntityController {
@@ -15,6 +19,8 @@ public class LocalityDialogController extends SuperDialogEntityController {
     private String fileTer;
     private String fileType;
     private RefCityEntity cityEntity;
+    private RefTerritoryEntity territoryEntity;
+    private RefTypeCityEntity typeCityEntity;
 
     public LocalityDialogController() {}
 
@@ -26,6 +32,8 @@ public class LocalityDialogController extends SuperDialogEntityController {
         if (city != null) {
             region.setText(cityEntity.getRefTerritoryByTerId().getName());
             typeOfLocality.setText(cityEntity.getRefTypeCityByTypeCityId().getName());
+            typeCityEntity = cityEntity.getRefTypeCityByTypeCityId();
+            territoryEntity = cityEntity.getRefTerritoryByTerId();
             setNew(false);
         } else {
             cityEntity = new RefCityEntity();
@@ -53,13 +61,14 @@ public class LocalityDialogController extends SuperDialogEntityController {
     @Override
     protected void createEntity() {
         super.createEntity();
-        RefCityEntity cityEntity = (RefCityEntity) getEntity();
+       // RefCityEntity cityEntity = (RefCityEntity) getEntity();
         for (int i = 0; i < getFarm().getReferences().getTypeCityData().size(); i++) {
-            if (getFarm().getReferences().getTypeCityData().get(i).getName().equals(getTypeOfLocality().getText()))
+            if (getFarm().getReferences().getTypeCityData().get(i).getId() == getTypeCityEntity().getId()) {
                 cityEntity.setRefTypeCityByTypeCityId(getFarm().getReferences().getTypeCityData().get(i));
+            }
         }
         for (int i = 0; i < getFarm().getReferences().getTerritoryData().size(); i++) {
-            if (getFarm().getReferences().getTerritoryData().get(i).getName().equals(getRegion().getText()))
+            if (getFarm().getReferences().getTerritoryData().get(i).getId() == getTerritoryEntity().getId())
                 cityEntity.setRefTerritoryByTerId(getFarm().getReferences().getTerritoryData().get(i));
         }
         setEntity(cityEntity);
@@ -101,5 +110,22 @@ public class LocalityDialogController extends SuperDialogEntityController {
     @Override
     public void editEntity(SuperEntity entity) {
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntityTable().refresh();
+        getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getLocalityOverviewController().getEntities());
+    }
+
+    public RefTerritoryEntity getTerritoryEntity() {
+        return territoryEntity;
+    }
+
+    public void setTerritoryEntity(RefTerritoryEntity territoryEntity) {
+        this.territoryEntity = territoryEntity;
+    }
+
+    public RefTypeCityEntity getTypeCityEntity() {
+        return typeCityEntity;
+    }
+
+    public void setTypeCityEntity(RefTypeCityEntity typeCityEntity) {
+        this.typeCityEntity = typeCityEntity;
     }
 }

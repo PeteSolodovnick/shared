@@ -38,12 +38,14 @@ public class TerritoryDialogController extends SuperDialogEntityController {
 
     @Override
     public void editEntity(SuperEntity entity) {
-        logger.info("in editEntity territory");
         if (getFarm().getConfigDialogController().getTerritoryTableController() != null) {
             getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getLocalityOverviewController().initRoot();
-        } else getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+        } else {
+            getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+            getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().refresh();
+        }
         for (int i = 0; i < getFarm().getReferences().getCitiesData().size(); i++) {
           if (getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().getId() == entity.getId()) {
               getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().setName(entity.getName());

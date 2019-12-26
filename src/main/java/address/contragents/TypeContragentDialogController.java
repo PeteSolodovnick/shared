@@ -43,7 +43,10 @@ public class TypeContragentDialogController extends SuperDialogEntityController 
             getFarm().getConfigDialogController().getTypeContragentTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getContragentOverviewController().initRoot();
-        } else getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+        } else {
+            getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+            getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().refresh();
+        }
         for (int i = 0; i < getFarm().getReferences().getContragentData().size(); i++) {
             if (getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().getId() == entity.getId()) {
                 getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().setName(entity.getName());

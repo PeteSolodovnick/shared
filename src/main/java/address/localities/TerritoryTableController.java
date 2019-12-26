@@ -2,6 +2,7 @@ package address.localities;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import models.RefTerritoryEntity;
 
 public class TerritoryTableController extends SuperTableEntityController {
     public TerritoryTableController() {}
@@ -15,6 +16,7 @@ public class TerritoryTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
+        getFarm().getConfigDialogController().getLocalityDialogController().setTerritoryEntity((RefTerritoryEntity)getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getLocalityDialogController().getRegion().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
     @Override
