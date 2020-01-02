@@ -121,8 +121,9 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
     public void handleEditTreeEntity() {
         int selectedId = treeView.getSelectionModel().getSelectedIndex();
+        SuperEntity selectedEntity = treeView.getSelectionModel().getSelectedItem().getValue();
         if (selectedId > 0) {
-            getFarm().showEntityDialog(entitiesTree.get(selectedId-1),getReferenceStage(),fileTree,getTitle());
+            getFarm().showEntityDialog(selectedEntity,getReferenceStage(),fileTree,getTitle());
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(getFarm().getPrimaryStage());

@@ -6,18 +6,18 @@ import models.RefTypeCityEntity;
 import models.SuperEntity;
 
 public class TypeCityDialogController extends SuperDialogEntityController {
-    private RefTypeCityEntity typeCityEntity;
+    private RefTypeCityEntity newTypeCityEntity;
     public TypeCityDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity typeCity) {
-        typeCityEntity = (RefTypeCityEntity) typeCity;
-        if (typeCityEntity != null) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedTypeCity) {
+        newTypeCityEntity = (RefTypeCityEntity) selectedTypeCity;
+        if (selectedTypeCity != null) {
             setNew(false);
         } else {
-            typeCityEntity = new RefTypeCityEntity();
+            newTypeCityEntity = new RefTypeCityEntity();
             setNew(true);
         }
-        super.setFarmFX(farm,typeCityEntity);
+        super.setFarmFX(farm,newTypeCityEntity);
     }
 
     @Override
@@ -27,15 +27,15 @@ public class TypeCityDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getTypeCityData().add(typeCityEntity);
-        getFarm().getConfigDialogController().getTypeCityTableController().getEntityTable().getItems().add(typeCityEntity);
+        getFarm().getReferences().getTypeCityData().add(newTypeCityEntity);
+        getFarm().getConfigDialogController().getTypeCityTableController().getEntityTable().getItems().add(newTypeCityEntity);
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getTypeCityData().size(); i++) {
-            if (getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().getId() == entity.getId()) {
-                getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().setName(entity.getName());
+            if (getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().getId() == newEntity.getId()) {
+                getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().setName(newEntity.getName());
             }
         }
         getFarm().getConfigDialogController().getTypeCityTableController().getEntityTable().refresh();

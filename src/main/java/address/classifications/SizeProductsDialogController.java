@@ -6,18 +6,18 @@ import models.RefSizeEntity;
 import models.SuperEntity;
 
 public class SizeProductsDialogController extends SuperDialogEntityController {
-    private RefSizeEntity sizeEntity;
+    private RefSizeEntity newSizeEntity;
     public SizeProductsDialogController(){}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity size) {
-        sizeEntity = (RefSizeEntity) size;
-        if (sizeEntity != null) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedSize) {
+        newSizeEntity = (RefSizeEntity) selectedSize;
+        if (selectedSize != null) {
             setNew(false);
         } else {
-            sizeEntity = new RefSizeEntity();
+            newSizeEntity = new RefSizeEntity();
             setNew(true);
         }
-        super.setFarmFX(farm,sizeEntity);
+        super.setFarmFX(farm, newSizeEntity);
     }
     @Override
     public void handleOkDialog() {
@@ -26,15 +26,15 @@ public class SizeProductsDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getSizeEntitiesData().add(sizeEntity);
-        getFarm().getConfigDialogController().getSizeProductsTableController().getEntityTable().getItems().add(sizeEntity);
+        getFarm().getReferences().getSizeEntitiesData().add(newSizeEntity);
+        getFarm().getConfigDialogController().getSizeProductsTableController().getEntityTable().getItems().add(newSizeEntity);
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getSizeEntitiesData().size(); i++) {
-            if (getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().getId() == entity.getId()) {
-                getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().setName(entity.getName());
+            if (getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().getId() == newEntity.getId()) {
+                getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().setName(newEntity.getName());
             }
         }
         getFarm().getConfigDialogController().getSizeProductsTableController().getEntityTable().refresh();

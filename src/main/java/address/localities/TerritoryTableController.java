@@ -17,7 +17,7 @@ public class TerritoryTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getLocalityDialogController().setTerritoryEntity((RefTerritoryEntity)getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getLocalityDialogController().setNewTerritoryEntity((RefTerritoryEntity)getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getLocalityDialogController().getRegion().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
     @Override

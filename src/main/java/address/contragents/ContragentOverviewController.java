@@ -8,7 +8,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.*;
-import net.bytebuddy.implementation.bind.annotation.Super;
 
 public class ContragentOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML

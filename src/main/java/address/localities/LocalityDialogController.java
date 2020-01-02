@@ -18,28 +18,28 @@ public class LocalityDialogController extends SuperDialogEntityController {
     private TextField typeOfLocality;
     private String fileTer;
     private String fileType;
-    private RefCityEntity cityEntity;
-    private RefTerritoryEntity territoryEntity;
-    private RefTypeCityEntity typeCityEntity;
+    private RefCityEntity newCityEntity;
+    private RefTerritoryEntity newTerritoryEntity;
+    private RefTypeCityEntity newTypeCityEntity;
 
     public LocalityDialogController() {}
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity city) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedCity) {
         fileTer = "/territory.fxml";
         fileType = "/typeOfCity.fxml";
-        cityEntity = (RefCityEntity) city;
-        if (city != null) {
-            region.setText(cityEntity.getRefTerritoryByTerId().getName());
-            typeOfLocality.setText(cityEntity.getRefTypeCityByTypeCityId().getName());
-            typeCityEntity = cityEntity.getRefTypeCityByTypeCityId();
-            territoryEntity = cityEntity.getRefTerritoryByTerId();
+        newCityEntity = (RefCityEntity) selectedCity;
+        if (selectedCity != null) {
+            region.setText(newCityEntity.getRefTerritoryByTerId().getName());
+            typeOfLocality.setText(newCityEntity.getRefTypeCityByTypeCityId().getName());
+            newTypeCityEntity = newCityEntity.getRefTypeCityByTypeCityId();
+            newTerritoryEntity = newCityEntity.getRefTerritoryByTerId();
             setNew(false);
         } else {
-            cityEntity = new RefCityEntity();
+            newCityEntity = new RefCityEntity();
             setNew(true);
         }
-        super.setFarmFX(farm, cityEntity);
+        super.setFarmFX(farm, newCityEntity);
     }
     @Override
     protected boolean isInputValid() {
@@ -61,17 +61,9 @@ public class LocalityDialogController extends SuperDialogEntityController {
     @Override
     protected void createEntity() {
         super.createEntity();
-       // RefCityEntity cityEntity = (RefCityEntity) getEntity();
-        for (int i = 0; i < getFarm().getReferences().getTypeCityData().size(); i++) {
-            if (getFarm().getReferences().getTypeCityData().get(i).getId() == getTypeCityEntity().getId()) {
-                cityEntity.setRefTypeCityByTypeCityId(getFarm().getReferences().getTypeCityData().get(i));
-            }
-        }
-        for (int i = 0; i < getFarm().getReferences().getTerritoryData().size(); i++) {
-            if (getFarm().getReferences().getTerritoryData().get(i).getId() == getTerritoryEntity().getId())
-                cityEntity.setRefTerritoryByTerId(getFarm().getReferences().getTerritoryData().get(i));
-        }
-        setEntity(cityEntity);
+        newCityEntity.setRefTypeCityByTypeCityId(getNewTypeCityEntity());
+        newCityEntity.setRefTerritoryByTerId(getNewTerritoryEntity());
+        setNewEntity(newCityEntity);
     }
     @FXML
     private void handleTerChoose() {
@@ -97,35 +89,35 @@ public class LocalityDialogController extends SuperDialogEntityController {
         super.handleOkDialog();
     }
 
-    public RefCityEntity getCityEntity() {
-        return cityEntity;
+    public RefCityEntity getNewCityEntity() {
+        return newCityEntity;
     }
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getCitiesData().add(getCityEntity());
-        getFarm().getConfigDialogController().getLocalityOverviewController().getEntities().add(getCityEntity());
+        getFarm().getReferences().getCitiesData().add(getNewCityEntity());
+        getFarm().getConfigDialogController().getLocalityOverviewController().getEntities().add(getNewCityEntity());
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getLocalityOverviewController().getEntities());
     }
 
-    public RefTerritoryEntity getTerritoryEntity() {
-        return territoryEntity;
+    public RefTerritoryEntity getNewTerritoryEntity() {
+        return newTerritoryEntity;
     }
 
-    public void setTerritoryEntity(RefTerritoryEntity territoryEntity) {
-        this.territoryEntity = territoryEntity;
+    public void setNewTerritoryEntity(RefTerritoryEntity newTerritoryEntity) {
+        this.newTerritoryEntity = newTerritoryEntity;
     }
 
-    public RefTypeCityEntity getTypeCityEntity() {
-        return typeCityEntity;
+    public RefTypeCityEntity getNewTypeCityEntity() {
+        return newTypeCityEntity;
     }
 
-    public void setTypeCityEntity(RefTypeCityEntity typeCityEntity) {
-        this.typeCityEntity = typeCityEntity;
+    public void setNewTypeCityEntity(RefTypeCityEntity newTypeCityEntity) {
+        this.newTypeCityEntity = newTypeCityEntity;
     }
 }

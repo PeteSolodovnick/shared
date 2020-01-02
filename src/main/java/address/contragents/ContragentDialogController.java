@@ -34,12 +34,12 @@ public class ContragentDialogController extends SuperDialogEntityController {
     @FXML
     private CheckBox vat;
 
-    private RefContragentEntity contragentEntity;
-    private RefCityEntity cityEntity;
-    private RefTypeContragentEntity typeContragentEntity;
-    private RefPriceEntity priceEntity;
-    private RefMarketViewEntity marketViewEntity;
-    private RefKindContragentEntity kindContragentEntity;
+    private RefContragentEntity newContragentEntity;
+    private RefCityEntity newCityEntity;
+    private RefTypeContragentEntity newTypeContragentEntity;
+    private RefPriceEntity newPriceEntity;
+    private RefMarketViewEntity newMarketViewEntity;
+    private RefKindContragentEntity newKindContragentEntity;
     private String fileType;
     private String fileView;
     private String fileCity;
@@ -47,37 +47,37 @@ public class ContragentDialogController extends SuperDialogEntityController {
     private String fileKind;
 
     public ContragentDialogController() {}
-    public void setFarmFX(FarmFX farm, SuperEntity contragent) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedContragent) {
         fileType = "/typeContragent.fxml";
         fileView = "/marketView.fxml";
         fileCity = "/city.fxml";
         filePrice = "/price.fxml";
         fileKind = "/kindContragent.fxml";
-        contragentEntity = (RefContragentEntity) contragent;
-        if (contragent != null) {
-            city.setText(contragentEntity.getRefCityByCityId().getName());
-            address.setText(contragentEntity.getAddress());
-            marketView.setText(contragentEntity.getRefMarketViewByMarketViewId().getName());
-            contact.setText(contragentEntity.getContact());
-            phone.setText(contragentEntity.getPhone());
-            type.setText(contragentEntity.getRefTypeContragentByTypeContraId().getName());
-            kind.setText(contragentEntity.getRefKindContragentByKindContraId().getName());
-            price.setText(contragentEntity.getRefPriceByPriceId().getName());
-            okpo.setText(contragentEntity.getOkpo());
-            inn.setText(contragentEntity.getInn());
-            comments.setText(contragentEntity.getComments());
-            vat.setSelected(contragentEntity.getNds());
-            cityEntity = contragentEntity.getRefCityByCityId();
-            typeContragentEntity = contragentEntity.getRefTypeContragentByTypeContraId();
-            kindContragentEntity = contragentEntity.getRefKindContragentByKindContraId();
-            marketViewEntity = contragentEntity.getRefMarketViewByMarketViewId();
-            priceEntity = contragentEntity.getRefPriceByPriceId();
+        newContragentEntity = (RefContragentEntity) selectedContragent;
+        if (selectedContragent != null) {
+            city.setText(newContragentEntity.getRefCityByCityId().getName());
+            address.setText(newContragentEntity.getAddress());
+            marketView.setText(newContragentEntity.getRefMarketViewByMarketViewId().getName());
+            contact.setText(newContragentEntity.getContact());
+            phone.setText(newContragentEntity.getPhone());
+            type.setText(newContragentEntity.getRefTypeContragentByTypeContraId().getName());
+            kind.setText(newContragentEntity.getRefKindContragentByKindContraId().getName());
+            price.setText(newContragentEntity.getRefPriceByPriceId().getName());
+            okpo.setText(newContragentEntity.getOkpo());
+            inn.setText(newContragentEntity.getInn());
+            comments.setText(newContragentEntity.getComments());
+            vat.setSelected(newContragentEntity.getNds());
+            newCityEntity = newContragentEntity.getRefCityByCityId();
+            newTypeContragentEntity = newContragentEntity.getRefTypeContragentByTypeContraId();
+            newKindContragentEntity = newContragentEntity.getRefKindContragentByKindContraId();
+            newMarketViewEntity = newContragentEntity.getRefMarketViewByMarketViewId();
+            newPriceEntity = newContragentEntity.getRefPriceByPriceId();
             setNew(false);
         } else {
-            contragentEntity = new RefContragentEntity();
+            newContragentEntity = new RefContragentEntity();
             setNew(true);
         }
-        super.setFarmFX(farm, contragentEntity);
+        super.setFarmFX(farm, newContragentEntity);
     }
     @Override
     protected boolean isInputValid() {
@@ -107,34 +107,19 @@ public class ContragentDialogController extends SuperDialogEntityController {
     @Override
     protected void createEntity() {
         super.createEntity();
-        for (int i = 0; i < getFarm().getReferences().getTypeContragentData().size(); i++) {
-            if (getFarm().getReferences().getTypeContragentData().get(i).getId() == getTypeContragentEntity().getId())
-                contragentEntity.setRefTypeContragentByTypeContraId(getFarm().getReferences().getTypeContragentData().get(i));
-        }
-        for (int i = 0; i < getFarm().getReferences().getKindContragentData().size(); i++) {
-            if (getFarm().getReferences().getKindContragentData().get(i).getId() == getKindContragentEntity().getId())
-                contragentEntity.setRefKindContragentByKindContraId(getFarm().getReferences().getKindContragentData().get(i));
-        }
-        for (int i = 0; i < getFarm().getReferences().getPriceData().size(); i++) {
-            if (getFarm().getReferences().getPriceData().get(i).getId() == getPriceEntity().getId())
-                contragentEntity.setRefPriceByPriceId(getFarm().getReferences().getPriceData().get(i));
-        }
-        for (int i = 0; i < getFarm().getReferences().getMarketViewData().size(); i++) {
-            if (getFarm().getReferences().getMarketViewData().get(i).getId() == getMarketViewEntity().getId())
-                contragentEntity.setRefMarketViewByMarketViewId(getFarm().getReferences().getMarketViewData().get(i));
-        }
-        for (int i = 0; i < getFarm().getReferences().getCitiesData().size(); i++) {
-            if (getFarm().getReferences().getCitiesData().get(i).getId() == getCityEntity().getId())
-                contragentEntity.setRefCityByCityId(getFarm().getReferences().getCitiesData().get(i));
-        }
-        contragentEntity.setAddress(address.getText());
-        contragentEntity.setComments(comments.getText());
-        contragentEntity.setInn(inn.getText());
-        contragentEntity.setContact(contact.getText());
-        contragentEntity.setOkpo(okpo.getText());
-        contragentEntity.setPhone(phone.getText());
-        contragentEntity.setNds(vat.isSelected());
-        setEntity(contragentEntity);
+        newContragentEntity.setRefTypeContragentByTypeContraId(getNewTypeContragentEntity());
+        newContragentEntity.setRefKindContragentByKindContraId(getNewKindContragentEntity());
+        newContragentEntity.setRefPriceByPriceId(getNewPriceEntity());
+        newContragentEntity.setRefMarketViewByMarketViewId(getNewMarketViewEntity());
+        newContragentEntity.setRefCityByCityId(getNewCityEntity());
+        newContragentEntity.setAddress(address.getText());
+        newContragentEntity.setComments(comments.getText());
+        newContragentEntity.setInn(inn.getText());
+        newContragentEntity.setContact(contact.getText());
+        newContragentEntity.setOkpo(okpo.getText());
+        newContragentEntity.setPhone(phone.getText());
+        newContragentEntity.setNds(vat.isSelected());
+        setNewEntity(newContragentEntity);
     }
 
     @FXML
@@ -169,63 +154,62 @@ public class ContragentDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getContragentData().add(getContragentEntity());
-        getFarm().getConfigDialogController().getContragentOverviewController().getEntities().add(getContragentEntity());
-      //  getFarm().getConfigDialogController().getContragentOverviewController().getEntityTable().refresh();
+        getFarm().getReferences().getContragentData().add(getNewContragentEntity());
+        getFarm().getConfigDialogController().getContragentOverviewController().getEntities().add(getNewContragentEntity());
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         getFarm().getConfigDialogController().getContragentOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getContragentOverviewController().getEntities());
     }
 
-    public RefContragentEntity getContragentEntity() {
-        return contragentEntity;
+    public RefContragentEntity getNewContragentEntity() {
+        return newContragentEntity;
     }
 
-    public void setContragentEntity(RefContragentEntity contragentEntity) {
-        this.contragentEntity = contragentEntity;
+    public void setNewContragentEntity(RefContragentEntity newContragentEntity) {
+        this.newContragentEntity = newContragentEntity;
     }
 
-    public RefCityEntity getCityEntity() {
-        return cityEntity;
+    public RefCityEntity getNewCityEntity() {
+        return newCityEntity;
     }
 
-    public void setCityEntity(RefCityEntity cityEntity) {
-        this.cityEntity = cityEntity;
+    public void setNewCityEntity(RefCityEntity newCityEntity) {
+        this.newCityEntity = newCityEntity;
     }
 
-    public RefTypeContragentEntity getTypeContragentEntity() {
-        return typeContragentEntity;
+    public RefTypeContragentEntity getNewTypeContragentEntity() {
+        return newTypeContragentEntity;
     }
 
-    public void setTypeContragentEntity(RefTypeContragentEntity typeContragentEntity) {
-        this.typeContragentEntity = typeContragentEntity;
+    public void setNewTypeContragentEntity(RefTypeContragentEntity newTypeContragentEntity) {
+        this.newTypeContragentEntity = newTypeContragentEntity;
     }
 
-    public RefPriceEntity getPriceEntity() {
-        return priceEntity;
+    public RefPriceEntity getNewPriceEntity() {
+        return newPriceEntity;
     }
 
-    public void setPriceEntity(RefPriceEntity priceEntity) {
-        this.priceEntity = priceEntity;
+    public void setNewPriceEntity(RefPriceEntity newPriceEntity) {
+        this.newPriceEntity = newPriceEntity;
     }
 
-    public RefMarketViewEntity getMarketViewEntity() {
-        return marketViewEntity;
+    public RefMarketViewEntity getNewMarketViewEntity() {
+        return newMarketViewEntity;
     }
 
-    public void setMarketViewEntity(RefMarketViewEntity marketViewEntity) {
-        this.marketViewEntity = marketViewEntity;
+    public void setNewMarketViewEntity(RefMarketViewEntity newMarketViewEntity) {
+        this.newMarketViewEntity = newMarketViewEntity;
     }
 
-    public RefKindContragentEntity getKindContragentEntity() {
-        return kindContragentEntity;
+    public RefKindContragentEntity getNewKindContragentEntity() {
+        return newKindContragentEntity;
     }
 
-    public void setKindContragentEntity(RefKindContragentEntity kindContragentEntity) {
-        this.kindContragentEntity = kindContragentEntity;
+    public void setNewKindContragentEntity(RefKindContragentEntity newKindContragentEntity) {
+        this.newKindContragentEntity = newKindContragentEntity;
     }
 
     public TextField getCity() {

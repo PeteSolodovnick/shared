@@ -15,7 +15,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     private TextField name;
 
     private FarmFX farm;
-    private SuperEntity entity;
+    private SuperEntity newEntity;
     private Stage dialogStage;
     private boolean isNew;
 
@@ -31,13 +31,13 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     }
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity entity) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedEntity) {
         this.farm = farm;
-        this.entity = entity;
+        newEntity = selectedEntity;
         if (isNew)
             name.setText("");
         else
-            name.setText(entity.getName());
+            name.setText(selectedEntity.getName());
     }
 
     @Override
@@ -52,11 +52,11 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
             EntityService service = new EntityService();
             try {
                 if (isNew) {
-                    service.create(entity);
+                    service.create(newEntity);
                     newEntity();
                 } else {
-                    service.update(entity);
-                    editEntity(entity);
+                    service.update(newEntity);
+                    editEntity(newEntity);
                 }
                 dialogStage.close();
             } catch (Exception e) {
@@ -65,10 +65,10 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
         }
     }
     public abstract void newEntity();
-    public abstract void editEntity(SuperEntity entity);
+    public abstract void editEntity(SuperEntity newEntity);
 
     protected void createEntity() {
-            entity.setName(name.getText());
+            newEntity.setName(name.getText());
     }
 
     protected boolean isInputValid() {
@@ -105,12 +105,12 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
         this.farm = farm;
     }
 
-    public SuperEntity getEntity() {
-        return entity;
+    public SuperEntity getNewEntity() {
+        return newEntity;
     }
 
-    public void setEntity(SuperEntity entity) {
-        this.entity = entity;
+    public void setNewEntity(SuperEntity newEntity) {
+        this.newEntity = newEntity;
     }
 
     public boolean isNew() {

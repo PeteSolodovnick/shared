@@ -49,13 +49,13 @@ public class FarmFX extends Application {
             referenceWindow.initLayout(this);
             logger.info("show and wait");
     }
-    public void showEntityDialog(SuperEntity entity, Stage ownerStage, String file, String title) {
+    public void showEntityDialog(SuperEntity selectedEntity, Stage ownerStage, String file, String title) {
         Stage dialogStage = new Stage();
         dialogStage.setTitle(title);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(ownerStage);
         InitializerWindow referenceWindow = new InitializerWindow(file, dialogStage, new AnchorPane());
-        referenceWindow.initLayoutDialog(this,entity,dialogStage);
+        referenceWindow.initLayoutDialog(this,selectedEntity,dialogStage);
     }
 
     public CollectionsEntities getReferences() {

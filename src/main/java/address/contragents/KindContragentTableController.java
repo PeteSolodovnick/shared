@@ -17,7 +17,7 @@ public class KindContragentTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getContragentDialogController().setKindContragentEntity((RefKindContragentEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getContragentDialogController().setNewKindContragentEntity((RefKindContragentEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getContragentDialogController().getKind().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

@@ -6,18 +6,18 @@ import models.RefMarketViewEntity;
 import models.SuperEntity;
 
 public class MarketViewDialogController extends SuperDialogEntityController {
-    private RefMarketViewEntity marketViewEntity;
+    private RefMarketViewEntity newMarketViewEntity;
     public MarketViewDialogController(){}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity marketView) {
-        marketViewEntity = (RefMarketViewEntity) marketView;
-        if (marketViewEntity != null) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedMarketView) {
+        newMarketViewEntity = (RefMarketViewEntity) selectedMarketView;
+        if (selectedMarketView != null) {
             setNew(false);
         } else {
-            marketViewEntity = new RefMarketViewEntity();
+            newMarketViewEntity = new RefMarketViewEntity();
             setNew(true);
         }
-        super.setFarmFX(farm,marketViewEntity);
+        super.setFarmFX(farm, newMarketViewEntity);
     }
     @Override
     public void handleOkDialog() {
@@ -26,15 +26,15 @@ public class MarketViewDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getMarketViewData().add(marketViewEntity);
-        getFarm().getConfigDialogController().getMarketViewTableController().getEntityTable().getItems().add(marketViewEntity);
+        getFarm().getReferences().getMarketViewData().add(newMarketViewEntity);
+        getFarm().getConfigDialogController().getMarketViewTableController().getEntityTable().getItems().add(newMarketViewEntity);
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getMarketViewData().size(); i++) {
-            if (getFarm().getReferences().getContragentData().get(i).getRefMarketViewByMarketViewId().getId() == entity.getId()) {
-                getFarm().getReferences().getContragentData().get(i).getRefMarketViewByMarketViewId().setName(entity.getName());
+            if (getFarm().getReferences().getContragentData().get(i).getRefMarketViewByMarketViewId().getId() == newEntity.getId()) {
+                getFarm().getReferences().getContragentData().get(i).getRefMarketViewByMarketViewId().setName(newEntity.getName());
             }
         }
         getFarm().getConfigDialogController().getMarketViewTableController().getEntityTable().refresh();

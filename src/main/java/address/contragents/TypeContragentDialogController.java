@@ -7,19 +7,19 @@ import models.RefTypeContragentEntity;
 import models.SuperEntity;
 
 public class TypeContragentDialogController extends SuperDialogEntityController {
-    private RefTypeContragentEntity typeContragent;
+    private RefTypeContragentEntity newTypeContragent;
     public TypeContragentDialogController(){}
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity typeContragent) {
-        this.typeContragent = (RefTypeContragentEntity) typeContragent;
-        if (this.typeContragent != null) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedTypeContragent) {
+        newTypeContragent = (RefTypeContragentEntity) selectedTypeContragent;
+        if (selectedTypeContragent != null) {
             setNew(false);
         } else {
-            this.typeContragent = new RefTypeContragentEntity();
+            newTypeContragent = new RefTypeContragentEntity();
             setNew(true);
         }
-        super.setFarmFX(farm,this.typeContragent);
+        super.setFarmFX(farm,newTypeContragent);
     }
 
     @Override
@@ -29,27 +29,27 @@ public class TypeContragentDialogController extends SuperDialogEntityController 
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getTypeContragentData().add(typeContragent);
+        getFarm().getReferences().getTypeContragentData().add(newTypeContragent);
         if (getFarm().getConfigDialogController().getTypeContragentTableController() != null) {
-            getFarm().getConfigDialogController().getTypeContragentTableController().getEntityTable().getItems().add(typeContragent);
+            getFarm().getConfigDialogController().getTypeContragentTableController().getEntityTable().getItems().add(newTypeContragent);
         }
-        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().add(new TreeItem<>(typeContragent));
-        getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesTree().add(typeContragent);
+        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().add(new TreeItem<>(newTypeContragent));
+        getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesTree().add(newTypeContragent);
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         if (getFarm().getConfigDialogController().getTypeContragentTableController() != null) {
             getFarm().getConfigDialogController().getTypeContragentTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getContragentOverviewController().initRoot();
         } else {
-            getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+            getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(newEntity);
             getFarm().getConfigDialogController().getContragentOverviewController().getTreeView().refresh();
         }
         for (int i = 0; i < getFarm().getReferences().getContragentData().size(); i++) {
-            if (getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().getId() == entity.getId()) {
-                getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().setName(entity.getName());
+            if (getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().getId() == newEntity.getId()) {
+                getFarm().getReferences().getContragentData().get(i).getRefTypeContragentByTypeContraId().setName(newEntity.getName());
             }
         }
         getFarm().getConfigDialogController().getContragentOverviewController().getEntityTable().refresh();

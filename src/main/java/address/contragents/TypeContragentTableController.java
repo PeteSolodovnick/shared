@@ -18,7 +18,7 @@ public class TypeContragentTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getContragentDialogController().setTypeContragentEntity((RefTypeContragentEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getContragentDialogController().setNewTypeContragentEntity((RefTypeContragentEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getContragentDialogController().getType().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
     @Override

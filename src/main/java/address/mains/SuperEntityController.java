@@ -141,9 +141,9 @@ public abstract class SuperEntityController implements ControllerReference {
 
     @FXML
     public void handleEditEntity() {
-        SuperEntity entity = entityTable.getSelectionModel().getSelectedItem();
-        if (entity != null) {
-            farm.showEntityDialog(entity, referenceStage, file, title);
+        SuperEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
+        if (selectedEntity != null) {
+            farm.showEntityDialog(selectedEntity, referenceStage, file, title);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(farm.getPrimaryStage());
@@ -155,9 +155,9 @@ public abstract class SuperEntityController implements ControllerReference {
     }
     @FXML
     public void handleInfoEntity() {
-        SuperEntity entity = entityTable.getSelectionModel().getSelectedItem();
-        if (entity != null) {
-            farm.showEntityDialog(entity, referenceStage, fileInfo, title);
+        SuperEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
+        if (selectedEntity != null) {
+            farm.showEntityDialog(selectedEntity, referenceStage, fileInfo, title);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(farm.getPrimaryStage());

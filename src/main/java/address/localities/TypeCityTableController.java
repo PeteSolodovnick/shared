@@ -17,7 +17,7 @@ public class TypeCityTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getLocalityDialogController().setTypeCityEntity((RefTypeCityEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getLocalityDialogController().setNewTypeCityEntity((RefTypeCityEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getLocalityDialogController().getTypeOfLocality().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

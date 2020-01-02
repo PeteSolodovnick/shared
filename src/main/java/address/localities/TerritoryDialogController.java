@@ -7,18 +7,18 @@ import models.RefTerritoryEntity;
 import models.SuperEntity;
 
 public class TerritoryDialogController extends SuperDialogEntityController {
-    private RefTerritoryEntity territoryEntity;
+    private RefTerritoryEntity newTerritoryEntity;
     public TerritoryDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity territory) {
-        territoryEntity = (RefTerritoryEntity) territory;
-        if (territoryEntity != null) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedTerritory) {
+        newTerritoryEntity = (RefTerritoryEntity) selectedTerritory;
+        if (selectedTerritory != null) {
             setNew(false);
         } else {
-            territoryEntity = new RefTerritoryEntity();
+            newTerritoryEntity = new RefTerritoryEntity();
             setNew(true);
         }
-        super.setFarmFX(farm,territoryEntity);
+        super.setFarmFX(farm,newTerritoryEntity);
     }
 
     @Override
@@ -28,27 +28,27 @@ public class TerritoryDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getTerritoryData().add(territoryEntity);
+        getFarm().getReferences().getTerritoryData().add(newTerritoryEntity);
         if (getFarm().getConfigDialogController().getTerritoryTableController() != null) {
-            getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().getItems().add(territoryEntity);
+            getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().getItems().add(newTerritoryEntity);
         }
-        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().add(new TreeItem<>(territoryEntity));
-        getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().add(territoryEntity);
+        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().add(new TreeItem<>(newTerritoryEntity));
+        getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().add(newTerritoryEntity);
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperEntity newEntity) {
         if (getFarm().getConfigDialogController().getTerritoryTableController() != null) {
             getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getLocalityOverviewController().initRoot();
         } else {
-            getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+            getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(newEntity);
             getFarm().getConfigDialogController().getLocalityOverviewController().getTreeView().refresh();
         }
         for (int i = 0; i < getFarm().getReferences().getCitiesData().size(); i++) {
-          if (getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().getId() == entity.getId()) {
-              getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().setName(entity.getName());
+          if (getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().getId() == newEntity.getId()) {
+              getFarm().getReferences().getCitiesData().get(i).getRefTerritoryByTerId().setName(newEntity.getName());
            }
         }
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntityTable().refresh();

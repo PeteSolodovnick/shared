@@ -63,7 +63,7 @@ public class ProductsDialogController extends SuperDialogEntityController {
             if (getFarm().getReferences().getClassificationData().get(i).getId() == getClassificationEntity().getId())
                 productEntity.setRefClassificationByClassificationId(getFarm().getReferences().getClassificationData().get(i));
         }
-        setEntity(productEntity);
+        setNewEntity(productEntity);
     }
 
     @FXML

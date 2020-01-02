@@ -47,9 +47,9 @@ public class InitializerWindow {
 
     }
 
-    public void initLayoutDialog(FarmFX farm, SuperEntity entity, Stage stage) {
+    public void initLayoutDialog(FarmFX farm, SuperEntity selectedEntity, Stage stage) {
         ControllerDialog controller = initScene().getController();
-        controller.setFarmFX(farm, entity);
+        controller.setFarmFX(farm, selectedEntity);
         controller.setDialogStage(stage);
     }
 }

@@ -37,7 +37,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
             if (getFarm().getReferences().getClassificationData().get(i).getId() == getParentEntity().getId());
                 classificationEntity.setRefClassificationByParentId(getFarm().getReferences().getClassificationData().get(i));
         }
-        setEntity(classificationEntity);
+        setNewEntity(classificationEntity);
     }
     @FXML
     private void handleClassificationChoose() {
