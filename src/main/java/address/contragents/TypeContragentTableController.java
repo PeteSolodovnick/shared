@@ -4,6 +4,7 @@ import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.RefTerritoryEntity;
 import models.RefTypeContragentEntity;
+import models.SuperEntity;
 
 public class TypeContragentTableController extends SuperTableEntityController {
     public TypeContragentTableController(){}
@@ -34,9 +35,9 @@ public class TypeContragentTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getTypeContragentData().remove(id);
-        getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesTree().remove(id);
-        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getTypeContragentData().remove(selectedEntity);
+        getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesTree().remove(selectedEntity);
+        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().remove(selectedEntity);
     }
 }

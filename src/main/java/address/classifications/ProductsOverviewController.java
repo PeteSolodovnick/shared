@@ -3,6 +3,7 @@ package address.classifications;
 import address.mains.ControllerReference;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,22 +11,25 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TreeItem;
 import models.RefClassificationEntity;
 import models.RefNomenklEntity;
+import models.RefSizeEntity;
 import models.SuperEntity;
 
 public class ProductsOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefNomenklEntity, String> size;
+    private TableColumn<RefNomenklEntity, RefSizeEntity> size;
     @FXML
-    private TableColumn<RefNomenklEntity, String> classification;
+    private TableColumn<RefNomenklEntity, RefClassificationEntity> classification;
 
     public ProductsOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-        getRootItem().setValue(new TreeItem<RefClassificationEntity>().getValue());
+        RefClassificationEntity rootClassificationEntity = new RefClassificationEntity();
+        rootClassificationEntity.setName("Classification");
+        getRootItem().setValue(rootClassificationEntity);
         super.initialize();
-        size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefSizeBySizeId().getName()));
-        classification.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRefClassificationByClassificationId().getName()));
+        size.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefSizeBySizeId().getName()));
+        classification.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getRefClassificationByClassificationId().getName()));
     }
     @Override
     public void setFarmFX(FarmFX farm) {
@@ -41,9 +45,9 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         setTitle("New Product...");
         super.handleNewEntity();
     }
+
     @Override
     protected void initRoot() {
-        logger.info("in init root products");
         for (SuperEntity entity : getEntitiesTree()) {
             RefClassificationEntity classification = (RefClassificationEntity) entity;
             if (classification.getRefClassificationByParentId() == null) {
@@ -88,7 +92,8 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         int selectedId = getTreeView().getSelectionModel().getSelectedIndex();
         if (selectedId > 0) {
             RefClassificationEntity findItem = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getValue();
-            RefClassificationEntity parent = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getParent().getValue();
+            getFarm().showEntityDialog(findItem,getReferenceStage(),getFileTree(),getTitle());
+            /* RefClassificationEntity parent = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getParent().getValue();
             for (int i = 0; i < getEntitiesTree().size(); i++) {
                 RefClassificationEntity classificationEntity = (RefClassificationEntity) getEntitiesTree().get(i);
                 if (getEntitiesTree().get(i).getName().equals(findItem)) {
@@ -100,7 +105,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
                             getFarm().showEntityDialog(getEntitiesTree().get(i), getReferenceStage(), getFileTree(), getTitle());
                     }
                 }
-            }
+            } */
         } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(getFarm().getPrimaryStage());
@@ -112,12 +117,12 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
     }
 
     @Override
-    public void deletedFromTreeArray(int id) {
-        getFarm().getReferences().getClassificationData().remove(id);
+    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getClassificationData().remove(selectedEntity);
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getProductsData().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getProductsData().remove(selectedEntity);
     }
 }

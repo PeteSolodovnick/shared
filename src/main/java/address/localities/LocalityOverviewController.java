@@ -11,6 +11,7 @@ import javafx.scene.control.TreeItem;
 import models.RefCityEntity;
 import models.RefTerritoryEntity;
 import models.RefTypeCityEntity;
+import models.SuperEntity;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -72,12 +73,12 @@ public class LocalityOverviewController extends SuperEntityTreeController implem
     }
 
     @Override
-    public void deletedFromTreeArray(int id) {
-        getFarm().getReferences().getTerritoryData().remove(id);
+    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getTerritoryData().remove(selectedEntity);
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getCitiesData().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getCitiesData().remove(selectedEntity);
     }
 }

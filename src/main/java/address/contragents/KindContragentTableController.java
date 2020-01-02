@@ -3,6 +3,7 @@ package address.contragents;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.RefKindContragentEntity;
+import models.SuperEntity;
 
 public class KindContragentTableController extends SuperTableEntityController {
     public KindContragentTableController(){
@@ -35,7 +36,7 @@ public class KindContragentTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getKindContragentData().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getKindContragentData().remove(selectedEntity);
     }
 }

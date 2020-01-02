@@ -80,9 +80,8 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
     public void handleDeleteTreeEntity() {
         int selectedId = treeView.getSelectionModel().getSelectedIndex();
-        SuperEntity name = treeView.getTreeItem(selectedId).getValue();
-        logger.info("name for delete " + name);
         if (selectedId>0) {
+            SuperEntity name = treeView.getTreeItem(selectedId).getValue();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete " + rootItem);
             alert.setHeaderText(rootItem.getValue() +" "+ treeView.getTreeItem(selectedId).getValue() + " will be deleted");
@@ -91,14 +90,10 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
             if (result.get() == ButtonType.OK) {
                 EntityService service = new EntityService();
                 try {
-                    for (int i = 0; i < entitiesTree.size(); i++) {
-                        if (entitiesTree.get(i).getId() == name.getId()) {
-                            service.delete(entitiesTree.get(i));
-                            entitiesTree.remove(i);
-                            rootItem.getChildren().remove(selectedId-1);
-                            deletedFromTreeArray(i);
-                        }
-                    }
+                    service.delete(name);
+                    entitiesTree.remove(name);
+                    rootItem.getChildren().remove(selectedId-1);
+                    deletedFromTreeArray(name);
                 } catch (Exception e) {
                     Alert exAlert = new Alert(Alert.AlertType.ERROR);
                     exAlert.setTitle("Error!");
@@ -118,7 +113,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
             alert.showAndWait();
         }
     }
-    public abstract void deletedFromTreeArray(int id);
+    public abstract void deletedFromTreeArray(SuperEntity selectedEntity);
     @FXML
     public void handleNewTreeEntity() {
         getFarm().showEntityDialog(null,getReferenceStage(),fileTree,getTitle());

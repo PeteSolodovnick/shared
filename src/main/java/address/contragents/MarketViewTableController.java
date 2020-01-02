@@ -4,6 +4,8 @@ import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.RefMarketViewEntity;
 import models.RefTypeCityEntity;
+import models.SuperEntity;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 public class MarketViewTableController extends SuperTableEntityController {
     public MarketViewTableController() {
@@ -35,7 +37,7 @@ public class MarketViewTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getMarketViewData().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getMarketViewData().remove(selectedEntity);
     }
 }

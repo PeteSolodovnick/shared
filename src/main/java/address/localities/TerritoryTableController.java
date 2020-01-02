@@ -3,6 +3,7 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.RefTerritoryEntity;
+import models.SuperEntity;
 
 public class TerritoryTableController extends SuperTableEntityController {
     public TerritoryTableController() {}
@@ -33,9 +34,9 @@ public class TerritoryTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getTerritoryData().remove(id);
-        getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().remove(id);
-        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getTerritoryData().remove(selectedEntity);
+        getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().remove(selectedEntity);
+        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().remove(selectedEntity);
     }
 }

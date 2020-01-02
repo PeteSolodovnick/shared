@@ -72,8 +72,6 @@ public abstract class SuperEntityController implements ControllerReference {
     public void setFarmFX(FarmFX farm) {
         this.farm = farm;
         entityTable.setItems(entities);
-    //    for (SuperEntity entity:this.entities)
-    //        entitiesName.getItems().add(entity.getName());
         entitiesName.setItems(entities);
         AutoCompleteComboBoxListener autoEntity = new AutoCompleteComboBoxListener(entitiesName);
     }
@@ -88,74 +86,6 @@ public abstract class SuperEntityController implements ControllerReference {
                 for (SuperEntity someEntity : this.entities) {
                     if (someEntity.getName().equals(nameEntity.getName()))
                         entities.add(someEntity);
-                /*    switch (someEntity.getClass().getName()) {
-                        case "models.RefCityEntity":
-                            RefCityEntity cityEntity = (RefCityEntity) someEntity;
-                            if (cityEntity.getName().equals(nameEntity.getName())) {
-                                entities.add(cityEntity);
-                            }
-                            break;
-                        case "models.RefTerritoryEntity":
-                            RefTerritoryEntity territoryEntity = (RefTerritoryEntity) someEntity;
-                            if (territoryEntity.getName().equals(nameEntity.getName())) {
-                                entities.add(territoryEntity);
-                            }
-                            break;
-                        case "models.RefContragentEntity":
-                            RefContragentEntity contragentEntity = (RefContragentEntity) someEntity;
-                            if (contragentEntity.getName().equals(nameEntity.getName())) {
-                                entities.add(contragentEntity);
-                            }
-                            break;
-                        case "models.RefTypeCityEntity":
-                            RefTypeCityEntity typeCity = (RefTypeCityEntity) someEntity;
-                            if (typeCity.getName().equals(nameEntity.getName())) {
-                                entities.add(typeCity);
-                            }
-                            break;
-                        case "models.RefSizeEntity":
-                            RefSizeEntity size = (RefSizeEntity) someEntity;
-                            if (size.getName().equals(nameEntity.getName())) {
-                                entities.add(size);
-                            }
-                            break;
-                        case "models.RefTypeContragentEntity":
-                            RefTypeContragentEntity typeContra = (RefTypeContragentEntity) someEntity;
-                            if (typeContra.getName().equals(nameEntity.getName())) {
-                                entities.add(typeContra);
-                            }
-                            break;
-                        case "models.RefPriceEntity":
-                            RefPriceEntity price = (RefPriceEntity) someEntity;
-                            if (price.getName().equals(nameEntity.getName())) {
-                                entities.add(price);
-                            }
-                            break;
-                        case "models.RefNomenklEntity":
-                            RefNomenklEntity nomenkl = (RefNomenklEntity) someEntity;
-                            if (nomenkl.getName().equals(nameEntity.getName())) {
-                                entities.add(nomenkl);
-                            }
-                            break;
-                        case "models.RefMarketViewEntity":
-                            RefMarketViewEntity marketView = (RefMarketViewEntity) someEntity;
-                            if (marketView.getName().equals(nameEntity.getName())) {
-                                entities.add(marketView);
-                            }
-                            break;
-                        case "models.RefKindContrgentEntity":
-                            RefKindContragentEntity kindContragentEntity = (RefKindContragentEntity) someEntity;
-                            if (kindContragentEntity.getName().equals(nameEntity.getName())) {
-                                entities.add(kindContragentEntity);
-                            }
-                            break;
-                        case "models.RefClassificationEntity":
-                            RefClassificationEntity classificationEntity = (RefClassificationEntity) someEntity;
-                            if (classificationEntity.getName().equals(nameEntity.getName())) {
-                                entities.add(classificationEntity);
-                            }
-                            break;
-                    } */
                 }
                 entityTable.setItems(entities);
         }
@@ -165,6 +95,7 @@ public abstract class SuperEntityController implements ControllerReference {
     public void handleDeleteEntity() {
         int selectedId = entityTable.getSelectionModel().getSelectedIndex();
         if (selectedId>=0) {
+            SuperEntity selectedEntity = entityTable.getItems().get(selectedId);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete " + nameEntity.getText());
             alert.setHeaderText(nameEntity.getText()+" " + entityTable.getItems().get(selectedId).getName() + " will be deleted");
@@ -174,8 +105,9 @@ public abstract class SuperEntityController implements ControllerReference {
                 EntityService service = new EntityService();
                 try {
                     service.delete(entityTable.getItems().get(selectedId));
-                    entities.remove(selectedId);
-                    deletedFromArray(selectedId);
+                    entities.remove(selectedEntity);
+                    deletedFromArray(selectedEntity);
+                    entityTable.getItems().remove(selectedEntity);
                 } catch (Exception e) {
                     Alert exAlert = new Alert(Alert.AlertType.ERROR);
                     exAlert.setTitle("Error!");
@@ -195,7 +127,7 @@ public abstract class SuperEntityController implements ControllerReference {
             alert.showAndWait();
         }
     }
-    public abstract void deletedFromArray(int id);
+    public abstract void deletedFromArray(SuperEntity selectedEntity);
 
     @FXML
     public void handleNewEntity() {

@@ -2,6 +2,9 @@ package address.classifications;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
+import models.RefMarketViewEntity;
+import models.RefSizeEntity;
+import models.SuperEntity;
 
 public class SizeProductsTableController extends SuperTableEntityController {
     public SizeProductsTableController() {
@@ -14,6 +17,7 @@ public class SizeProductsTableController extends SuperTableEntityController {
     }
     @Override
     public void setTextEdit() {
+        getFarm().getConfigDialogController().getProductsDialogController().setSizeEntity((RefSizeEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getProductsDialogController().getSize().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 
@@ -32,7 +36,7 @@ public class SizeProductsTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getSizeEntitiesData().remove(id);
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getSizeEntitiesData().remove(selectedEntity);
     }
 }

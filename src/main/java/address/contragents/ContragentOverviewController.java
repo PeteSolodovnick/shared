@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.*;
+import net.bytebuddy.implementation.bind.annotation.Super;
 
 public class ContragentOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -84,12 +85,11 @@ public class ContragentOverviewController extends SuperEntityTreeController impl
     }
 
     @Override
-    public void deletedFromTreeArray(int id) {
-        getFarm().getReferences().getTypeContragentData().remove(id);
+    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getTypeContragentData().remove(selectedEntity);
     }
 
     @Override
-    public void deletedFromArray(int id) {
-        getFarm().getReferences().getContragentData().remove(id);
-    }
+    public void deletedFromArray(SuperEntity selectedEntity) {
+        getFarm().getReferences().getContragentData().remove(selectedEntity); }
 }

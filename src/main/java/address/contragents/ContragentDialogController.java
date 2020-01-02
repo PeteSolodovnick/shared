@@ -107,36 +107,26 @@ public class ContragentDialogController extends SuperDialogEntityController {
     @Override
     protected void createEntity() {
         super.createEntity();
-      //  RefContragentEntity contragentEntity = (RefContragentEntity) getEntity();
-        logger.info(contragentEntity);
-        logger.info(getTypeContragentEntity());
         for (int i = 0; i < getFarm().getReferences().getTypeContragentData().size(); i++) {
             if (getFarm().getReferences().getTypeContragentData().get(i).getId() == getTypeContragentEntity().getId())
                 contragentEntity.setRefTypeContragentByTypeContraId(getFarm().getReferences().getTypeContragentData().get(i));
         }
-        logger.info("before kind");
         for (int i = 0; i < getFarm().getReferences().getKindContragentData().size(); i++) {
             if (getFarm().getReferences().getKindContragentData().get(i).getId() == getKindContragentEntity().getId())
                 contragentEntity.setRefKindContragentByKindContraId(getFarm().getReferences().getKindContragentData().get(i));
         }
-        logger.info("after kind");
-        logger.info(getPriceEntity());
-        logger.info("before price");
         for (int i = 0; i < getFarm().getReferences().getPriceData().size(); i++) {
             if (getFarm().getReferences().getPriceData().get(i).getId() == getPriceEntity().getId())
                 contragentEntity.setRefPriceByPriceId(getFarm().getReferences().getPriceData().get(i));
         }
-        logger.info("before market");
         for (int i = 0; i < getFarm().getReferences().getMarketViewData().size(); i++) {
             if (getFarm().getReferences().getMarketViewData().get(i).getId() == getMarketViewEntity().getId())
                 contragentEntity.setRefMarketViewByMarketViewId(getFarm().getReferences().getMarketViewData().get(i));
         }
-        logger.info("before city");
         for (int i = 0; i < getFarm().getReferences().getCitiesData().size(); i++) {
             if (getFarm().getReferences().getCitiesData().get(i).getId() == getCityEntity().getId())
                 contragentEntity.setRefCityByCityId(getFarm().getReferences().getCitiesData().get(i));
         }
-        logger.info("before others");
         contragentEntity.setAddress(address.getText());
         contragentEntity.setComments(comments.getText());
         contragentEntity.setInn(inn.getText());
@@ -145,7 +135,6 @@ public class ContragentDialogController extends SuperDialogEntityController {
         contragentEntity.setPhone(phone.getText());
         contragentEntity.setNds(vat.isSelected());
         setEntity(contragentEntity);
-        logger.info("complete");
     }
 
     @FXML
@@ -182,6 +171,7 @@ public class ContragentDialogController extends SuperDialogEntityController {
     public void newEntity() {
         getFarm().getReferences().getContragentData().add(getContragentEntity());
         getFarm().getConfigDialogController().getContragentOverviewController().getEntities().add(getContragentEntity());
+      //  getFarm().getConfigDialogController().getContragentOverviewController().getEntityTable().refresh();
     }
 
     @Override

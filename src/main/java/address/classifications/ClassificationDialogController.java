@@ -12,6 +12,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
     @FXML
     private TextField parent;
     private RefClassificationEntity classificationEntity;
+    private RefClassificationEntity parentEntity;
     private String fileClassif;
     public ClassificationDialogController() {}
     public void setFarmFX(FarmFX farm, SuperEntity classification) {
@@ -20,6 +21,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
         if (classification != null) {
             if (classificationEntity.getRefClassificationByParentId() != null) {
                 parent.setText(classificationEntity.getRefClassificationByParentId().getName());
+                parentEntity = classificationEntity.getRefClassificationByParentId();
             }
             setNew(false);
         } else {
@@ -31,12 +33,11 @@ public class ClassificationDialogController extends SuperDialogEntityController 
     @Override
     protected void createEntity() {
         super.createEntity();
-        RefClassificationEntity classification = (RefClassificationEntity) getEntity();
         for (int i = 0; i < getFarm().getReferences().getClassificationData().size(); i++) {
-            if (getFarm().getReferences().getClassificationData().get(i).getName().equals(getParent().getText()))
-                classification.setRefClassificationByParentId(getFarm().getReferences().getClassificationData().get(i));
+            if (getFarm().getReferences().getClassificationData().get(i).getId() == getParentEntity().getId());
+                classificationEntity.setRefClassificationByParentId(getFarm().getReferences().getClassificationData().get(i));
         }
-        setEntity(classification);
+        setEntity(classificationEntity);
     }
     @FXML
     private void handleClassificationChoose() {
@@ -78,5 +79,13 @@ public class ClassificationDialogController extends SuperDialogEntityController 
 
     public TextField getParent() {
         return parent;
+    }
+
+    public RefClassificationEntity getParentEntity() {
+        return parentEntity;
+    }
+
+    public void setParentEntity(RefClassificationEntity parentEntity) {
+        this.parentEntity = parentEntity;
     }
 }
