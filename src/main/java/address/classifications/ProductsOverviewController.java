@@ -54,6 +54,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
                 TreeItem<SuperEntity> newRoot = new TreeItem(classification);
                 initializeClassification(newRoot, classification);
                 getRootItem().getChildren().add(newRoot);
+                getRootItem().setExpanded(true);
             }
         }
     }
@@ -65,6 +66,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
                     TreeItem<SuperEntity> newRoot = new TreeItem(classif);
                     initializeClassification(newRoot, classif);
                     root.getChildren().add(newRoot);
+                    root.setExpanded(true);
                 }
             }
         }
@@ -78,6 +80,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
     @Override
     public void handleDeleteTreeEntity() {
         super.handleDeleteTreeEntity();
+
     }
     @Override
     public void handleNewTreeEntity() {
@@ -90,31 +93,6 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         getFarm().getConfigDialogController().setProductsOverviewController(this);
         setTitle("Edit Classification...");
         super.handleEditTreeEntity();
-     //   int selectedId = getTreeView().getSelectionModel().getSelectedIndex();
-     //   if (selectedId > 0) {
-     //       RefClassificationEntity findItem = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getValue();
-     //       getFarm().showEntityDialog(findItem,getReferenceStage(),getFileTree(),getTitle());
-            /* RefClassificationEntity parent = (RefClassificationEntity) getTreeView().getSelectionModel().getSelectedItem().getParent().getValue();
-            for (int i = 0; i < getEntitiesTree().size(); i++) {
-                RefClassificationEntity classificationEntity = (RefClassificationEntity) getEntitiesTree().get(i);
-                if (getEntitiesTree().get(i).getName().equals(findItem)) {
-                    if (classificationEntity.getRefClassificationByParentId() == null) {
-                        if (parent.equals("Classification"))
-                            getFarm().showEntityDialog(getEntitiesTree().get(i), getReferenceStage(), getFileTree(), getTitle());
-                    } else {
-                        if (parent.equals(classificationEntity.getRefClassificationByParentId().getName()))
-                            getFarm().showEntityDialog(getEntitiesTree().get(i), getReferenceStage(), getFileTree(), getTitle());
-                    }
-                }
-            } */
-      //  } else {
-      //          Alert alert = new Alert(Alert.AlertType.WARNING);
-      //          alert.initOwner(getFarm().getPrimaryStage());
-      //          alert.setTitle("No Selection");
-      //          alert.setHeaderText("No one element Selected");
-      //          alert.setContentText("Please select an element in the tree for editing");
-      //          alert.showAndWait();
-      //  }
     }
 
     @Override

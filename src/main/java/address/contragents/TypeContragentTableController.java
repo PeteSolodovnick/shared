@@ -38,6 +38,7 @@ public class TypeContragentTableController extends SuperTableEntityController {
     public void deletedFromArray(SuperEntity selectedEntity) {
         getFarm().getReferences().getTypeContragentData().remove(selectedEntity);
         getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesTree().remove(selectedEntity);
-        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().remove(selectedEntity);
+        getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().clear();
+        getFarm().getConfigDialogController().getContragentOverviewController().initRoot();
     }
 }

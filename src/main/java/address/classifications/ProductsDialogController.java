@@ -15,28 +15,28 @@ public class ProductsDialogController extends SuperDialogEntityController {
     @FXML
     private TextField classification;
 
-    private RefNomenklEntity productEntity;
-    private RefSizeEntity sizeEntity;
-    private RefClassificationEntity classificationEntity;
+    private RefNomenklEntity newProductEntity;
+    private RefSizeEntity newSizeEntity;
+    private RefClassificationEntity newParentEntity;
     private String fileSize;
     private String fileClassif;
     public ProductsDialogController() {}
 
-    public void setFarmFX(FarmFX farm, SuperEntity product) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedProduct) {
         fileSize = "/size.fxml";
         fileClassif = "/classificationTable.fxml";
-        productEntity = (RefNomenklEntity) product;
-        if (product != null) {
-            size.setText(productEntity.getRefSizeBySizeId().getName());
-            classification.setText(productEntity.getRefClassificationByClassificationId().getName());
-            sizeEntity = productEntity.getRefSizeBySizeId();
-            classificationEntity = productEntity.getRefClassificationByClassificationId();
+        newProductEntity = (RefNomenklEntity) selectedProduct;
+        if (selectedProduct != null) {
+            size.setText(newProductEntity.getRefSizeBySizeId().getName());
+            classification.setText(newProductEntity.getRefClassificationByClassificationId().getName());
+            newSizeEntity = newProductEntity.getRefSizeBySizeId();
+            newParentEntity = newProductEntity.getRefClassificationByClassificationId();
             setNew(false);
         } else {
-            productEntity = new RefNomenklEntity();
+            newProductEntity = new RefNomenklEntity();
             setNew(true);
         }
-        super.setFarmFX(farm, productEntity);
+        super.setFarmFX(farm, newProductEntity);
     }
     @Override
     protected boolean isInputValid() {
@@ -54,16 +54,9 @@ public class ProductsDialogController extends SuperDialogEntityController {
     @Override
     protected void createEntity() {
         super.createEntity();
-      //  RefNomenklEntity prodEntity = (RefNomenklEntity) getEntity();
-        for (int i = 0; i < getFarm().getReferences().getSizeEntitiesData().size(); i++) {
-            if (getFarm().getReferences().getSizeEntitiesData().get(i).getId() == getSizeEntity().getId())
-                productEntity.setRefSizeBySizeId(getFarm().getReferences().getSizeEntitiesData().get(i));
-        }
-        for (int i = 0; i < getFarm().getReferences().getClassificationData().size(); i++) {
-            if (getFarm().getReferences().getClassificationData().get(i).getId() == getClassificationEntity().getId())
-                productEntity.setRefClassificationByClassificationId(getFarm().getReferences().getClassificationData().get(i));
-        }
-        setNewEntity(productEntity);
+        newProductEntity.setRefSizeBySizeId(getNewSizeEntity());
+        newProductEntity.setRefClassificationByClassificationId(getNewParentEntity());
+        setNewEntity(newProductEntity);
     }
 
     @FXML
@@ -84,8 +77,8 @@ public class ProductsDialogController extends SuperDialogEntityController {
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getProductsData().add(getProductEntity());
-        getFarm().getConfigDialogController().getProductsOverviewController().getEntities().add(getProductEntity());
+        getFarm().getReferences().getProductsData().add(getNewProductEntity());
+        getFarm().getConfigDialogController().getProductsOverviewController().getEntities().add(getNewProductEntity());
     }
 
     @Override
@@ -106,23 +99,27 @@ public class ProductsDialogController extends SuperDialogEntityController {
         return classification;
     }
 
-    public RefSizeEntity getSizeEntity() {
-        return sizeEntity;
+    public RefNomenklEntity getNewProductEntity() {
+        return newProductEntity;
     }
 
-    public void setSizeEntity(RefSizeEntity sizeEntity) {
-        this.sizeEntity = sizeEntity;
+    public void setNewProductEntity(RefNomenklEntity newProductEntity) {
+        this.newProductEntity = newProductEntity;
     }
 
-    public RefClassificationEntity getClassificationEntity() {
-        return classificationEntity;
+    public RefSizeEntity getNewSizeEntity() {
+        return newSizeEntity;
     }
 
-    public void setClassificationEntity(RefClassificationEntity classificationEntity) {
-        this.classificationEntity = classificationEntity;
+    public void setNewSizeEntity(RefSizeEntity newSizeEntity) {
+        this.newSizeEntity = newSizeEntity;
     }
 
-    public RefNomenklEntity getProductEntity() {
-        return productEntity;
+    public RefClassificationEntity getNewParentEntity() {
+        return newParentEntity;
+    }
+
+    public void setNewParentEntity(RefClassificationEntity newParentEntity) {
+        this.newParentEntity = newParentEntity;
     }
 }

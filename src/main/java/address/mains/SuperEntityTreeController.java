@@ -92,8 +92,9 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
                 try {
                     service.delete(name);
                     entitiesTree.remove(name);
-                    rootItem.getChildren().remove(selectedId-1);
                     deletedFromTreeArray(name);
+                    rootItem.getChildren().clear();
+                    initRoot();
                 } catch (Exception e) {
                     Alert exAlert = new Alert(Alert.AlertType.ERROR);
                     exAlert.setTitle("Error!");

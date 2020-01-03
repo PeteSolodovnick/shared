@@ -17,7 +17,7 @@ public class SizeProductsTableController extends SuperTableEntityController {
     }
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getProductsDialogController().setSizeEntity((RefSizeEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getProductsDialogController().setNewSizeEntity((RefSizeEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getProductsDialogController().getSize().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

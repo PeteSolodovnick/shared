@@ -11,33 +11,30 @@ import models.SuperEntity;
 public class ClassificationDialogController extends SuperDialogEntityController {
     @FXML
     private TextField parent;
-    private RefClassificationEntity classificationEntity;
-    private RefClassificationEntity parentEntity;
+    private RefClassificationEntity newClassificationEntity;
+    private RefClassificationEntity newParentEntity;
     private String fileClassif;
     public ClassificationDialogController() {}
-    public void setFarmFX(FarmFX farm, SuperEntity classification) {
+    public void setFarmFX(FarmFX farm, SuperEntity selectedClassification) {
         fileClassif = "/classifClassifTable.fxml";
-        classificationEntity = (RefClassificationEntity) classification;
-        if (classification != null) {
-            if (classificationEntity.getRefClassificationByParentId() != null) {
-                parent.setText(classificationEntity.getRefClassificationByParentId().getName());
-                parentEntity = classificationEntity.getRefClassificationByParentId();
+        newClassificationEntity = (RefClassificationEntity) selectedClassification;
+        if (selectedClassification != null) {
+            if (newClassificationEntity.getRefClassificationByParentId() != null) {
+                parent.setText(newClassificationEntity.getRefClassificationByParentId().getName());
+                newParentEntity = newClassificationEntity.getRefClassificationByParentId();
             }
             setNew(false);
         } else {
-            classificationEntity = new RefClassificationEntity();
+            newClassificationEntity = new RefClassificationEntity();
             setNew(true);
         }
-        super.setFarmFX(farm, classificationEntity);
+        super.setFarmFX(farm, newClassificationEntity);
     }
     @Override
     protected void createEntity() {
         super.createEntity();
-        for (int i = 0; i < getFarm().getReferences().getClassificationData().size(); i++) {
-            if (getFarm().getReferences().getClassificationData().get(i).getId() == getParentEntity().getId());
-                classificationEntity.setRefClassificationByParentId(getFarm().getReferences().getClassificationData().get(i));
-        }
-        setNewEntity(classificationEntity);
+        newClassificationEntity.setRefClassificationByParentId(getNewParentEntity());
+        setNewEntity(newClassificationEntity);
     }
     @FXML
     private void handleClassificationChoose() {
@@ -51,27 +48,30 @@ public class ClassificationDialogController extends SuperDialogEntityController 
 
     @Override
     public void newEntity() {
-        getFarm().getReferences().getClassificationData().add(classificationEntity);
+        getFarm().getReferences().getClassificationData().add(newClassificationEntity);
         if (getFarm().getConfigDialogController().getClassificationProductTableController() != null) {
-            getFarm().getConfigDialogController().getClassificationProductTableController().getEntityTable().getItems().add(classificationEntity);
+            getFarm().getConfigDialogController().getClassificationProductTableController().getEntityTable().getItems().add(newClassificationEntity);
+
         }
-        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().add(new TreeItem<>(classificationEntity));
-        getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesTree().add(classificationEntity);
+        getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesTree().add(newClassificationEntity);
+        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();
+        getFarm().getConfigDialogController().getProductsOverviewController().initRoot();
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
-        logger.info("in edit entity");
+    public void editEntity(SuperEntity newEntity) {
         if (getFarm().getConfigDialogController().getClassificationProductTableController() != null) {
             getFarm().getConfigDialogController().getClassificationProductTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();
             getFarm().getConfigDialogController().getProductsOverviewController().initRoot();
         } else {
-            getFarm().getConfigDialogController().getProductsOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(entity);
+            getFarm().getConfigDialogController().getProductsOverviewController().getTreeView().getSelectionModel().getSelectedItem().setValue(newEntity);
+            getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();
+            getFarm().getConfigDialogController().getProductsOverviewController().initRoot();
         }
         for (int i = 0; i < getFarm().getReferences().getProductsData().size(); i++) {
-            if (getFarm().getReferences().getProductsData().get(i).getRefClassificationByClassificationId().getId() == entity.getId()) {
-                getFarm().getReferences().getProductsData().get(i).getRefClassificationByClassificationId().setName(entity.getName());
+            if (getFarm().getReferences().getProductsData().get(i).getRefClassificationByClassificationId().getId() == newEntity.getId()) {
+                getFarm().getReferences().getProductsData().get(i).getRefClassificationByClassificationId().setName(newEntity.getName());
             }
         }
         getFarm().getConfigDialogController().getProductsOverviewController().getEntityTable().refresh();
@@ -81,11 +81,11 @@ public class ClassificationDialogController extends SuperDialogEntityController 
         return parent;
     }
 
-    public RefClassificationEntity getParentEntity() {
-        return parentEntity;
+    public RefClassificationEntity getNewParentEntity() {
+        return newParentEntity;
     }
 
-    public void setParentEntity(RefClassificationEntity parentEntity) {
-        this.parentEntity = parentEntity;
+    public void setNewParentEntity(RefClassificationEntity newParentEntity) {
+        this.newParentEntity = newParentEntity;
     }
 }

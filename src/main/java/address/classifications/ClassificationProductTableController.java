@@ -34,7 +34,7 @@ public class ClassificationProductTableController extends SuperTableEntityContro
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getProductsDialogController().setClassificationEntity((RefClassificationEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getProductsDialogController().setNewParentEntity((RefClassificationEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getProductsDialogController().getClassification().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
     @Override
@@ -54,6 +54,7 @@ public class ClassificationProductTableController extends SuperTableEntityContro
     public void deletedFromArray(SuperEntity selectedEntity) {
         getFarm().getReferences().getClassificationData().remove(selectedEntity);
         getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesTree().remove(selectedEntity);
-        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().remove(selectedEntity);
+        getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();
+        getFarm().getConfigDialogController().getProductsOverviewController().initRoot();
     }
 }

@@ -37,6 +37,7 @@ public class TerritoryTableController extends SuperTableEntityController {
     public void deletedFromArray(SuperEntity selectedEntity) {
         getFarm().getReferences().getTerritoryData().remove(selectedEntity);
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesTree().remove(selectedEntity);
-        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().remove(selectedEntity);
+        getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().clear();
+        getFarm().getConfigDialogController().getLocalityOverviewController().initRoot();
     }
 }
