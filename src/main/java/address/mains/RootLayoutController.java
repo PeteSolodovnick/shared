@@ -10,6 +10,7 @@ public class RootLayoutController {
     private final String contragentReference = "/contragent.fxml";
     private final String localityReference = "/cities.fxml";
     private final String productReference = "/classification.fxml";
+    private final String lotsReference = "/lots.fxml";
     private FarmFX farm;
     private FactoryListEntities listEntities;
 
@@ -55,9 +56,18 @@ public class RootLayoutController {
          farm.getReferences().getClassificationData().clear();
          listEntities.getListEntities(References.PRODUCT);
          listEntities.getListEntities(References.CLASSIFICATION);
-       //  logger.info(farm.getReferences().getClassificationData().get(0).getName());
          listEntities.getListEntities(References.SIZE);
          farm.showEntityOverview(productReference);
+    }
+    @FXML
+    private void handleLots() {
+         farm.getReferences().getLotsData().clear();
+         farm.getReferences().getKindLotsData().clear();
+         farm.getReferences().getTypeLotsData().clear();
+         listEntities.getListEntities(References.KIND_LOTS);
+         listEntities.getListEntities(References.TYPE_LOTS);
+         listEntities.getListEntities(References.LOTS);
+         farm.showEntityOverview(lotsReference);
     }
 
     @FXML

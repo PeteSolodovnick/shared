@@ -7,10 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import models.RefCityEntity;
-import models.RefContragentEntity;
-import models.RefNomenklEntity;
-import models.SuperEntity;
+import models.*;
 import services.EntityService;
 
 import java.util.Optional;
@@ -70,6 +67,11 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
                                 entities.add(productEntity);
                             }
                             break;
+                        case "models.RefLotsEntity":
+                            RefLotsEntity lotsEntity = (RefLotsEntity) someEntity;
+                            if (lotsEntity.getRefTypeLotsByTypeLotsId().getId() == entity.getValue().getId()) {
+                                entities.add(lotsEntity);
+                            }
                     }
                 }
                 getEntityTable().setItems(entities);

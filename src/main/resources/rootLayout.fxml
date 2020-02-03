@@ -24,6 +24,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#handleLocality" text="Locality" />
                   <MenuItem mnemonicParsing="false" onAction="#handleContragent" text="Contragents" />
                   <MenuItem mnemonicParsing="false" onAction="#handleProduct" text="Classifications" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleLots" text="Lots" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

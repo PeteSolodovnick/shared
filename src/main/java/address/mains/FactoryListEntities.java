@@ -46,6 +46,15 @@ public class FactoryListEntities {
             case CLASSIFICATION:
                 entity = new RefClassificationEntity();
                 break;
+            case LOTS:
+                entity = new RefLotsEntity();
+                break;
+            case TYPE_LOTS:
+                entity = new RefTypeLotsEntity();
+                break;
+            case KIND_LOTS:
+                entity = new RefKindLotsEntity();
+                break;
         }
                 for (SuperEntity ent : service.getAllRows(entity)) {
                     switch (reference) {
@@ -81,6 +90,15 @@ public class FactoryListEntities {
                             break;
                         case SIZE:
                             farm.getReferences().getSizeEntitiesData().add((RefSizeEntity) ent);
+                            break;
+                        case LOTS:
+                            farm.getReferences().getLotsData().add((RefLotsEntity) ent);
+                            break;
+                        case KIND_LOTS:
+                            farm.getReferences().getKindLotsData().add((RefKindLotsEntity)ent);
+                            break;
+                        case TYPE_LOTS:
+                            farm.getReferences().getTypeLotsData().add((RefTypeLotsEntity) ent);
                             break;
                     }
                 }

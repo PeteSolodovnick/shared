@@ -16,6 +16,21 @@ public class CollectionsEntities {
     private ObservableList<RefClassificationEntity> classificationData = FXCollections.observableArrayList();
     private ObservableList<RefSizeEntity> sizeEntitiesData = FXCollections.observableArrayList();
     private ObservableList<RefKindContragentEntity> kindContragentData = FXCollections.observableArrayList();
+    private ObservableList<RefKindLotsEntity> kindLotsData = FXCollections.observableArrayList();
+    private ObservableList<RefTypeLotsEntity> typeLotsData = FXCollections.observableArrayList();
+    private ObservableList<RefLotsEntity> lotsData = FXCollections.observableArrayList();
+
+    public ObservableList<RefKindLotsEntity> getKindLotsData() {
+        return kindLotsData;
+    }
+
+    public ObservableList<RefTypeLotsEntity> getTypeLotsData() {
+        return typeLotsData;
+    }
+
+    public ObservableList<RefLotsEntity> getLotsData() {
+        return lotsData;
+    }
 
     public ObservableList<RefKindContragentEntity> getKindContragentData() {
         return kindContragentData;

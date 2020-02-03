@@ -3,6 +3,10 @@ package address.mains;
 import address.classifications.*;
 import address.contragents.*;
 import address.localities.*;
+import address.lots.KindLotsTableController;
+import address.lots.LotsDialogController;
+import address.lots.LotsOverviewController;
+import address.lots.TypeLotsTableController;
 import address.prices.SuperPriceTableController;
 
 public class ConfigDialogController {
@@ -22,6 +26,42 @@ public class ConfigDialogController {
     private ClassificationDialogController classificationDialogController;
     private ClassificationProductTableController classificationProductTableController;
     private SizeProductsTableController sizeProductsTableController;
+    private LotsOverviewController lotsOverviewController;
+    private LotsDialogController lotsDialogController;
+    private TypeLotsTableController typeLotsTableController;
+    private KindLotsTableController kindLotsTableController;
+
+    public KindLotsTableController getKindLotsTableController() {
+        return kindLotsTableController;
+    }
+
+    public void setKindLotsTableController(KindLotsTableController kindLotsTableController) {
+        this.kindLotsTableController = kindLotsTableController;
+    }
+
+    public TypeLotsTableController getTypeLotsTableController() {
+        return typeLotsTableController;
+    }
+
+    public void setTypeLotsTableController(TypeLotsTableController typeLotsTableController) {
+        this.typeLotsTableController = typeLotsTableController;
+    }
+
+    public LotsDialogController getLotsDialogController() {
+        return lotsDialogController;
+    }
+
+    public void setLotsDialogController(LotsDialogController lotsDialogController) {
+        this.lotsDialogController = lotsDialogController;
+    }
+
+    public LotsOverviewController getLotsOverviewController() {
+        return lotsOverviewController;
+    }
+
+    public void setLotsOverviewController(LotsOverviewController lotsOverviewController) {
+        this.lotsOverviewController = lotsOverviewController;
+    }
 
     public SizeProductsTableController getSizeProductsTableController() {
         return sizeProductsTableController;

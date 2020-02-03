@@ -11,5 +11,8 @@ public enum References {
     KIND_CONTRAGENT,
     PRODUCT,
     SIZE,
-    CLASSIFICATION
+    CLASSIFICATION,
+    LOTS,
+    TYPE_LOTS,
+    KIND_LOTS
 }

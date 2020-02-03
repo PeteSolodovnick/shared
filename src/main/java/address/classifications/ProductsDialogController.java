@@ -43,7 +43,10 @@ public class ProductsDialogController extends SuperDialogEntityController {
         if (super.isInputValid()) {
             String errorMessage = "";
             if (size.getText() == null || size.getText().length() == 0) {
-                errorMessage += "No valid city\n";
+                errorMessage += "No valid size\n";
+            }
+            if (classification.getText() == null || classification.getText().length() == 0) {
+                errorMessage += "No valid classification \n";
             }
             if (isError(errorMessage))
                 return false;
