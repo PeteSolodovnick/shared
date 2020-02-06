@@ -19,6 +19,11 @@ public class CollectionsEntities {
     private ObservableList<RefKindLotsEntity> kindLotsData = FXCollections.observableArrayList();
     private ObservableList<RefTypeLotsEntity> typeLotsData = FXCollections.observableArrayList();
     private ObservableList<RefLotsEntity> lotsData = FXCollections.observableArrayList();
+    private ObservableList<RefStorageEntity> storageData = FXCollections.observableArrayList();
+
+    public ObservableList<RefStorageEntity> getStorageData() {
+        return storageData;
+    }
 
     public ObservableList<RefKindLotsEntity> getKindLotsData() {
         return kindLotsData;

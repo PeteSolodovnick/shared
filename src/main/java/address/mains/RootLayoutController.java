@@ -11,6 +11,7 @@ public class RootLayoutController {
     private final String localityReference = "/cities.fxml";
     private final String productReference = "/classification.fxml";
     private final String lotsReference = "/lots.fxml";
+    private final String storageReference = "/storage.fxml";
     private FarmFX farm;
     private FactoryListEntities listEntities;
 
@@ -68,6 +69,12 @@ public class RootLayoutController {
          listEntities.getListEntities(References.TYPE_LOTS);
          listEntities.getListEntities(References.LOTS);
          farm.showEntityOverview(lotsReference);
+    }
+    @FXML
+    private void handleStorage() {
+         farm.getReferences().getStorageData().clear();
+         listEntities.getListEntities(References.STORAGE);
+         farm.showEntityOverview(storageReference);
     }
 
     @FXML

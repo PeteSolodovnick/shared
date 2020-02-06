@@ -8,6 +8,7 @@ import address.lots.LotsDialogController;
 import address.lots.LotsOverviewController;
 import address.lots.TypeLotsTableController;
 import address.prices.SuperPriceTableController;
+import address.stores.StorageOverviewController;
 
 public class ConfigDialogController {
     private LocalityOverviewController localityOverviewController;
@@ -30,6 +31,15 @@ public class ConfigDialogController {
     private LotsDialogController lotsDialogController;
     private TypeLotsTableController typeLotsTableController;
     private KindLotsTableController kindLotsTableController;
+    private StorageOverviewController storageOverviewController;
+
+    public StorageOverviewController getStorageOverviewController() {
+        return storageOverviewController;
+    }
+
+    public void setStorageOverviewController(StorageOverviewController storageOverviewController) {
+        this.storageOverviewController = storageOverviewController;
+    }
 
     public KindLotsTableController getKindLotsTableController() {
         return kindLotsTableController;

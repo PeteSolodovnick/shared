@@ -2,10 +2,13 @@ package dao.implDAO;
 
 import dao.DAO;
 import models.SuperEntity;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactoryUtil;
 
+import java.util.Date;
 import java.util.List;
 
 public class EntityDaoImpl implements DAO<SuperEntity,Long> {
@@ -59,6 +62,14 @@ public class EntityDaoImpl implements DAO<SuperEntity,Long> {
     public List<SuperEntity> getAllRows(SuperEntity entity) {
         try (final Session session = sessionFactory.openSession()) {
             return session.createCriteria(entity.getClass()).list();
+        }
+    }
+    @Override
+    public List<SuperEntity> getDateRows(SuperEntity entity, Date startDate, Date finishDate) {
+        try (final Session session = sessionFactory.openSession()) {
+            Criteria cr = session.createCriteria(entity.getClass());
+            cr.add(Restrictions.between("date", startDate, finishDate));
+            return cr.list();
         }
     }
 }

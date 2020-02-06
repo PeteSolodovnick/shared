@@ -55,6 +55,9 @@ public class FactoryListEntities {
             case KIND_LOTS:
                 entity = new RefKindLotsEntity();
                 break;
+            case STORAGE:
+                entity = new RefStorageEntity();
+                break;
         }
                 for (SuperEntity ent : service.getAllRows(entity)) {
                     switch (reference) {
@@ -99,6 +102,9 @@ public class FactoryListEntities {
                             break;
                         case TYPE_LOTS:
                             farm.getReferences().getTypeLotsData().add((RefTypeLotsEntity) ent);
+                            break;
+                        case STORAGE:
+                            farm.getReferences().getStorageData().add((RefStorageEntity) ent);
                             break;
                     }
                 }

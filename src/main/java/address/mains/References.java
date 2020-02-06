@@ -14,5 +14,6 @@ public enum References {
     CLASSIFICATION,
     LOTS,
     TYPE_LOTS,
-    KIND_LOTS
+    KIND_LOTS,
+    STORAGE
 }
