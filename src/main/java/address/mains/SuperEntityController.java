@@ -102,7 +102,7 @@ public abstract class SuperEntityController implements ControllerReference {
             alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                EntityService service = new EntityService();
+                EntityService<SuperEntity, Long> service = new EntityService<>();
                 try {
                     service.delete(entityTable.getItems().get(selectedId));
                     entities.remove(selectedEntity);

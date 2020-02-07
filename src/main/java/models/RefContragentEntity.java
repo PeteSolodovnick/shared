@@ -1,6 +1,9 @@
 package models;
 
+import address.documents.invoices.DocInvoiceHeadDocEntity;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +21,16 @@ public class RefContragentEntity extends SuperEntity{
     private RefPriceEntity refPriceByPriceId;
     private RefMarketViewEntity refMarketViewByMarketViewId;
     private RefKindContragentEntity refKindContragentByKindContraId;
+    private Collection<DocInvoiceHeadDocEntity> docInvoiceHeadById;
+
+    @OneToMany(mappedBy = "refContragentEntityByContragentId")
+    public Collection<DocInvoiceHeadDocEntity> getDocInvoiceHeadById() {
+        return docInvoiceHeadById;
+    }
+
+    public void setDocInvoiceHeadById(Collection<DocInvoiceHeadDocEntity> docInvoiceHeadById) {
+        this.docInvoiceHeadById = docInvoiceHeadById;
+    }
 
     @Basic
     @Column(name = "address", nullable = true, length = 150)

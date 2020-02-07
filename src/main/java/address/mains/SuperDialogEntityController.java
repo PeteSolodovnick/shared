@@ -49,7 +49,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     public void handleOkDialog() {
         if (isInputValid()) {
             createEntity();
-            EntityService service = new EntityService();
+            EntityService<SuperEntity, Long> service = new EntityService<>();
             try {
                 if (isNew) {
                     service.create(newEntity);

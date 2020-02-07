@@ -1,9 +1,13 @@
 package address.mains;
 
+import address.documents.invoices.DocInvoiceHeadDocEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import models.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.time.LocalDate;
 
 public class RootLayoutController {
     private static final Logger logger = LogManager.getLogger();
@@ -12,12 +16,11 @@ public class RootLayoutController {
     private final String productReference = "/classification.fxml";
     private final String lotsReference = "/lots.fxml";
     private final String storageReference = "/storage.fxml";
+    private final String invoiceDoc = "/invoice.fxml";
     private FarmFX farm;
-    private FactoryListEntities listEntities;
 
      public void setFarm(FarmFX farm) {
         this.farm = farm;
-        listEntities = new FactoryListEntities(farm);
     }
 
     @FXML
@@ -25,9 +28,9 @@ public class RootLayoutController {
         farm.getReferences().getTerritoryData().clear();
         farm.getReferences().getCitiesData().clear();
         farm.getReferences().getTypeCityData().clear();
-        listEntities.getListEntities(References.TYPE_CITY);
-        listEntities.getListEntities(References.CITY);
-        listEntities.getListEntities(References.TERRITORY);
+        farm.getReferences().setCitiesData(new FactoryListEntities<>(new RefCityEntity()).getListEntities());
+        farm.getReferences().setTerritoryData(new FactoryListEntities<>(new RefTerritoryEntity()).getListEntities());
+        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new RefTypeCityEntity()).getListEntities());
         farm.showEntityOverview(localityReference);
     }
     @FXML
@@ -39,15 +42,13 @@ public class RootLayoutController {
         farm.getReferences().getKindContragentData().clear();
         farm.getReferences().getCitiesData().clear();
         farm.getReferences().getTypeCityData().clear();
-        farm.getReferences().getTypeCityData().clear();
-        listEntities.getListEntities(References.CONTRAGENT);
-        listEntities.getListEntities(References.CITY);
-        listEntities.getListEntities(References.TYPE_CITY);
-        listEntities.getListEntities(References.TERRITORY);
-        listEntities.getListEntities(References.TYPE_CONTRAGENT);
-        listEntities.getListEntities(References.MARKET_VIEW);
-        listEntities.getListEntities(References.PRICE);
-        listEntities.getListEntities(References.KIND_CONTRAGENT);
+        farm.getReferences().setContragentData(new FactoryListEntities<>(new RefContragentEntity()).getListEntities());
+        farm.getReferences().setTypeContragentData(new FactoryListEntities<>(new RefTypeContragentEntity()).getListEntities());
+        farm.getReferences().setMarketViewData(new FactoryListEntities<>(new RefMarketViewEntity()).getListEntities());
+        farm.getReferences().setPriceData(new FactoryListEntities<>(new RefPriceEntity()).getListEntities());
+        farm.getReferences().setKindContragentData(new FactoryListEntities<>(new RefKindContragentEntity()).getListEntities());
+        farm.getReferences().setCitiesData(new FactoryListEntities<>(new RefCityEntity()).getListEntities());
+        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new RefTypeCityEntity()).getListEntities());
         farm.showEntityOverview(contragentReference);
     }
     @FXML
@@ -55,9 +56,9 @@ public class RootLayoutController {
          farm.getReferences().getProductsData().clear();
          farm.getReferences().getSizeEntitiesData().clear();
          farm.getReferences().getClassificationData().clear();
-         listEntities.getListEntities(References.PRODUCT);
-         listEntities.getListEntities(References.CLASSIFICATION);
-         listEntities.getListEntities(References.SIZE);
+         farm.getReferences().setProductsData(new FactoryListEntities<>(new RefNomenklEntity()).getListEntities());
+         farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new RefSizeEntity()).getListEntities());
+         farm.getReferences().setClassificationData(new FactoryListEntities<>(new RefClassificationEntity()).getListEntities());
          farm.showEntityOverview(productReference);
     }
     @FXML
@@ -65,16 +66,24 @@ public class RootLayoutController {
          farm.getReferences().getLotsData().clear();
          farm.getReferences().getKindLotsData().clear();
          farm.getReferences().getTypeLotsData().clear();
-         listEntities.getListEntities(References.KIND_LOTS);
-         listEntities.getListEntities(References.TYPE_LOTS);
-         listEntities.getListEntities(References.LOTS);
+         farm.getReferences().setLotsData(new FactoryListEntities<>(new RefLotsEntity()).getListEntities());
+         farm.getReferences().setKindLotsData(new FactoryListEntities<>(new RefKindLotsEntity()).getListEntities());
+         farm.getReferences().setTypeLotsData(new FactoryListEntities<>(new RefTypeLotsEntity()).getListEntities());
          farm.showEntityOverview(lotsReference);
     }
     @FXML
     private void handleStorage() {
          farm.getReferences().getStorageData().clear();
-         listEntities.getListEntities(References.STORAGE);
+         farm.getReferences().setStorageData(new FactoryListEntities<>(new RefStorageEntity()).getListEntities());
          farm.showEntityOverview(storageReference);
+    }
+    @FXML
+    private void handleInvoices() {
+         farm.getReferences().getInvoiceData().clear();
+         farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
+         logger.info(LocalDate.now());
+         logger.info(LocalDate.now().minusWeeks(1));
+
     }
 
     @FXML

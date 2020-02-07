@@ -90,7 +90,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
             alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                EntityService service = new EntityService();
+                EntityService<SuperEntity, Long> service = new EntityService<>();
                 try {
                     service.delete(name);
                     entitiesTree.remove(name);

@@ -32,9 +32,16 @@
     <mapping class="models.RefLotsEntity"/>
     <mapping class="models.RefTypeLotsEntity"/>
       <mapping class="models.RefStorageEntity"/>
+      <mapping class="address.documents.invoices.DocInvoiceHeadDocEntity"/>
+      <mapping class="address.documents.invoices.DocTypeInvoiceDocEntity"/>
+      <mapping class="address.documents.invoices.TableInvoiceLotDocEntity"/>
+      <mapping class="address.documents.invoices.TableInvoiceNomDocEntity"/>
+    <mapping class="address.documents.invoices.RefStatusInvoiceDocEntity"/>
+    <mapping class="address.documents.SuperDocumentEntity"/>
 
 
-      <!-- DB schema will be updated if needed -->
+
+    <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

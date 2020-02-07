@@ -1,32 +1,31 @@
 package services;
 
 import dao.implDAO.EntityDaoImpl;
-import models.SuperEntity;
-
 import java.util.List;
 
-public class EntityService {
-    private EntityDaoImpl entity = new EntityDaoImpl();
+public class EntityService<Entity, Key> {
+    private EntityDaoImpl<Entity, Key> entity = new EntityDaoImpl();
     public EntityService() {}
 
     public void exit() {
         entity.exit();
     }
-    public void create(SuperEntity superEntity) {
-        System.out.println("In EntityService create");
-        this.entity.create(superEntity);
-        System.out.println("after EntityService create");
+    public void create(Entity entity) {
+        this.entity.create(entity);
     }
-    public void update(SuperEntity superEntity) {
-        this.entity.update(superEntity);
+    public void update(Entity entity) {
+        this.entity.update(entity);
     }
-    public void delete(SuperEntity superEntity) {
-        this.entity.delete(superEntity);
+    public void delete(Entity entity) {
+        this.entity.delete(entity);
     }
-    public SuperEntity read(long id) {
-        return this.entity.read(id);
+    public Entity read(Entity entity, Key id) {
+        return (Entity) this.entity.read(entity, id);
     }
-    public List<SuperEntity> getAllRows(SuperEntity entity) {
+    public List<Entity> getAllRows(Entity entity) {
         return this.entity.getAllRows(entity);
+    }
+    public List<Entity> getDateRows (Entity entity, Key startDate, Key endDate) {
+        return this.entity.getDateRows(entity, startDate, endDate);
     }
 }
