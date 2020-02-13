@@ -3,19 +3,19 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
-import models.RefTerritoryEntity;
 import models.SuperEntity;
+import models.TerritoryEntity;
 
 public class TerritoryDialogController extends SuperDialogEntityController {
-    private RefTerritoryEntity newTerritoryEntity;
+    private TerritoryEntity newTerritoryEntity;
     public TerritoryDialogController() {}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedTerritory) {
-        newTerritoryEntity = (RefTerritoryEntity) selectedTerritory;
+        newTerritoryEntity = (TerritoryEntity) selectedTerritory;
         if (selectedTerritory != null) {
             setNew(false);
         } else {
-            newTerritoryEntity = new RefTerritoryEntity();
+            newTerritoryEntity = new TerritoryEntity();
             setNew(true);
         }
         super.setFarmFX(farm,newTerritoryEntity);

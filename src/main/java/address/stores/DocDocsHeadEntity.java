@@ -14,9 +14,9 @@ public class DocDocsHeadEntity {
     private Integer number;
     private Long kindOfTypeDocId;
     private Date date;
-    private RefContragentEntity refContragentByContraId;
-    private RefStorageEntity refStorageByStorageInId;
-    private RefStorageEntity refStorageByStorageOutId;
+    private ContragentEntity refContragentByContraId;
+    private StorageEntity refStorageByStorageInId;
+    private StorageEntity refStorageByStorageOutId;
     private RefKindOfTypeDocEntity refKindOfTypeDocByKindOfTypeDocId;
 
     @Id
@@ -110,31 +110,31 @@ public class DocDocsHeadEntity {
 
     @ManyToOne
     @JoinColumn(name = "contra_id", referencedColumnName = "id")
-    public RefContragentEntity getRefContragentByContraId() {
+    public ContragentEntity getRefContragentByContraId() {
         return refContragentByContraId;
     }
 
-    public void setRefContragentByContraId(RefContragentEntity refContragentByContraId) {
+    public void setRefContragentByContraId(ContragentEntity refContragentByContraId) {
         this.refContragentByContraId = refContragentByContraId;
     }
 
     @ManyToOne
     @JoinColumn(name = "storage_in_id", referencedColumnName = "id")
-    public RefStorageEntity getRefStorageByStorageInId() {
+    public StorageEntity getRefStorageByStorageInId() {
         return refStorageByStorageInId;
     }
 
-    public void setRefStorageByStorageInId(RefStorageEntity refStorageByStorageInId) {
+    public void setRefStorageByStorageInId(StorageEntity refStorageByStorageInId) {
         this.refStorageByStorageInId = refStorageByStorageInId;
     }
 
     @ManyToOne
     @JoinColumn(name = "storage_out_id", referencedColumnName = "id")
-    public RefStorageEntity getRefStorageByStorageOutId() {
+    public StorageEntity getRefStorageByStorageOutId() {
         return refStorageByStorageOutId;
     }
 
-    public void setRefStorageByStorageOutId(RefStorageEntity refStorageByStorageOutId) {
+    public void setRefStorageByStorageOutId(StorageEntity refStorageByStorageOutId) {
         this.refStorageByStorageOutId = refStorageByStorageOutId;
     }
 

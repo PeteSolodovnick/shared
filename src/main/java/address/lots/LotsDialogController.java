@@ -20,9 +20,9 @@ public class LotsDialogController extends SuperDialogEntityController {
     @FXML
     private TextField number;
 
-    private RefLotsEntity newLotEntity;
-    private RefTypeLotsEntity newTypeLot;
-    private RefKindLotsEntity newKindLot;
+    private LotsEntity newLotEntity;
+    private TypeLotsEntity newTypeLot;
+    private KindLotsEntity newKindLot;
     private String fileType;
     private String fileKind;
 
@@ -31,7 +31,7 @@ public class LotsDialogController extends SuperDialogEntityController {
     public void setFarmFX(FarmFX farm, SuperEntity selectedLot) {
         fileType = "/lot'sType.fxml";
         fileKind = "/lotsKind.fxml";
-        newLotEntity = (RefLotsEntity) selectedLot;
+        newLotEntity = (LotsEntity) selectedLot;
         if (selectedLot != null) {
             type.setText(newLotEntity.getRefTypeLotsByTypeLotsId().getName());
             kind.setText(newLotEntity.getRefKindLotsByKindLotsId().getName());
@@ -42,7 +42,7 @@ public class LotsDialogController extends SuperDialogEntityController {
             newKindLot = newLotEntity.getRefKindLotsByKindLotsId();
             setNew(false);
         } else {
-            newLotEntity = new RefLotsEntity();
+            newLotEntity = new LotsEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newLotEntity);
@@ -147,23 +147,23 @@ public class LotsDialogController extends SuperDialogEntityController {
         return number;
     }
 
-    public RefLotsEntity getNewLotEntity() {
+    public LotsEntity getNewLotEntity() {
         return newLotEntity;
     }
 
-    public RefTypeLotsEntity getNewTypeLot() {
+    public TypeLotsEntity getNewTypeLot() {
         return newTypeLot;
     }
 
-    public void setNewTypeLot(RefTypeLotsEntity newTypeLot) {
+    public void setNewTypeLot(TypeLotsEntity newTypeLot) {
         this.newTypeLot = newTypeLot;
     }
 
-    public RefKindLotsEntity getNewKindLot() {
+    public KindLotsEntity getNewKindLot() {
         return newKindLot;
     }
 
-    public void setNewKindLot(RefKindLotsEntity newKindLot) {
+    public void setNewKindLot(KindLotsEntity newKindLot) {
         this.newKindLot = newKindLot;
     }
 

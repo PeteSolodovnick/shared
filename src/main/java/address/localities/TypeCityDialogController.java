@@ -2,19 +2,19 @@ package address.localities;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.RefTypeCityEntity;
 import models.SuperEntity;
+import models.TypeCityEntity;
 
 public class TypeCityDialogController extends SuperDialogEntityController {
-    private RefTypeCityEntity newTypeCityEntity;
+    private TypeCityEntity newTypeCityEntity;
     public TypeCityDialogController() {}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedTypeCity) {
-        newTypeCityEntity = (RefTypeCityEntity) selectedTypeCity;
+        newTypeCityEntity = (TypeCityEntity) selectedTypeCity;
         if (selectedTypeCity != null) {
             setNew(false);
         } else {
-            newTypeCityEntity = new RefTypeCityEntity();
+            newTypeCityEntity = new TypeCityEntity();
             setNew(true);
         }
         super.setFarmFX(farm,newTypeCityEntity);

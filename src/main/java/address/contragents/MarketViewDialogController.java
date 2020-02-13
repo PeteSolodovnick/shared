@@ -2,19 +2,19 @@ package address.contragents;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.RefMarketViewEntity;
+import models.MarketViewEntity;
 import models.SuperEntity;
 
 public class MarketViewDialogController extends SuperDialogEntityController {
-    private RefMarketViewEntity newMarketViewEntity;
+    private MarketViewEntity newMarketViewEntity;
     public MarketViewDialogController(){}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedMarketView) {
-        newMarketViewEntity = (RefMarketViewEntity) selectedMarketView;
+        newMarketViewEntity = (MarketViewEntity) selectedMarketView;
         if (selectedMarketView != null) {
             setNew(false);
         } else {
-            newMarketViewEntity = new RefMarketViewEntity();
+            newMarketViewEntity = new MarketViewEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newMarketViewEntity);

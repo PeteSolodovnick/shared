@@ -1,6 +1,6 @@
 package address.documents;
 
-import models.RefContragentEntity;
+import models.ContragentEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,12 +11,12 @@ public abstract class SuperDocumentEntity {
 
     private Long id;
     private String number;
-    private RefContragentEntity refContragentEntityByContragentId;
+    private ContragentEntity refContragentEntityByContragentId;
     private Float sum;
     private LocalDate date;
 
     public SuperDocumentEntity() {}
-    public SuperDocumentEntity(Long id, String number, RefContragentEntity refContragentEntityByContragentId, Float sum, LocalDate date) {
+    public SuperDocumentEntity(Long id, String number, ContragentEntity refContragentEntityByContragentId, Float sum, LocalDate date) {
         this.id = id;
         this.number = number;
         this.refContragentEntityByContragentId = refContragentEntityByContragentId;
@@ -49,11 +49,11 @@ public abstract class SuperDocumentEntity {
     }
     @ManyToOne
     @JoinColumn(name = "contra_id", referencedColumnName = "id", nullable = false)
-    public RefContragentEntity getRefContragentEntityByContragentId() {
+    public ContragentEntity getRefContragentEntityByContragentId() {
         return refContragentEntityByContragentId;
     }
 
-    public void setRefContragentEntityByContragentId(RefContragentEntity refContragentEntityByContragentId) {
+    public void setRefContragentEntityByContragentId(ContragentEntity refContragentEntityByContragentId) {
         this.refContragentEntityByContragentId = refContragentEntityByContragentId;
     }
     @Basic

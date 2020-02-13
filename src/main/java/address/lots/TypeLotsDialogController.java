@@ -3,19 +3,19 @@ package address.lots;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
-import models.RefTypeLotsEntity;
 import models.SuperEntity;
+import models.TypeLotsEntity;
 
 public class TypeLotsDialogController extends SuperDialogEntityController {
-    private RefTypeLotsEntity newTypeLot;
+    private TypeLotsEntity newTypeLot;
     public TypeLotsDialogController() {}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedTypeLot) {
-        newTypeLot = (RefTypeLotsEntity) selectedTypeLot;
+        newTypeLot = (TypeLotsEntity) selectedTypeLot;
         if (selectedTypeLot != null) {
             setNew(false);
         } else {
-            newTypeLot = new RefTypeLotsEntity();
+            newTypeLot = new TypeLotsEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newTypeLot);

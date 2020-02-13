@@ -11,21 +11,21 @@ import models.*;
 
 public class ContragentOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefContragentEntity, RefCityEntity> city;
+    private TableColumn<ContragentEntity, CityEntity> city;
     @FXML
-    private TableColumn<RefContragentEntity, String> address;
+    private TableColumn<ContragentEntity, String> address;
     @FXML
-    private TableColumn<RefContragentEntity, String> contact;
+    private TableColumn<ContragentEntity, String> contact;
     @FXML
-    private TableColumn<RefContragentEntity, String> phone;
+    private TableColumn<ContragentEntity, String> phone;
     @FXML
-    private TableColumn<RefContragentEntity, RefMarketViewEntity> market;
+    private TableColumn<ContragentEntity, MarketViewEntity> market;
 
     public ContragentOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-        RefTypeContragentEntity rootTypeContragent = new RefTypeContragentEntity();
+        TypeContragentEntity rootTypeContragent = new TypeContragentEntity();
         rootTypeContragent.setName("Type Contragent");
         getRootItem().setValue(rootTypeContragent);
         super.initialize();

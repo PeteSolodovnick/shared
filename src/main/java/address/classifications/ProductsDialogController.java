@@ -4,10 +4,7 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import models.RefClassificationEntity;
-import models.RefNomenklEntity;
-import models.RefSizeEntity;
-import models.SuperEntity;
+import models.*;
 
 public class ProductsDialogController extends SuperDialogEntityController {
     @FXML
@@ -15,9 +12,9 @@ public class ProductsDialogController extends SuperDialogEntityController {
     @FXML
     private TextField classification;
 
-    private RefNomenklEntity newProductEntity;
-    private RefSizeEntity newSizeEntity;
-    private RefClassificationEntity newParentEntity;
+    private NomenklEntity newProductEntity;
+    private SizeEntity newSizeEntity;
+    private ClassificationEntity newParentEntity;
     private String fileSize;
     private String fileClassif;
     public ProductsDialogController() {}
@@ -25,7 +22,7 @@ public class ProductsDialogController extends SuperDialogEntityController {
     public void setFarmFX(FarmFX farm, SuperEntity selectedProduct) {
         fileSize = "/size.fxml";
         fileClassif = "/classificationTable.fxml";
-        newProductEntity = (RefNomenklEntity) selectedProduct;
+        newProductEntity = (NomenklEntity) selectedProduct;
         if (selectedProduct != null) {
             size.setText(newProductEntity.getRefSizeBySizeId().getName());
             classification.setText(newProductEntity.getRefClassificationByClassificationId().getName());
@@ -33,7 +30,7 @@ public class ProductsDialogController extends SuperDialogEntityController {
             newParentEntity = newProductEntity.getRefClassificationByClassificationId();
             setNew(false);
         } else {
-            newProductEntity = new RefNomenklEntity();
+            newProductEntity = new NomenklEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newProductEntity);
@@ -102,27 +99,27 @@ public class ProductsDialogController extends SuperDialogEntityController {
         return classification;
     }
 
-    public RefNomenklEntity getNewProductEntity() {
+    public NomenklEntity getNewProductEntity() {
         return newProductEntity;
     }
 
-    public void setNewProductEntity(RefNomenklEntity newProductEntity) {
+    public void setNewProductEntity(NomenklEntity newProductEntity) {
         this.newProductEntity = newProductEntity;
     }
 
-    public RefSizeEntity getNewSizeEntity() {
+    public SizeEntity getNewSizeEntity() {
         return newSizeEntity;
     }
 
-    public void setNewSizeEntity(RefSizeEntity newSizeEntity) {
+    public void setNewSizeEntity(SizeEntity newSizeEntity) {
         this.newSizeEntity = newSizeEntity;
     }
 
-    public RefClassificationEntity getNewParentEntity() {
+    public ClassificationEntity getNewParentEntity() {
         return newParentEntity;
     }
 
-    public void setNewParentEntity(RefClassificationEntity newParentEntity) {
+    public void setNewParentEntity(ClassificationEntity newParentEntity) {
         this.newParentEntity = newParentEntity;
     }
 }

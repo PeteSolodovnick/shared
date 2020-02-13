@@ -2,19 +2,18 @@ package models;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_market_view", schema = "public", catalog = "farm")
-public class RefMarketViewEntity extends SuperEntity{
-    private Collection<RefContragentEntity> refContragentsById;
+public class MarketViewEntity extends SuperEntity {
+    private Collection<ContragentEntity> refContragentsById;
 
     @OneToMany(mappedBy = "refMarketViewByMarketViewId")
-    public Collection<RefContragentEntity> getRefContragentsById() {
+    public Collection<ContragentEntity> getRefContragentsById() {
         return refContragentsById;
     }
 
-    public void setRefContragentsById(Collection<RefContragentEntity> refContragentsById) {
+    public void setRefContragentsById(Collection<ContragentEntity> refContragentsById) {
         this.refContragentsById = refContragentsById;
     }
 }

@@ -2,7 +2,7 @@ package address.lots;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
-import models.RefKindLotsEntity;
+import models.KindLotsEntity;
 import models.SuperEntity;
 
 public class KindLotsTableController extends SuperTableEntityController {
@@ -18,7 +18,7 @@ public class KindLotsTableController extends SuperTableEntityController {
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getLotsDialogController().setNewKindLot((RefKindLotsEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getLotsDialogController().setNewKindLot((KindLotsEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getLotsDialogController().getKind().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
 

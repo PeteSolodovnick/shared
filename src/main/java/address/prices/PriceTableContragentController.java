@@ -1,11 +1,11 @@
 package address.prices;
 
-import models.RefPriceEntity;
+import models.PriceEntity;
 
 public class PriceTableContragentController extends SuperPriceTableController{
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getContragentDialogController().setNewPriceEntity((RefPriceEntity) getEntityTable().getSelectionModel().getSelectedItem());
-        getFarm().getConfigDialogController().getContragentDialogController().getPrice().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
+        getFarm().getConfigDialogController().getContragentDialogController().setNewPriceEntity((PriceEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getContragentDialogController().getPrice().setText(((PriceEntity) getEntityTable().getSelectionModel().getSelectedItem()).getName());
     }
 }

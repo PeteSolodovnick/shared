@@ -3,20 +3,20 @@ package address.contragents;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
-import models.RefTypeContragentEntity;
 import models.SuperEntity;
+import models.TypeContragentEntity;
 
 public class TypeContragentDialogController extends SuperDialogEntityController {
-    private RefTypeContragentEntity newTypeContragent;
+    private TypeContragentEntity newTypeContragent;
     public TypeContragentDialogController(){}
 
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedTypeContragent) {
-        newTypeContragent = (RefTypeContragentEntity) selectedTypeContragent;
+        newTypeContragent = (TypeContragentEntity) selectedTypeContragent;
         if (selectedTypeContragent != null) {
             setNew(false);
         } else {
-            newTypeContragent = new RefTypeContragentEntity();
+            newTypeContragent = new TypeContragentEntity();
             setNew(true);
         }
         super.setFarmFX(farm,newTypeContragent);

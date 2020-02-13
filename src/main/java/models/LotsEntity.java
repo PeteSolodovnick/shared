@@ -1,17 +1,16 @@
 package models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_lots", schema = "public", catalog = "farm")
-public class RefLotsEntity extends SuperEntity{ ;
+public class LotsEntity extends SuperEntity { ;
     private int startCount;
     private float startWeight;
     private int startAge;
     private Integer number;
-    private RefKindLotsEntity refKindLotsByKindLotsId;
-    private RefTypeLotsEntity refTypeLotsByTypeLotsId;
+    private KindLotsEntity refKindLotsByKindLotsId;
+    private TypeLotsEntity refTypeLotsByTypeLotsId;
 
     @Basic
     @Column(name = "start_count", nullable = false)
@@ -55,21 +54,21 @@ public class RefLotsEntity extends SuperEntity{ ;
 
     @ManyToOne
     @JoinColumn(name = "kind_lots_id", referencedColumnName = "id", nullable = false)
-    public RefKindLotsEntity getRefKindLotsByKindLotsId() {
+    public KindLotsEntity getRefKindLotsByKindLotsId() {
         return refKindLotsByKindLotsId;
     }
 
-    public void setRefKindLotsByKindLotsId(RefKindLotsEntity refKindLotsByKindLotsId) {
+    public void setRefKindLotsByKindLotsId(KindLotsEntity refKindLotsByKindLotsId) {
         this.refKindLotsByKindLotsId = refKindLotsByKindLotsId;
     }
 
     @ManyToOne
     @JoinColumn(name = "type_lots_id", referencedColumnName = "id", nullable = false)
-    public RefTypeLotsEntity getRefTypeLotsByTypeLotsId() {
+    public TypeLotsEntity getRefTypeLotsByTypeLotsId() {
         return refTypeLotsByTypeLotsId;
     }
 
-    public void setRefTypeLotsByTypeLotsId(RefTypeLotsEntity refTypeLotsByTypeLotsId) {
+    public void setRefTypeLotsByTypeLotsId(TypeLotsEntity refTypeLotsByTypeLotsId) {
         this.refTypeLotsByTypeLotsId = refTypeLotsByTypeLotsId;
     }
 }

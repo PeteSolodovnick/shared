@@ -4,27 +4,22 @@ import address.mains.ControllerReference;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TreeItem;
-import models.RefClassificationEntity;
-import models.RefNomenklEntity;
-import models.RefSizeEntity;
-import models.SuperEntity;
+import models.*;
 
 public class ProductsOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefNomenklEntity, RefSizeEntity> size;
+    private TableColumn<NomenklEntity, SizeEntity> size;
     @FXML
-    private TableColumn<RefNomenklEntity, RefClassificationEntity> classification;
+    private TableColumn<NomenklEntity, ClassificationEntity> classification;
 
     public ProductsOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-        RefClassificationEntity rootClassificationEntity = new RefClassificationEntity();
+        ClassificationEntity rootClassificationEntity = new ClassificationEntity();
         rootClassificationEntity.setName("Classification");
         getRootItem().setValue(rootClassificationEntity);
         super.initialize();
@@ -49,7 +44,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
     @Override
     protected void initRoot() {
         for (SuperEntity entity : getEntitiesTree()) {
-            RefClassificationEntity classification = (RefClassificationEntity) entity;
+            ClassificationEntity classification = (ClassificationEntity) entity;
             if (classification.getRefClassificationByParentId() == null) {
                 TreeItem<SuperEntity> newRoot = new TreeItem(classification);
                 initializeClassification(newRoot, classification);
@@ -58,10 +53,10 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
             }
         }
     }
-    private void initializeClassification(TreeItem<SuperEntity> root, RefClassificationEntity classification) {
+    private void initializeClassification(TreeItem<SuperEntity> root, ClassificationEntity classification) {
         if (classification != null) {
             for (SuperEntity entity : getEntitiesTree()) {
-                RefClassificationEntity classif = (RefClassificationEntity) entity;
+                ClassificationEntity classif = (ClassificationEntity) entity;
                 if (classif.getRefClassificationByParentId() != null && classif.getRefClassificationByParentId().getId() == classification.getId()) {
                     TreeItem<SuperEntity> newRoot = new TreeItem(classif);
                     initializeClassification(newRoot, classif);

@@ -6,12 +6,12 @@ import address.mains.SuperEntityController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import models.RefStorageEntity;
+import models.StorageEntity;
 import models.SuperEntity;
 
 public class StorageOverviewController extends SuperEntityController implements ControllerReference {
     @FXML
-    private TableColumn<RefStorageEntity, Integer> attribute;
+    private TableColumn<StorageEntity, Integer> attribute;
     public StorageOverviewController() {}
     @FXML @Override
     protected void initialize() {

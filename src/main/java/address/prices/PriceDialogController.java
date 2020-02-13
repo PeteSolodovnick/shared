@@ -2,19 +2,20 @@ package address.prices;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.RefPriceEntity;
+import models.PriceEntity;
 import models.SuperEntity;
 
 public class PriceDialogController extends SuperDialogEntityController {
-    private RefPriceEntity refPriceEntity;
+    private PriceEntity refPriceEntity;
     public PriceDialogController() {}
+
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity priceEntity) {
-        refPriceEntity = (RefPriceEntity) priceEntity;
+        refPriceEntity = (PriceEntity) priceEntity;
         if (refPriceEntity != null) {
             setNew(false);
         } else {
-            refPriceEntity = new RefPriceEntity();
+            refPriceEntity = new PriceEntity();
             setNew(true);
         }
         super.setFarmFX(farm,refPriceEntity);

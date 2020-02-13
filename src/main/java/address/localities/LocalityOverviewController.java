@@ -4,26 +4,21 @@ import address.mains.ControllerReference;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TreeItem;
-import models.RefCityEntity;
-import models.RefTerritoryEntity;
-import models.RefTypeCityEntity;
-import models.SuperEntity;
+import models.*;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefCityEntity, RefTypeCityEntity> typeLocality;
+    private TableColumn<CityEntity, TypeCityEntity> typeLocality;
     @FXML
-    private TableColumn<RefCityEntity, RefTerritoryEntity> territory;
+    private TableColumn<CityEntity, TerritoryEntity> territory;
 
     public LocalityOverviewController() {}
 
     @FXML @Override
     protected void initialize() {
-            RefTerritoryEntity rootTer = new RefTerritoryEntity();
+            TerritoryEntity rootTer = new TerritoryEntity();
             rootTer.setName("Territories");
             getRootItem().setValue(rootTer);
             super.initialize();

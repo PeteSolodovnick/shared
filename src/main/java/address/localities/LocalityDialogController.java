@@ -3,13 +3,8 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
-import models.RefCityEntity;
-import models.RefTerritoryEntity;
-import models.RefTypeCityEntity;
-import models.SuperEntity;
+import models.*;
 
 public class LocalityDialogController extends SuperDialogEntityController {
     @FXML
@@ -18,9 +13,9 @@ public class LocalityDialogController extends SuperDialogEntityController {
     private TextField typeOfLocality;
     private String fileTer;
     private String fileType;
-    private RefCityEntity newCityEntity;
-    private RefTerritoryEntity newTerritoryEntity;
-    private RefTypeCityEntity newTypeCityEntity;
+    private CityEntity newCityEntity;
+    private TerritoryEntity newTerritoryEntity;
+    private TypeCityEntity newTypeCityEntity;
 
     public LocalityDialogController() {}
 
@@ -28,7 +23,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
     public void setFarmFX(FarmFX farm, SuperEntity selectedCity) {
         fileTer = "/territory.fxml";
         fileType = "/typeOfCity.fxml";
-        newCityEntity = (RefCityEntity) selectedCity;
+        newCityEntity = (CityEntity) selectedCity;
         if (selectedCity != null) {
             region.setText(newCityEntity.getRefTerritoryByTerId().getName());
             typeOfLocality.setText(newCityEntity.getRefTypeCityByTypeCityId().getName());
@@ -36,7 +31,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
             newTerritoryEntity = newCityEntity.getRefTerritoryByTerId();
             setNew(false);
         } else {
-            newCityEntity = new RefCityEntity();
+            newCityEntity = new CityEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newCityEntity);
@@ -89,7 +84,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
         super.handleOkDialog();
     }
 
-    public RefCityEntity getNewCityEntity() {
+    public CityEntity getNewCityEntity() {
         return newCityEntity;
     }
 
@@ -105,19 +100,19 @@ public class LocalityDialogController extends SuperDialogEntityController {
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getLocalityOverviewController().getEntities());
     }
 
-    public RefTerritoryEntity getNewTerritoryEntity() {
+    public TerritoryEntity getNewTerritoryEntity() {
         return newTerritoryEntity;
     }
 
-    public void setNewTerritoryEntity(RefTerritoryEntity newTerritoryEntity) {
+    public void setNewTerritoryEntity(TerritoryEntity newTerritoryEntity) {
         this.newTerritoryEntity = newTerritoryEntity;
     }
 
-    public RefTypeCityEntity getNewTypeCityEntity() {
+    public TypeCityEntity getNewTypeCityEntity() {
         return newTypeCityEntity;
     }
 
-    public void setNewTypeCityEntity(RefTypeCityEntity newTypeCityEntity) {
+    public void setNewTypeCityEntity(TypeCityEntity newTypeCityEntity) {
         this.newTypeCityEntity = newTypeCityEntity;
     }
 }

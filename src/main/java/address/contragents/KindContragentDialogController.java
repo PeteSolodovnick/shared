@@ -2,19 +2,19 @@ package address.contragents;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.RefKindContragentEntity;
+import models.KindContragentEntity;
 import models.SuperEntity;
 
 public class KindContragentDialogController extends SuperDialogEntityController {
-    private RefKindContragentEntity newKindContragent;
+    private KindContragentEntity newKindContragent;
     public KindContragentDialogController(){}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedKindContragent) {
-        newKindContragent = (RefKindContragentEntity) selectedKindContragent;
+        newKindContragent = (KindContragentEntity) selectedKindContragent;
         if (selectedKindContragent != null) {
             setNew(false);
         } else {
-            newKindContragent = new RefKindContragentEntity();
+            newKindContragent = new KindContragentEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newKindContragent);

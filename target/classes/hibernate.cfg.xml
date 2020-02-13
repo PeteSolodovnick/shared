@@ -17,26 +17,26 @@
 
     <!--  <mapping class="forDeleting.RefTerritoryEntityOldTemp"/>
       <mapping class="forDeleting.RefCityEntityOldTemp"/>-->
-    <mapping class="models.RefCityEntity"/>
-    <mapping class="models.RefTerritoryEntity"/>
-      <mapping class="models.RefTypeCityEntity"/>
-      <mapping class="models.RefContragentEntity"/>
-      <mapping class="models.RefMarketViewEntity"/>
-      <mapping class="models.RefPriceEntity"/>
-      <mapping class="models.RefTypeContragentEntity"/>
-      <mapping class="models.RefClassificationEntity"/>
-      <mapping class="models.RefNomenklEntity"/>
-      <mapping class="models.RefSizeEntity"/>
-      <mapping class="models.RefKindContragentEntity"/>
-    <mapping class="models.RefKindLotsEntity"/>
-    <mapping class="models.RefLotsEntity"/>
-    <mapping class="models.RefTypeLotsEntity"/>
-      <mapping class="models.RefStorageEntity"/>
+    <mapping class="models.CityEntity"/>
+    <mapping class="models.TerritoryEntity"/>
+      <mapping class="models.TypeCityEntity"/>
+      <mapping class="models.ContragentEntity"/>
+      <mapping class="models.MarketViewEntity"/>
+      <mapping class="models.PriceEntity"/>
+      <mapping class="models.TypeContragentEntity"/>
+      <mapping class="models.ClassificationEntity"/>
+      <mapping class="models.NomenklEntity"/>
+      <mapping class="models.SizeEntity"/>
+      <mapping class="models.KindContragentEntity"/>
+    <mapping class="models.KindLotsEntity"/>
+    <mapping class="models.LotsEntity"/>
+    <mapping class="models.TypeLotsEntity"/>
+      <mapping class="models.StorageEntity"/>
       <mapping class="address.documents.invoices.DocInvoiceHeadDocEntity"/>
       <mapping class="address.documents.invoices.DocTypeInvoiceDocEntity"/>
       <mapping class="address.documents.invoices.TableInvoiceLotDocEntity"/>
       <mapping class="address.documents.invoices.TableInvoiceNomDocEntity"/>
-    <mapping class="address.documents.invoices.RefStatusInvoiceDocEntity"/>
+    <mapping class="address.documents.invoices.DocStatusInvoiceDocEntity"/>
     <mapping class="address.documents.SuperDocumentEntity"/>
 
 

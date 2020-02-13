@@ -2,19 +2,19 @@ package address.classifications;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.RefSizeEntity;
+import models.SizeEntity;
 import models.SuperEntity;
 
 public class SizeProductsDialogController extends SuperDialogEntityController {
-    private RefSizeEntity newSizeEntity;
+    private SizeEntity newSizeEntity;
     public SizeProductsDialogController(){}
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedSize) {
-        newSizeEntity = (RefSizeEntity) selectedSize;
+        newSizeEntity = (SizeEntity) selectedSize;
         if (selectedSize != null) {
             setNew(false);
         } else {
-            newSizeEntity = new RefSizeEntity();
+            newSizeEntity = new SizeEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newSizeEntity);

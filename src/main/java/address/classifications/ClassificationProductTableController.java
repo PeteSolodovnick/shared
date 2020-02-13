@@ -3,16 +3,14 @@ package address.classifications;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import models.RefCityEntity;
-import models.RefClassificationEntity;
+import models.ClassificationEntity;
 import models.SuperEntity;
 
 public class ClassificationProductTableController extends SuperTableEntityController {
     @FXML
-    private TableColumn<RefClassificationEntity, RefClassificationEntity> parent;
+    private TableColumn<ClassificationEntity, ClassificationEntity> parent;
     public ClassificationProductTableController() {}
     @FXML @Override
     protected void initialize() {
@@ -34,7 +32,7 @@ public class ClassificationProductTableController extends SuperTableEntityContro
 
     @Override
     public void setTextEdit() {
-        getFarm().getConfigDialogController().getProductsDialogController().setNewParentEntity((RefClassificationEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        getFarm().getConfigDialogController().getProductsDialogController().setNewParentEntity((ClassificationEntity) getEntityTable().getSelectionModel().getSelectedItem());
         getFarm().getConfigDialogController().getProductsDialogController().getClassification().setText(getEntityTable().getSelectionModel().getSelectedItem().getName());
     }
     @Override

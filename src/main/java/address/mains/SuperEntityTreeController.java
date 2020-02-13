@@ -49,26 +49,26 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
             } else {
                 for (SuperEntity someEntity : this.getEntities()) {
                     switch (someEntity.getClass().getName()) {
-                        case "models.RefCityEntity":
-                            RefCityEntity cityEntity = (RefCityEntity) someEntity;
+                        case "models.CityEntity":
+                            CityEntity cityEntity = (CityEntity) someEntity;
                             if (cityEntity.getRefTerritoryByTerId().getId() == entity.getValue().getId()) {
                                 entities.add(cityEntity);
                             }
                             break;
-                        case "models.RefContragentEntity":
-                            RefContragentEntity contragentEntity = (RefContragentEntity) someEntity;
+                        case "models.ContragentEntity":
+                            ContragentEntity contragentEntity = (ContragentEntity) someEntity;
                             if (contragentEntity.getRefTypeContragentByTypeContraId().getId() == entity.getValue().getId()) {
                                 entities.add(contragentEntity);
                             }
                             break;
-                        case "models.RefNomenklEntity":
-                            RefNomenklEntity productEntity = (RefNomenklEntity) someEntity;
+                        case "models.NomenklEntity":
+                            NomenklEntity productEntity = (NomenklEntity) someEntity;
                             if (productEntity.getRefClassificationByClassificationId().getId() == entity.getValue().getId()) {
                                 entities.add(productEntity);
                             }
                             break;
-                        case "models.RefLotsEntity":
-                            RefLotsEntity lotsEntity = (RefLotsEntity) someEntity;
+                        case "models.LotsEntity":
+                            LotsEntity lotsEntity = (LotsEntity) someEntity;
                             if (lotsEntity.getRefTypeLotsByTypeLotsId().getId() == entity.getValue().getId()) {
                                 entities.add(lotsEntity);
                             }

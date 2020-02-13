@@ -3,19 +3,15 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import models.RefCityEntity;
-import models.RefTerritoryEntity;
-import models.RefTypeCityEntity;
-import models.SuperEntity;
+import models.*;
 
 public abstract class SuperCityTableController extends SuperTableEntityController {
     @FXML
-    private TableColumn<RefCityEntity, RefTerritoryEntity> territory;
+    private TableColumn<CityEntity, TerritoryEntity> territory;
     @FXML
-    private TableColumn<RefCityEntity, RefTypeCityEntity> typeCity;
+    private TableColumn<CityEntity, TypeCityEntity> typeCity;
 
     @FXML
     protected void initialize() {

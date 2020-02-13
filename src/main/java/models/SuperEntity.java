@@ -5,15 +5,14 @@ import java.util.Objects;
 
 @MappedSuperclass
 public abstract class SuperEntity {
-
     private Long id;
     private String name;
     public SuperEntity() {}
-    public SuperEntity(Long id, String name) {
-        this.id = id; this.name = name;
+    public SuperEntity(String name) {
+        this.name = name;
     }
 
-  //  @Column(name="id")
+    //  @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
@@ -32,7 +31,7 @@ public abstract class SuperEntity {
     public void setName(String name) {
         this.name = name;
     }
-
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -40,6 +39,7 @@ public abstract class SuperEntity {
         return getId() == that.getId() &&
                 Objects.equals(name, that.name);
     }
+    @Override
     public int hashCode() {
         return Objects.hash(name, getId());
     }

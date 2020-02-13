@@ -1,9 +1,5 @@
 package dao;
 
-import address.documents.SuperDocumentEntity;
-import models.SuperEntity;
-
-import java.util.Date;
 import java.util.List;
 
 public interface DAO<Entity, Key> {

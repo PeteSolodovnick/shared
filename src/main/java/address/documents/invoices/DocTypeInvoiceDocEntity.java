@@ -4,7 +4,6 @@ import models.SuperEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "doc_type_invoice", schema = "public", catalog = "farm")

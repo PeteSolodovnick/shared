@@ -4,11 +4,10 @@ import address.documents.invoices.DocInvoiceHeadDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_contragent", schema = "public", catalog = "farm")
-public class RefContragentEntity extends SuperEntity{
+public class ContragentEntity extends SuperEntity {
     private String address;
     private String contact;
     private String phone;
@@ -16,11 +15,11 @@ public class RefContragentEntity extends SuperEntity{
     private String okpo;
     private String inn;
     private Boolean nds;
-    private RefTypeContragentEntity refTypeContragentByTypeContraId;
-    private RefCityEntity refCityByCityId;
-    private RefPriceEntity refPriceByPriceId;
-    private RefMarketViewEntity refMarketViewByMarketViewId;
-    private RefKindContragentEntity refKindContragentByKindContraId;
+    private TypeContragentEntity refTypeContragentByTypeContraId;
+    private CityEntity refCityByCityId;
+    private PriceEntity refPriceByPriceId;
+    private MarketViewEntity refMarketViewByMarketViewId;
+    private KindContragentEntity refKindContragentByKindContraId;
     private Collection<DocInvoiceHeadDocEntity> docInvoiceHeadById;
 
     @OneToMany(mappedBy = "refContragentEntityByContragentId")
@@ -103,51 +102,51 @@ public class RefContragentEntity extends SuperEntity{
 
     @ManyToOne
     @JoinColumn(name = "type_contra_id", referencedColumnName = "id", nullable = false)
-    public RefTypeContragentEntity getRefTypeContragentByTypeContraId() {
+    public TypeContragentEntity getRefTypeContragentByTypeContraId() {
         return refTypeContragentByTypeContraId;
     }
 
-    public void setRefTypeContragentByTypeContraId(RefTypeContragentEntity refTypeContragentByTypeContraId) {
+    public void setRefTypeContragentByTypeContraId(TypeContragentEntity refTypeContragentByTypeContraId) {
         this.refTypeContragentByTypeContraId = refTypeContragentByTypeContraId;
     }
 
     @ManyToOne
     @JoinColumn(name = "kind_contra_id", referencedColumnName = "id", nullable = false)
-    public RefKindContragentEntity getRefKindContragentByKindContraId() {
+    public KindContragentEntity getRefKindContragentByKindContraId() {
         return refKindContragentByKindContraId;
     }
 
-    public void setRefKindContragentByKindContraId(RefKindContragentEntity refKindContragentByKindContraId) {
+    public void setRefKindContragentByKindContraId(KindContragentEntity refKindContragentByKindContraId) {
         this.refKindContragentByKindContraId = refKindContragentByKindContraId;
     }
 
     @ManyToOne
     @JoinColumn(name = "market_view_id", referencedColumnName = "id", nullable = false)
-    public RefMarketViewEntity getRefMarketViewByMarketViewId() {
+    public MarketViewEntity getRefMarketViewByMarketViewId() {
         return refMarketViewByMarketViewId;
     }
 
-    public void setRefMarketViewByMarketViewId(RefMarketViewEntity refMarketViewByMarketViewId) {
+    public void setRefMarketViewByMarketViewId(MarketViewEntity refMarketViewByMarketViewId) {
         this.refMarketViewByMarketViewId = refMarketViewByMarketViewId;
     }
 
     @ManyToOne
     @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
-    public RefCityEntity getRefCityByCityId() {
+    public CityEntity getRefCityByCityId() {
         return refCityByCityId;
     }
 
-    public void setRefCityByCityId(RefCityEntity refCityByCityId) {
+    public void setRefCityByCityId(CityEntity refCityByCityId) {
         this.refCityByCityId = refCityByCityId;
     }
 
     @ManyToOne
     @JoinColumn(name = "price_id", referencedColumnName = "id")
-    public RefPriceEntity getRefPriceByPriceId() {
+    public PriceEntity getRefPriceByPriceId() {
         return refPriceByPriceId;
     }
 
-    public void setRefPriceByPriceId(RefPriceEntity refPriceByPriceId) {
+    public void setRefPriceByPriceId(PriceEntity refPriceByPriceId) {
         this.refPriceByPriceId = refPriceByPriceId;
     }
 }

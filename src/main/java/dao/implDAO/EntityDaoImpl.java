@@ -1,20 +1,16 @@
 package dao.implDAO;
 
-import address.documents.SuperDocumentEntity;
 import dao.DAO;
-import models.SuperEntity;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactoryUtil;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import java.util.Date;
 import java.util.List;
 
 public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {

@@ -1,27 +1,47 @@
 package address.mains;
 
 import address.documents.invoices.DocInvoiceHeadDocEntity;
+import address.documents.invoices.DocTypeInvoiceDocEntity;
+import address.documents.invoices.DocStatusInvoiceDocEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.*;
 
 public class CollectionsEntities {
-    private ObservableList<RefTerritoryEntity> territoryData = FXCollections.observableArrayList();
-    private ObservableList<RefCityEntity> citiesData = FXCollections.observableArrayList();
-    private ObservableList<RefTypeCityEntity> typeCityData = FXCollections.observableArrayList();
-    private ObservableList<RefContragentEntity> contragentData = FXCollections.observableArrayList();
-    private ObservableList<RefTypeContragentEntity> typeContragentData = FXCollections.observableArrayList();
-    private ObservableList<RefPriceEntity> priceData = FXCollections.observableArrayList();
-    private ObservableList<RefMarketViewEntity> marketViewData = FXCollections.observableArrayList();
-    private ObservableList<RefNomenklEntity> productsData = FXCollections.observableArrayList();
-    private ObservableList<RefClassificationEntity> classificationData = FXCollections.observableArrayList();
-    private ObservableList<RefSizeEntity> sizeEntitiesData = FXCollections.observableArrayList();
-    private ObservableList<RefKindContragentEntity> kindContragentData = FXCollections.observableArrayList();
-    private ObservableList<RefKindLotsEntity> kindLotsData = FXCollections.observableArrayList();
-    private ObservableList<RefTypeLotsEntity> typeLotsData = FXCollections.observableArrayList();
-    private ObservableList<RefLotsEntity> lotsData = FXCollections.observableArrayList();
-    private ObservableList<RefStorageEntity> storageData = FXCollections.observableArrayList();
+    private ObservableList<TerritoryEntity> territoryData = FXCollections.observableArrayList();
+    private ObservableList<CityEntity> citiesData = FXCollections.observableArrayList();
+    private ObservableList<TypeCityEntity> typeCityData = FXCollections.observableArrayList();
+    private ObservableList<ContragentEntity> contragentData = FXCollections.observableArrayList();
+    private ObservableList<TypeContragentEntity> typeContragentData = FXCollections.observableArrayList();
+    private ObservableList<PriceEntity> priceData = FXCollections.observableArrayList();
+    private ObservableList<MarketViewEntity> marketViewData = FXCollections.observableArrayList();
+    private ObservableList<NomenklEntity> productsData = FXCollections.observableArrayList();
+    private ObservableList<ClassificationEntity> classificationData = FXCollections.observableArrayList();
+    private ObservableList<SizeEntity> sizeEntitiesData = FXCollections.observableArrayList();
+    private ObservableList<KindContragentEntity> kindContragentData = FXCollections.observableArrayList();
+    private ObservableList<KindLotsEntity> kindLotsData = FXCollections.observableArrayList();
+    private ObservableList<TypeLotsEntity> typeLotsData = FXCollections.observableArrayList();
+    private ObservableList<LotsEntity> lotsData = FXCollections.observableArrayList();
+    private ObservableList<StorageEntity> storageData = FXCollections.observableArrayList();
     private ObservableList<DocInvoiceHeadDocEntity> invoiceData = FXCollections.observableArrayList();
+    private ObservableList<DocTypeInvoiceDocEntity> typeInvoiceData = FXCollections.observableArrayList();
+    private ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData = FXCollections.observableArrayList();
+
+    public ObservableList<DocTypeInvoiceDocEntity> getTypeInvoiceData() {
+        return typeInvoiceData;
+    }
+
+    public void setTypeInvoiceData(ObservableList<DocTypeInvoiceDocEntity> typeInvoiceData) {
+        this.typeInvoiceData = typeInvoiceData;
+    }
+
+    public ObservableList<DocStatusInvoiceDocEntity> getStatusInvoiceData() {
+        return statusInvoiceData;
+    }
+
+    public void setStatusInvoiceData(ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData) {
+        this.statusInvoiceData = statusInvoiceData;
+    }
 
     public ObservableList<DocInvoiceHeadDocEntity> getInvoiceData() {
         return invoiceData;
@@ -31,123 +51,123 @@ public class CollectionsEntities {
         this.invoiceData = invoiceData;
     }
 
-    public ObservableList<RefStorageEntity> getStorageData() {
+    public ObservableList<StorageEntity> getStorageData() {
         return storageData;
     }
 
-    public ObservableList<RefKindLotsEntity> getKindLotsData() {
+    public ObservableList<KindLotsEntity> getKindLotsData() {
         return kindLotsData;
     }
 
-    public ObservableList<RefTypeLotsEntity> getTypeLotsData() {
+    public ObservableList<TypeLotsEntity> getTypeLotsData() {
         return typeLotsData;
     }
 
-    public ObservableList<RefLotsEntity> getLotsData() {
+    public ObservableList<LotsEntity> getLotsData() {
         return lotsData;
     }
 
-    public ObservableList<RefKindContragentEntity> getKindContragentData() {
+    public ObservableList<KindContragentEntity> getKindContragentData() {
         return kindContragentData;
     }
 
-    public ObservableList<RefTerritoryEntity> getTerritoryData() {
+    public ObservableList<TerritoryEntity> getTerritoryData() {
         return territoryData;
     }
 
-    public ObservableList<RefCityEntity> getCitiesData() {
+    public ObservableList<CityEntity> getCitiesData() {
         return citiesData;
     }
 
-    public ObservableList<RefTypeCityEntity> getTypeCityData() {
+    public ObservableList<TypeCityEntity> getTypeCityData() {
         return typeCityData;
     }
 
-    public ObservableList<RefContragentEntity> getContragentData() {
+    public ObservableList<ContragentEntity> getContragentData() {
         return contragentData;
     }
 
-    public ObservableList<RefTypeContragentEntity> getTypeContragentData() {
+    public ObservableList<TypeContragentEntity> getTypeContragentData() {
         return typeContragentData;
     }
 
-    public ObservableList<RefPriceEntity> getPriceData() {
+    public ObservableList<PriceEntity> getPriceData() {
         return priceData;
     }
 
-    public ObservableList<RefMarketViewEntity> getMarketViewData() {
+    public ObservableList<MarketViewEntity> getMarketViewData() {
         return marketViewData;
     }
 
-    public ObservableList<RefNomenklEntity> getProductsData() {
+    public ObservableList<NomenklEntity> getProductsData() {
         return productsData;
     }
 
-    public ObservableList<RefClassificationEntity> getClassificationData() {
+    public ObservableList<ClassificationEntity> getClassificationData() {
         return classificationData;
     }
 
-    public ObservableList<RefSizeEntity> getSizeEntitiesData() {
+    public ObservableList<SizeEntity> getSizeEntitiesData() {
         return sizeEntitiesData;
     }
 
-    public void setTerritoryData(ObservableList<RefTerritoryEntity> territoryData) {
+    public void setTerritoryData(ObservableList<TerritoryEntity> territoryData) {
         this.territoryData = territoryData;
     }
 
-    public void setCitiesData(ObservableList<RefCityEntity> citiesData) {
+    public void setCitiesData(ObservableList<CityEntity> citiesData) {
         this.citiesData = citiesData;
     }
 
-    public void setTypeCityData(ObservableList<RefTypeCityEntity> typeCityData) {
+    public void setTypeCityData(ObservableList<TypeCityEntity> typeCityData) {
         this.typeCityData = typeCityData;
     }
 
-    public void setContragentData(ObservableList<RefContragentEntity> contragentData) {
+    public void setContragentData(ObservableList<ContragentEntity> contragentData) {
         this.contragentData = contragentData;
     }
 
-    public void setTypeContragentData(ObservableList<RefTypeContragentEntity> typeContragentData) {
+    public void setTypeContragentData(ObservableList<TypeContragentEntity> typeContragentData) {
         this.typeContragentData = typeContragentData;
     }
 
-    public void setPriceData(ObservableList<RefPriceEntity> priceData) {
+    public void setPriceData(ObservableList<PriceEntity> priceData) {
         this.priceData = priceData;
     }
 
-    public void setMarketViewData(ObservableList<RefMarketViewEntity> marketViewData) {
+    public void setMarketViewData(ObservableList<MarketViewEntity> marketViewData) {
         this.marketViewData = marketViewData;
     }
 
-    public void setProductsData(ObservableList<RefNomenklEntity> productsData) {
+    public void setProductsData(ObservableList<NomenklEntity> productsData) {
         this.productsData = productsData;
     }
 
-    public void setClassificationData(ObservableList<RefClassificationEntity> classificationData) {
+    public void setClassificationData(ObservableList<ClassificationEntity> classificationData) {
         this.classificationData = classificationData;
     }
 
-    public void setSizeEntitiesData(ObservableList<RefSizeEntity> sizeEntitiesData) {
+    public void setSizeEntitiesData(ObservableList<SizeEntity> sizeEntitiesData) {
         this.sizeEntitiesData = sizeEntitiesData;
     }
 
-    public void setKindContragentData(ObservableList<RefKindContragentEntity> kindContragentData) {
+    public void setKindContragentData(ObservableList<KindContragentEntity> kindContragentData) {
         this.kindContragentData = kindContragentData;
     }
 
-    public void setKindLotsData(ObservableList<RefKindLotsEntity> kindLotsData) {
+    public void setKindLotsData(ObservableList<KindLotsEntity> kindLotsData) {
         this.kindLotsData = kindLotsData;
     }
 
-    public void setTypeLotsData(ObservableList<RefTypeLotsEntity> typeLotsData) {
+    public void setTypeLotsData(ObservableList<TypeLotsEntity> typeLotsData) {
         this.typeLotsData = typeLotsData;
     }
 
-    public void setLotsData(ObservableList<RefLotsEntity> lotsData) {
+    public void setLotsData(ObservableList<LotsEntity> lotsData) {
         this.lotsData = lotsData;
     }
 
-    public void setStorageData(ObservableList<RefStorageEntity> storageData) {
+    public void setStorageData(ObservableList<StorageEntity> storageData) {
         this.storageData = storageData;
     }
 }

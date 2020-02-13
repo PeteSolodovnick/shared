@@ -1,13 +1,10 @@
 package address.mains;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import models.RefTerritoryEntity;
 import models.SuperEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

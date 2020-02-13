@@ -4,11 +4,10 @@ import models.SuperEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_status_invoice", schema = "public", catalog = "farm")
-public class RefStatusInvoiceDocEntity extends SuperEntity {
+public class DocStatusInvoiceDocEntity extends SuperEntity {
     private Collection<DocInvoiceHeadDocEntity> docInvoiceHeadsById;
 
     @OneToMany(mappedBy = "refStatusInvoiceByStatusId")

@@ -1,31 +1,30 @@
 package models;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_nomenkl", schema = "public", catalog = "farm")
-public class RefNomenklEntity extends SuperEntity{
-    private RefClassificationEntity refClassificationByClassificationId;
-    private RefSizeEntity refSizeBySizeId;
+public class NomenklEntity extends SuperEntity {
+    private ClassificationEntity refClassificationByClassificationId;
+    private SizeEntity refSizeBySizeId;
 
     @ManyToOne
     @JoinColumn(name = "classification_id", referencedColumnName = "id", nullable = false)
-    public RefClassificationEntity getRefClassificationByClassificationId() {
+    public ClassificationEntity getRefClassificationByClassificationId() {
         return refClassificationByClassificationId;
     }
 
-    public void setRefClassificationByClassificationId(RefClassificationEntity refClassificationByClassificationId) {
+    public void setRefClassificationByClassificationId(ClassificationEntity refClassificationByClassificationId) {
         this.refClassificationByClassificationId = refClassificationByClassificationId;
     }
 
     @ManyToOne
     @JoinColumn(name = "size_id", referencedColumnName = "id", nullable = false)
-    public RefSizeEntity getRefSizeBySizeId() {
+    public SizeEntity getRefSizeBySizeId() {
         return refSizeBySizeId;
     }
 
-    public void setRefSizeBySizeId(RefSizeEntity refSizeBySizeId) {
+    public void setRefSizeBySizeId(SizeEntity refSizeBySizeId) {
         this.refSizeBySizeId = refSizeBySizeId;
     }
 }

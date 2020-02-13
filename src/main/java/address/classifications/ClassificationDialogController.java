@@ -4,20 +4,19 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import models.RefClassificationEntity;
+import models.ClassificationEntity;
 import models.SuperEntity;
 
 public class ClassificationDialogController extends SuperDialogEntityController {
     @FXML
     private TextField parent;
-    private RefClassificationEntity newClassificationEntity;
-    private RefClassificationEntity newParentEntity;
+    private ClassificationEntity newClassificationEntity;
+    private ClassificationEntity newParentEntity;
     private String fileClassif;
     public ClassificationDialogController() {}
     public void setFarmFX(FarmFX farm, SuperEntity selectedClassification) {
         fileClassif = "/classifClassifTable.fxml";
-        newClassificationEntity = (RefClassificationEntity) selectedClassification;
+        newClassificationEntity = (ClassificationEntity) selectedClassification;
         if (selectedClassification != null) {
             if (newClassificationEntity.getRefClassificationByParentId() != null) {
                 parent.setText(newClassificationEntity.getRefClassificationByParentId().getName());
@@ -25,7 +24,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
             }
             setNew(false);
         } else {
-            newClassificationEntity = new RefClassificationEntity();
+            newClassificationEntity = new ClassificationEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newClassificationEntity);
@@ -81,11 +80,11 @@ public class ClassificationDialogController extends SuperDialogEntityController 
         return parent;
     }
 
-    public RefClassificationEntity getNewParentEntity() {
+    public ClassificationEntity getNewParentEntity() {
         return newParentEntity;
     }
 
-    public void setNewParentEntity(RefClassificationEntity newParentEntity) {
+    public void setNewParentEntity(ClassificationEntity newParentEntity) {
         this.newParentEntity = newParentEntity;
     }
 }

@@ -10,21 +10,21 @@ import models.*;
 
 public class LotsOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
-    private TableColumn<RefLotsEntity, RefTypeLotsEntity> type;
+    private TableColumn<LotsEntity, TypeLotsEntity> type;
     @FXML
-    private TableColumn<RefLotsEntity, RefKindLotsEntity> kind;
+    private TableColumn<LotsEntity, KindLotsEntity> kind;
     @FXML
-    private TableColumn<RefLotsEntity, Integer> count;
+    private TableColumn<LotsEntity, Integer> count;
     @FXML
-    private TableColumn<RefLotsEntity, Integer> weight;
+    private TableColumn<LotsEntity, Integer> weight;
     @FXML
-    private TableColumn<RefLotsEntity, Integer> age;
+    private TableColumn<LotsEntity, Integer> age;
 
     public LotsOverviewController(){}
 
     @FXML @Override
     protected void initialize() {
-        RefTypeLotsEntity rootTypeLots = new RefTypeLotsEntity();
+        TypeLotsEntity rootTypeLots = new TypeLotsEntity();
         rootTypeLots.setName("Type Lots");
         getRootItem().setValue(rootTypeLots);
         super.initialize();

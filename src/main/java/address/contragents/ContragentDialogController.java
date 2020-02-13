@@ -34,12 +34,12 @@ public class ContragentDialogController extends SuperDialogEntityController {
     @FXML
     private CheckBox vat;
 
-    private RefContragentEntity newContragentEntity;
-    private RefCityEntity newCityEntity;
-    private RefTypeContragentEntity newTypeContragentEntity;
-    private RefPriceEntity newPriceEntity;
-    private RefMarketViewEntity newMarketViewEntity;
-    private RefKindContragentEntity newKindContragentEntity;
+    private ContragentEntity newContragentEntity;
+    private CityEntity newCityEntity;
+    private TypeContragentEntity newTypeContragentEntity;
+    private PriceEntity newPriceEntity;
+    private MarketViewEntity newMarketViewEntity;
+    private KindContragentEntity newKindContragentEntity;
     private String fileType;
     private String fileView;
     private String fileCity;
@@ -53,7 +53,7 @@ public class ContragentDialogController extends SuperDialogEntityController {
         fileCity = "/city.fxml";
         filePrice = "/price.fxml";
         fileKind = "/kindContragent.fxml";
-        newContragentEntity = (RefContragentEntity) selectedContragent;
+        newContragentEntity = (ContragentEntity) selectedContragent;
         if (selectedContragent != null) {
             city.setText(newContragentEntity.getRefCityByCityId().getName());
             address.setText(newContragentEntity.getAddress());
@@ -74,7 +74,7 @@ public class ContragentDialogController extends SuperDialogEntityController {
             newPriceEntity = newContragentEntity.getRefPriceByPriceId();
             setNew(false);
         } else {
-            newContragentEntity = new RefContragentEntity();
+            newContragentEntity = new ContragentEntity();
             setNew(true);
         }
         super.setFarmFX(farm, newContragentEntity);
@@ -164,51 +164,51 @@ public class ContragentDialogController extends SuperDialogEntityController {
         getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getContragentOverviewController().getEntities());
     }
 
-    public RefContragentEntity getNewContragentEntity() {
+    public ContragentEntity getNewContragentEntity() {
         return newContragentEntity;
     }
 
-    public void setNewContragentEntity(RefContragentEntity newContragentEntity) {
+    public void setNewContragentEntity(ContragentEntity newContragentEntity) {
         this.newContragentEntity = newContragentEntity;
     }
 
-    public RefCityEntity getNewCityEntity() {
+    public CityEntity getNewCityEntity() {
         return newCityEntity;
     }
 
-    public void setNewCityEntity(RefCityEntity newCityEntity) {
+    public void setNewCityEntity(CityEntity newCityEntity) {
         this.newCityEntity = newCityEntity;
     }
 
-    public RefTypeContragentEntity getNewTypeContragentEntity() {
+    public TypeContragentEntity getNewTypeContragentEntity() {
         return newTypeContragentEntity;
     }
 
-    public void setNewTypeContragentEntity(RefTypeContragentEntity newTypeContragentEntity) {
+    public void setNewTypeContragentEntity(TypeContragentEntity newTypeContragentEntity) {
         this.newTypeContragentEntity = newTypeContragentEntity;
     }
 
-    public RefPriceEntity getNewPriceEntity() {
+    public PriceEntity getNewPriceEntity() {
         return newPriceEntity;
     }
 
-    public void setNewPriceEntity(RefPriceEntity newPriceEntity) {
+    public void setNewPriceEntity(PriceEntity newPriceEntity) {
         this.newPriceEntity = newPriceEntity;
     }
 
-    public RefMarketViewEntity getNewMarketViewEntity() {
+    public MarketViewEntity getNewMarketViewEntity() {
         return newMarketViewEntity;
     }
 
-    public void setNewMarketViewEntity(RefMarketViewEntity newMarketViewEntity) {
+    public void setNewMarketViewEntity(MarketViewEntity newMarketViewEntity) {
         this.newMarketViewEntity = newMarketViewEntity;
     }
 
-    public RefKindContragentEntity getNewKindContragentEntity() {
+    public KindContragentEntity getNewKindContragentEntity() {
         return newKindContragentEntity;
     }
 
-    public void setNewKindContragentEntity(RefKindContragentEntity newKindContragentEntity) {
+    public void setNewKindContragentEntity(KindContragentEntity newKindContragentEntity) {
         this.newKindContragentEntity = newKindContragentEntity;
     }
 

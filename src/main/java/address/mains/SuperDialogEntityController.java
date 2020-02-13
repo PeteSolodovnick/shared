@@ -33,11 +33,12 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     @Override
     public void setFarmFX(FarmFX farm, SuperEntity selectedEntity) {
         this.farm = farm;
-        newEntity = selectedEntity;
+        SuperEntity selectEnt = (SuperEntity) selectedEntity;
+        newEntity = (SuperEntity) selectedEntity;
         if (isNew)
             name.setText("");
         else
-            name.setText(selectedEntity.getName());
+            name.setText(selectEnt.getName());
     }
 
     @Override
