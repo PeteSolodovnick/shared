@@ -74,7 +74,6 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
 
     protected boolean isInputValid() {
         String errorMessage = "";
-        logger.info("er m =" + errorMessage);
         if (name.getText() == null || name.getText().length() == 0) {
             errorMessage+="No valid name\n";
         }
@@ -121,5 +120,9 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
 
     public void setNew(boolean aNew) {
         isNew = aNew;
+    }
+
+    public Stage getDialogStage() {
+        return dialogStage;
     }
 }

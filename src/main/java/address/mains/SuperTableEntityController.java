@@ -1,6 +1,7 @@
 package address.mains;
 
 import javafx.fxml.FXML;
+import models.SuperEntity;
 
 public abstract class SuperTableEntityController extends SuperEntityController {
     private int countCLick = 0;

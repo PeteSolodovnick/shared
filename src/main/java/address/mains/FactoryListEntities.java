@@ -2,6 +2,7 @@ package address.mains;
 
 import address.documents.SuperDocumentEntity;
 import address.documents.invoices.DocInvoiceHeadDocEntity;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -33,4 +34,21 @@ public class FactoryListEntities<T> {
         }
         return entityList;
     }
+    public ObservableList<T> getSetDateListEntities(LocalDate startDate, LocalDate endDate) {
+        ObservableList<T> entityList = FXCollections.observableArrayList();
+        EntityService<T, LocalDate> service = new EntityService<>();
+        for (T entity: service.getDateRows(t, startDate, endDate)) {
+            entityList.add(entity);
+        }
+        return entityList;
+    }
+    public ObservableList<T> getSomeListEntities(Long id) {
+        ObservableList<T> entityList = FXCollections.observableArrayList();
+        EntityService<T, Long> service = new EntityService<>();
+        for (T entity: service.getSomeRows(t, id)) {
+            entityList.add(entity);
+        }
+        return entityList;
+    }
+
 }

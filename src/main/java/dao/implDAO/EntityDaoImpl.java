@@ -1,6 +1,7 @@
 package dao.implDAO;
 
 import dao.DAO;
+import javafx.fxml.FXML;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 
 public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
@@ -83,6 +85,18 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             Criteria cr = session.createCriteria(entity.getClass());
             cr.add(Restrictions.between("date", startDate, finishDate));
             return cr.list();
+        }
+    }
+    @Override
+    public List<Entity> getSomeRows(Entity entity, Key key) {
+        try (final Session session = sessionFactory.openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
+            Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
+            cr.select(root).where(cb.equal(root.get("docInvoiceHeadByInvId"), key));
+            Query query = session.createQuery(cr);
+            List<Entity> results = query.getResultList();
+            return results;
         }
     }
 }

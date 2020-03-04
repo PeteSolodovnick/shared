@@ -33,11 +33,9 @@
     <mapping class="models.TypeLotsEntity"/>
       <mapping class="models.StorageEntity"/>
       <mapping class="address.documents.invoices.DocInvoiceHeadDocEntity"/>
-      <mapping class="address.documents.invoices.DocTypeInvoiceDocEntity"/>
-      <mapping class="address.documents.invoices.TableInvoiceLotDocEntity"/>
       <mapping class="address.documents.invoices.TableInvoiceNomDocEntity"/>
     <mapping class="address.documents.invoices.DocStatusInvoiceDocEntity"/>
-    <mapping class="address.documents.SuperDocumentEntity"/>
+
 
 
 

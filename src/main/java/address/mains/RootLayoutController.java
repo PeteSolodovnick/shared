@@ -2,7 +2,6 @@ package address.mains;
 
 import address.documents.invoices.DocInvoiceHeadDocEntity;
 import address.documents.invoices.DocStatusInvoiceDocEntity;
-import address.documents.invoices.DocTypeInvoiceDocEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import models.*;
@@ -80,13 +79,19 @@ public class RootLayoutController {
     @FXML
     private void handleInvoices() {
          farm.getReferences().getContragentData().clear();
-         farm.getReferences().getTypeInvoiceData().clear();
          farm.getReferences().getStatusInvoiceData().clear();
          farm.getReferences().getInvoiceData().clear();
+         farm.getReferences().getProductsData().clear();
+        farm.getReferences().getSizeEntitiesData().clear();
+        farm.getReferences().getClassificationData().clear();
+        farm.getReferences().getTypeContragentData().clear();
+        farm.getReferences().setTypeContragentData(new FactoryListEntities<>(new TypeContragentEntity()).getListEntities());
+        farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
+        farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new SizeEntity()).getListEntities());
+        farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());
          farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
-         farm.getReferences().setContragentData(new FactoryListEntities<>(new ContragentEntity()).getDateListEntities());
-         farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new DocStatusInvoiceDocEntity()).getDateListEntities());
-         farm.getReferences().setTypeInvoiceData(new FactoryListEntities<>(new DocTypeInvoiceDocEntity()).getDateListEntities());
+         farm.getReferences().setContragentData(new FactoryListEntities<>(new ContragentEntity()).getListEntities());
+         farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new DocStatusInvoiceDocEntity()).getListEntities());
          farm.showEntityOverview(invoiceDoc);
     }
 

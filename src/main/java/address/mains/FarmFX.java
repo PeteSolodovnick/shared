@@ -13,6 +13,7 @@ import java.util.prefs.Preferences;
 
 public class FarmFX extends Application {
     public static final Logger logger = LogManager.getLogger();
+    public static final double vat = 20.0;
     private final String rootLayoutFXML = "/rootLayout.fxml";
     private Stage primaryStage;
     private CollectionsEntities references;

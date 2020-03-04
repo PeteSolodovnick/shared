@@ -2,6 +2,8 @@ package address.mains;
 
 import address.classifications.*;
 import address.contragents.*;
+import address.documents.invoices.InvoiceDialogController;
+import address.documents.invoices.InvoiceHeadOverviewController;
 import address.localities.*;
 import address.lots.KindLotsTableController;
 import address.lots.LotsDialogController;
@@ -32,6 +34,24 @@ public class ConfigDialogController {
     private TypeLotsTableController typeLotsTableController;
     private KindLotsTableController kindLotsTableController;
     private StorageOverviewController storageOverviewController;
+    private InvoiceHeadOverviewController invoiceHeadOverviewController;
+    private InvoiceDialogController invoiceDialogController;
+
+    public InvoiceDialogController getInvoiceDialogController() {
+        return invoiceDialogController;
+    }
+
+    public void setInvoiceDialogController(InvoiceDialogController invoiceDialogController) {
+        this.invoiceDialogController = invoiceDialogController;
+    }
+
+    public InvoiceHeadOverviewController getInvoiceHeadOverviewController() {
+        return invoiceHeadOverviewController;
+    }
+
+    public void setInvoiceHeadOverviewController(InvoiceHeadOverviewController invoiceHeadOverviewController) {
+        this.invoiceHeadOverviewController = invoiceHeadOverviewController;
+    }
 
     public StorageOverviewController getStorageOverviewController() {
         return storageOverviewController;

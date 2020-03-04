@@ -1,8 +1,8 @@
 package address.mains;
 
 import address.documents.invoices.DocInvoiceHeadDocEntity;
-import address.documents.invoices.DocTypeInvoiceDocEntity;
 import address.documents.invoices.DocStatusInvoiceDocEntity;
+import address.documents.invoices.TableInvoiceNomDocEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.*;
@@ -24,15 +24,15 @@ public class CollectionsEntities {
     private ObservableList<LotsEntity> lotsData = FXCollections.observableArrayList();
     private ObservableList<StorageEntity> storageData = FXCollections.observableArrayList();
     private ObservableList<DocInvoiceHeadDocEntity> invoiceData = FXCollections.observableArrayList();
-    private ObservableList<DocTypeInvoiceDocEntity> typeInvoiceData = FXCollections.observableArrayList();
     private ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData = FXCollections.observableArrayList();
+    private ObservableList<TableInvoiceNomDocEntity> tableInvoiceData = FXCollections.observableArrayList();
 
-    public ObservableList<DocTypeInvoiceDocEntity> getTypeInvoiceData() {
-        return typeInvoiceData;
+    public ObservableList<TableInvoiceNomDocEntity> getTableInvoiceData() {
+        return tableInvoiceData;
     }
 
-    public void setTypeInvoiceData(ObservableList<DocTypeInvoiceDocEntity> typeInvoiceData) {
-        this.typeInvoiceData = typeInvoiceData;
+    public void setTableInvoiceData(ObservableList<TableInvoiceNomDocEntity> tableInvoiceData) {
+        this.tableInvoiceData = tableInvoiceData;
     }
 
     public ObservableList<DocStatusInvoiceDocEntity> getStatusInvoiceData() {

@@ -1,44 +1,42 @@
 package address.documents;
 
 import models.ContragentEntity;
+import models.SuperEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @MappedSuperclass
-public abstract class SuperDocumentEntity {
+public abstract class SuperDocumentEntity extends SuperEntity {
 
-    private Long id;
-    private String number;
     private ContragentEntity refContragentEntityByContragentId;
     private Float sum;
     private LocalDate date;
+    private Boolean editable;
+    private Float vat;
+    private Float sum_vat;
 
     public SuperDocumentEntity() {}
-    public SuperDocumentEntity(Long id, String number, ContragentEntity refContragentEntityByContragentId, Float sum, LocalDate date) {
-        this.id = id;
-        this.number = number;
+    public SuperDocumentEntity(Long id, String number, ContragentEntity refContragentEntityByContragentId, Float sum, LocalDate date, boolean editable, Float vat, Float sum_vat) {
         this.refContragentEntityByContragentId = refContragentEntityByContragentId;
         this.date = date;
         this.sum = sum;
+        this.editable = editable;
+        this.vat = vat;
+        this.sum_vat = sum_vat;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+
     @Basic
-    @Column(name = "number", nullable = false, length = 20)
-    public String getNumber() {
-        return number;
+    @Column(name = "editable", nullable = true)
+    public Boolean getEditable() {
+        return editable;
     }
-    public void setNumber(String number) {
-        this.number = number;
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
+
     @Basic
     @Column(name = "date", nullable = false)
     public LocalDate getDate() {
@@ -64,22 +62,22 @@ public abstract class SuperDocumentEntity {
     public void setSum(Float sum) {
         this.sum = sum;
     }
+    @Basic
+    @Column(name="vat", nullable = true)
+    public Float getVat() {
+        return vat;
+    }
 
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SuperDocumentEntity that = (SuperDocumentEntity) o;
-        return getId() == that.getId() &&
-                refContragentEntityByContragentId.getId() == that.refContragentEntityByContragentId.getId() &&
-                Objects.equals(number, that.number) &&
-                Objects.equals(date, that.date) &&
-                Objects.equals(sum, that.sum);
+    public void setVat(Float vat) {
+        this.vat = vat;
     }
-    public int hashCode() {
-        return Objects.hash(getId(), number, date, refContragentEntityByContragentId.getId(), sum);
+    @Basic
+    @Column(name = "sum_vat", nullable = true)
+    public Float getSum_vat() {
+        return sum_vat;
     }
-    @Override
-    public String toString() {
-        return number;
+
+    public void setSum_vat(Float sum_vat) {
+        this.sum_vat = sum_vat;
     }
 }

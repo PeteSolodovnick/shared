@@ -54,6 +54,7 @@ public class InitializerWindow {
 
     public void initLayoutDialog(FarmFX farm, SuperEntity selectedEntity, Stage stage) {
         ControllerDialog controller = initScene().getController();
+        logger.info(controller.getClass().getName());
         controller.setFarmFX(farm, selectedEntity);
         controller.setDialogStage(stage);
     }

@@ -28,4 +28,7 @@ public class EntityService<Entity, Key> {
     public List<Entity> getDateRows (Entity entity, Key startDate, Key endDate) {
         return this.entity.getDateRows(entity, startDate, endDate);
     }
+    public List<Entity> getSomeRows (Entity entity, Key key) {
+        return this.entity.getSomeRows(entity, key);
+    }
 }

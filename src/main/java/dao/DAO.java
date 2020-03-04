@@ -10,4 +10,5 @@ public interface DAO<Entity, Key> {
     void delete(Entity entity);
     List<Entity> getAllRows(Entity entity);
     List<Entity> getDateRows(Entity entity, Key startDate, Key finDate);
+    List<Entity> getSomeRows(Entity entity, Key key);
 }
