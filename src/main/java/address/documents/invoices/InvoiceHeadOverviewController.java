@@ -1,15 +1,21 @@
 package address.documents.invoices;
 
+import address.documents.capitalize.DocDocsHeadDocEntity;
+import address.documents.capitalize.RefTypeDocDocEntity;
+import address.documents.capitalize.TableDocsStuffDocEntity;
 import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityController;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import models.ContragentEntity;
 import models.SuperEntity;
+import services.EntityService;
 
 import java.time.LocalDate;
 
@@ -30,6 +36,10 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     private DatePicker startDate;
     @FXML
     private DatePicker endDate;
+    @FXML
+    private Button capitalize;
+
+    private String fileStore;
 
     public InvoiceHeadOverviewController() {}
 
@@ -42,6 +52,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         sumVat.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getSum()*(FarmFX.vat/100+1)));
         date.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getDate()));
         editable.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getEditable()));
+        getEntityTable().getSelectionModel().getSelectedCells().addListener((InvalidationListener) observable -> showButton());
     }
     @Override
     public void setFarmFX(FarmFX farm) {
@@ -50,6 +61,12 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     //    getEntities().clear();
         getEntities().addAll(farm.getReferences().getInvoiceData());
         super.setFarmFX(farm);
+    }
+    public void showButton() {
+        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
+        if (!selectedInvoice.getEditable()) {
+            capitalize.setDisable(true);
+        } else capitalize.setDisable(false);
     }
     @Override
     public void handleNewEntity() {
@@ -93,6 +110,31 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
         setTitle("Full Invoice Information");
         super.handleInfoEntity();
+    }
+    public void handleCapitalize() {
+        fileStore = "/storageViewer.fxml";
+        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
+        if (selectedInvoice != null) {
+            if (selectedInvoice.getEditable()) {
+                getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
+                setTitle("Choose store for capitalize...");
+                getFarm().showEntityOverview(selectedInvoice, getReferenceStage(), fileStore, "Choose store");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.initOwner(getFarm().getPrimaryStage());
+                alert.setTitle("Sorry,");
+                alert.setHeaderText("You can't edit this document");
+                alert.setContentText("Please select an other element in the table for editing");
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(getFarm().getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No one element Selected");
+            alert.setContentText("Please select an element in the table for editing");
+            alert.showAndWait();
+        }
     }
     @Override
     public void deletedFromArray(SuperEntity selectedEntity) {

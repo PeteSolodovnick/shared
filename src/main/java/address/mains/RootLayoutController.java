@@ -1,5 +1,7 @@
 package address.mains;
 
+import address.documents.capitalize.RefKindDocDocEntity;
+import address.documents.capitalize.RefTypeDocDocEntity;
 import address.documents.invoices.DocInvoiceHeadDocEntity;
 import address.documents.invoices.DocStatusInvoiceDocEntity;
 import javafx.fxml.FXML;
@@ -7,6 +9,9 @@ import javafx.scene.control.Alert;
 import models.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RootLayoutController {
     private static final Logger logger = LogManager.getLogger();
@@ -78,6 +83,7 @@ public class RootLayoutController {
     }
     @FXML
     private void handleInvoices() {
+
          farm.getReferences().getContragentData().clear();
          farm.getReferences().getStatusInvoiceData().clear();
          farm.getReferences().getInvoiceData().clear();
@@ -85,6 +91,13 @@ public class RootLayoutController {
         farm.getReferences().getSizeEntitiesData().clear();
         farm.getReferences().getClassificationData().clear();
         farm.getReferences().getTypeContragentData().clear();
+        farm.getReferences().getStorageData().clear();
+        ArrayList<Long> keys = new ArrayList();
+        keys.add(1L);
+        keys.add(2L);
+        farm.getReferences().setTypeDocDocEntities(new FactoryListEntities<>(new RefTypeDocDocEntity()).getListEntities());
+        farm.getReferences().setKindDocDocEntities(new FactoryListEntities<>(new RefKindDocDocEntity()).getListEntities());
+        farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntitiesbyId(keys));
         farm.getReferences().setTypeContragentData(new FactoryListEntities<>(new TypeContragentEntity()).getListEntities());
         farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
         farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new SizeEntity()).getListEntities());

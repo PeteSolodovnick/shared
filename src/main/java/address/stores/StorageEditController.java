@@ -46,6 +46,7 @@ public class StorageEditController extends SuperDialogEntityController {
     protected void createEntity() {
         super.createEntity();
         newStorageEntity.setAttribute(Integer.parseInt(attribute.getText()));
+        newStorageEntity.setDeleted(true);
         setNewEntity(newStorageEntity);
     }
     @Override

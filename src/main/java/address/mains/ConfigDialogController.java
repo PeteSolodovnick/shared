@@ -10,6 +10,7 @@ import address.lots.LotsDialogController;
 import address.lots.LotsOverviewController;
 import address.lots.TypeLotsTableController;
 import address.prices.SuperPriceTableController;
+import address.stores.StorageCapitalizeController;
 import address.stores.StorageOverviewController;
 
 public class ConfigDialogController {
@@ -36,6 +37,15 @@ public class ConfigDialogController {
     private StorageOverviewController storageOverviewController;
     private InvoiceHeadOverviewController invoiceHeadOverviewController;
     private InvoiceDialogController invoiceDialogController;
+    private StorageCapitalizeController storageCapitalizeController;
+
+    public StorageCapitalizeController getStorageCapitalizeController() {
+        return storageCapitalizeController;
+    }
+
+    public void setStorageCapitalizeController(StorageCapitalizeController storageCapitalizeController) {
+        this.storageCapitalizeController = storageCapitalizeController;
+    }
 
     public InvoiceDialogController getInvoiceDialogController() {
         return invoiceDialogController;

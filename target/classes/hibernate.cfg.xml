@@ -35,11 +35,16 @@
       <mapping class="address.documents.invoices.DocInvoiceHeadDocEntity"/>
       <mapping class="address.documents.invoices.TableInvoiceNomDocEntity"/>
     <mapping class="address.documents.invoices.DocStatusInvoiceDocEntity"/>
+      <mapping class="address.documents.capitalize.DocDocsHeadDocEntity"/>
+      <mapping class="address.documents.capitalize.JournalOperationsStaffDocEntity"/>
+      <mapping class="address.documents.capitalize.RefKindDocDocEntity"/>
+      <mapping class="address.documents.capitalize.RefTypeDocDocEntity"/>
+      <mapping class="address.documents.capitalize.RefTypeOperationsDocEntity"/>
+      <mapping class="address.documents.capitalize.TableCurrentRestStuffDocEntity"/>
+      <mapping class="address.documents.capitalize.TableDocsStuffDocEntity"/>
 
 
-
-
-    <!-- DB schema will be updated if needed -->
+      <!-- DB schema will be updated if needed -->
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
   </session-factory>
 </hibernate-configuration>

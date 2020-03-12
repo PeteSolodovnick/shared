@@ -10,6 +10,7 @@ import models.*;
 import services.EntityService;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -50,5 +51,12 @@ public class FactoryListEntities<T> {
         }
         return entityList;
     }
-
+    public ObservableList<T> getListEntitiesbyId(List<Long> id) {
+        ObservableList<T> entityList = FXCollections.observableArrayList();
+        EntityService<T, Long> service = new EntityService<>();
+        for (Long i : id) {
+            entityList.add(service.read(t,i));
+        }
+        return entityList;
+    }
 }

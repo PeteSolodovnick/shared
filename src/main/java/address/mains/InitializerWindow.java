@@ -49,7 +49,11 @@ public class InitializerWindow {
             logger.info(controller.getClass().getName());
             controller.setFarmFX(farm);
             controller.setReferenceStage(stage);
-
+    }
+    public void initLayout(FarmFX farm, SuperEntity selectedEntity, Stage stage) {
+        ControllerReference controller = initScene().getController();
+        controller.setFarmFX(farm, selectedEntity);
+        controller.setReferenceStage(stage);
     }
 
     public void initLayoutDialog(FarmFX farm, SuperEntity selectedEntity, Stage stage) {

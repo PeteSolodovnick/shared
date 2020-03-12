@@ -4,8 +4,6 @@ import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -53,9 +51,6 @@ public class InvoiceDialogController extends SuperDialogEntityController {
     private ContragentEntity newContragentEntity;
     private DocInvoiceHeadDocEntity newInvoice;
     private DocStatusInvoiceDocEntity statusInvoiceDocEntity;
-    private NomenklEntity newNomenklEntity;
-    private SizeEntity newSizeEntity;
-    private ClassificationEntity newClassificationEntity;
     private String fileContragent;
     private String fileNomenkl;
     private List<TableInvoiceNomDocEntity> forDelete = new ArrayList<>();
@@ -152,10 +147,8 @@ public class InvoiceDialogController extends SuperDialogEntityController {
         newInvoice.setDate(date.getValue());
         newInvoice.setSum(Float.parseFloat(sumInv.getText()));
         newInvoice.setTableInvoiceNomById(entityTable.getItems());
-        for (TableInvoiceNomDocEntity tableInv:entityTable.getItems()) {
-            logger.info(tableInv);
-        }
-        logger.info("adding");
+        newInvoice.setVat(Float.parseFloat(vat.getText()));
+        newInvoice.setSum_vat(Float.parseFloat(sum_vat.getText()));
         if (isNew()) {
             newInvoice.setRefStatusInvoiceByStatusId(statusInvoiceDocEntity);
             newInvoice.setEditable(true);

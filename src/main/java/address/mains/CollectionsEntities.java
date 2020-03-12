@@ -1,5 +1,7 @@
 package address.mains;
 
+import address.documents.capitalize.RefKindDocDocEntity;
+import address.documents.capitalize.RefTypeDocDocEntity;
 import address.documents.invoices.DocInvoiceHeadDocEntity;
 import address.documents.invoices.DocStatusInvoiceDocEntity;
 import address.documents.invoices.TableInvoiceNomDocEntity;
@@ -26,6 +28,24 @@ public class CollectionsEntities {
     private ObservableList<DocInvoiceHeadDocEntity> invoiceData = FXCollections.observableArrayList();
     private ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData = FXCollections.observableArrayList();
     private ObservableList<TableInvoiceNomDocEntity> tableInvoiceData = FXCollections.observableArrayList();
+    private ObservableList<RefTypeDocDocEntity> typeDocDocEntities = FXCollections.observableArrayList();
+    private ObservableList<RefKindDocDocEntity> kindDocDocEntities = FXCollections.observableArrayList();
+
+    public ObservableList<RefTypeDocDocEntity> getTypeDocDocEntities() {
+        return typeDocDocEntities;
+    }
+
+    public void setTypeDocDocEntities(ObservableList<RefTypeDocDocEntity> typeDocDocEntities) {
+        this.typeDocDocEntities = typeDocDocEntities;
+    }
+
+    public ObservableList<RefKindDocDocEntity> getKindDocDocEntities() {
+        return kindDocDocEntities;
+    }
+
+    public void setKindDocDocEntities(ObservableList<RefKindDocDocEntity> kindDocDocEntities) {
+        this.kindDocDocEntities = kindDocDocEntities;
+    }
 
     public ObservableList<TableInvoiceNomDocEntity> getTableInvoiceData() {
         return tableInvoiceData;

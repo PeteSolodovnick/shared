@@ -27,6 +27,7 @@ public abstract class SuperEntityController implements ControllerReference {
 
     private Stage referenceStage;
     private FarmFX farm;
+    private SuperEntity selectedEntity;
 
     private String file;
     private String fileInfo;
@@ -75,6 +76,16 @@ public abstract class SuperEntityController implements ControllerReference {
         entitiesName.setItems(entities);
         AutoCompleteComboBoxListener autoEntity = new AutoCompleteComboBoxListener(entitiesName);
     }
+
+    @Override
+    public void setFarmFX(FarmFX farm, SuperEntity selectedEntity) {
+        this.farm = farm;
+        this.selectedEntity = selectedEntity;
+        entityTable.setItems(entities);
+        entitiesName.setItems(entities);
+        AutoCompleteComboBoxListener autoEntity = new AutoCompleteComboBoxListener(entitiesName);
+    }
+
     @Override
     public void setReferenceStage(Stage referenceStage) {
         this.referenceStage = referenceStage;
@@ -169,6 +180,14 @@ public abstract class SuperEntityController implements ControllerReference {
 
     }
 
+    public SuperEntity getSelectedEntity() {
+        return selectedEntity;
+    }
+
+    public void setSelectedEntity(SuperEntity selectedEntity) {
+        this.selectedEntity = selectedEntity;
+    }
+
     public ObservableList<SuperEntity> getEntities() {
         return entities;
     }
@@ -203,5 +222,9 @@ public abstract class SuperEntityController implements ControllerReference {
 
     public ComboBox<SuperEntity> getEntitiesName() {
         return entitiesName;
+    }
+
+    public String getFile() {
+        return file;
     }
 }

@@ -8,10 +8,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactoryUtil;
 
+import javax.persistence.Entity;
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -39,7 +38,7 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
             Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
-            cr.select(root).where(cb.equal(root.get("Id"), id));
+            cr.select(root).where(cb.equal(root.get("id"), id));
             Query query = session.createQuery(cr);
             entity = (Entity) query.getSingleResult();
             session.close();

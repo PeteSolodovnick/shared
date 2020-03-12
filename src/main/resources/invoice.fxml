@@ -114,7 +114,7 @@
             <Tooltip text="Edit" />
          </tooltip>
       </Button>
-      <Button layoutX="594.0" layoutY="6.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="193.0" text="Оприходовать">
+      <Button fx:id="capitalize" layoutX="594.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleCapitalize" prefHeight="29.0" prefWidth="193.0" text="Оприходовать">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

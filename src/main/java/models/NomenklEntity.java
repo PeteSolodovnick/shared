@@ -1,5 +1,7 @@
 package models;
 
+import address.documents.capitalize.JournalOperationsStaffDocEntity;
+import address.documents.capitalize.TableDocsStuffDocEntity;
 import address.documents.invoices.DocInvoiceHeadDocEntity;
 import address.documents.invoices.TableInvoiceNomDocEntity;
 
@@ -12,6 +14,26 @@ public class NomenklEntity extends SuperEntity {
     private ClassificationEntity refClassificationByClassificationId;
     private SizeEntity refSizeBySizeId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomDocEntities;
+    private Collection<TableDocsStuffDocEntity> tableDocsStuffDocEntities;
+    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities;
+
+    @OneToMany(mappedBy = "nomenklEntityById")
+    public Collection<JournalOperationsStaffDocEntity> getJournalOperationsStaffDocEntities() {
+        return journalOperationsStaffDocEntities;
+    }
+
+    public void setJournalOperationsStaffDocEntities(Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities) {
+        this.journalOperationsStaffDocEntities = journalOperationsStaffDocEntities;
+    }
+
+    @OneToMany(mappedBy = "nomenklEntityByNomId")
+    public Collection<TableDocsStuffDocEntity> getTableDocsStuffDocEntities() {
+        return tableDocsStuffDocEntities;
+    }
+
+    public void setTableDocsStuffDocEntities(Collection<TableDocsStuffDocEntity> tableDocsStuffDocEntities) {
+        this.tableDocsStuffDocEntities = tableDocsStuffDocEntities;
+    }
 
     @OneToMany(mappedBy = "nomenklEntityByNomId")
     public Collection<TableInvoiceNomDocEntity> getTableInvoiceNomDocEntities() {

@@ -69,6 +69,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
     private void handleTypeChoose() {
         getFarm().getConfigDialogController().setLocalityDialogController(this);
         getFarm().showEntityOverview(fileType);
+
     }
 
     public TextField getRegion() {
