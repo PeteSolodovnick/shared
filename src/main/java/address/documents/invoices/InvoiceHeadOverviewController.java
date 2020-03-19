@@ -1,8 +1,5 @@
 package address.documents.invoices;
 
-import address.documents.capitalize.DocDocsHeadDocEntity;
-import address.documents.capitalize.RefTypeDocDocEntity;
-import address.documents.capitalize.TableDocsStuffDocEntity;
 import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityController;
@@ -13,9 +10,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
-import models.ContragentEntity;
+import models.documents.DocInvoiceHeadDocEntity;
+import models.references.RefStatusInvoiceDocEntity;
+import models.references.ContragentEntity;
 import models.SuperEntity;
-import services.EntityService;
+import models.references.SuperReferenceEntity;
 
 import java.time.LocalDate;
 
@@ -23,7 +22,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     @FXML
     private TableColumn<DocInvoiceHeadDocEntity, ContragentEntity> contragent;
     @FXML
-    private TableColumn<DocInvoiceHeadDocEntity, DocStatusInvoiceDocEntity> status;
+    private TableColumn<DocInvoiceHeadDocEntity, RefStatusInvoiceDocEntity> status;
     @FXML
     private TableColumn<DocInvoiceHeadDocEntity, Float> sum;
     @FXML
@@ -138,7 +137,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         }
     }
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getInvoiceData().remove(selectedEntity);
     }
     @FXML

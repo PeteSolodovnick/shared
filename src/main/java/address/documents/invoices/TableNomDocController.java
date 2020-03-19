@@ -2,7 +2,8 @@ package address.documents.invoices;
 
 import address.classifications.ProductsOverviewController;
 import javafx.fxml.FXML;
-import models.NomenklEntity;
+import models.references.NomenklEntity;
+import models.tables.TableInvoiceNomDocEntity;
 
 public class TableNomDocController extends ProductsOverviewController {
     private int countClick = 0;

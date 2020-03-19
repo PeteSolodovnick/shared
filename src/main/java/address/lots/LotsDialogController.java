@@ -5,6 +5,10 @@ import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import models.*;
+import models.references.KindLotsEntity;
+import models.references.LotsEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeLotsEntity;
 
 public class LotsDialogController extends SuperDialogEntityController {
     @FXML
@@ -28,7 +32,7 @@ public class LotsDialogController extends SuperDialogEntityController {
 
     public LotsDialogController() {}
 
-    public void setFarmFX(FarmFX farm, SuperEntity selectedLot) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedLot) {
         fileType = "/lot'sType.fxml";
         fileKind = "/lotsKind.fxml";
         newLotEntity = (LotsEntity) selectedLot;
@@ -97,9 +101,7 @@ public class LotsDialogController extends SuperDialogEntityController {
     }
     @FXML
     private void handleKindChoose() {
-        logger.info("kind choosed");
         getFarm().getConfigDialogController().setLotsDialogController(this);
-        logger.info("before farm");
         getFarm().showEntityOverview(fileKind);
     }
     @Override
@@ -114,7 +116,7 @@ public class LotsDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         getFarm().getConfigDialogController().getLotsOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getLotsOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getLotsOverviewController().getEntities());
     }

@@ -11,6 +11,9 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import models.*;
+import models.documents.DocInvoiceHeadDocEntity;
+import models.references.*;
+import models.tables.TableInvoiceNomDocEntity;
 import services.EntityService;
 
 import java.util.ArrayList;
@@ -50,7 +53,7 @@ public class InvoiceDialogController extends SuperDialogEntityController {
 
     private ContragentEntity newContragentEntity;
     private DocInvoiceHeadDocEntity newInvoice;
-    private DocStatusInvoiceDocEntity statusInvoiceDocEntity;
+    private RefStatusInvoiceDocEntity statusInvoiceDocEntity;
     private String fileContragent;
     private String fileNomenkl;
     private List<TableInvoiceNomDocEntity> forDelete = new ArrayList<>();
@@ -93,7 +96,7 @@ public class InvoiceDialogController extends SuperDialogEntityController {
         sumVat.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getSum()*(1 + FarmFX.vat/100)));
     }
  @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedInvoice) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedInvoice) {
         logger.info("in set table invoice");
         fileContragent = "/contragentViewer.fxml";
         fileNomenkl = "/nomenklViewer.fxml";
@@ -202,7 +205,7 @@ public class InvoiceDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
 
     }
 

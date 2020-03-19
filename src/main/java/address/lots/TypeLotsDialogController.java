@@ -4,13 +4,14 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
 import models.SuperEntity;
-import models.TypeLotsEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeLotsEntity;
 
 public class TypeLotsDialogController extends SuperDialogEntityController {
     private TypeLotsEntity newTypeLot;
     public TypeLotsDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedTypeLot) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedTypeLot) {
         newTypeLot = (TypeLotsEntity) selectedTypeLot;
         if (selectedTypeLot != null) {
             setNew(false);
@@ -36,7 +37,7 @@ public class TypeLotsDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         if (getFarm().getConfigDialogController().getTypeLotsTableController() != null) {
             getFarm().getConfigDialogController().getTypeLotsTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getLotsOverviewController().getRootItem().getChildren().clear();

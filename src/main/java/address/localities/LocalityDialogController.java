@@ -5,6 +5,10 @@ import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import models.*;
+import models.references.CityEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TerritoryEntity;
+import models.references.TypeCityEntity;
 
 public class LocalityDialogController extends SuperDialogEntityController {
     @FXML
@@ -20,7 +24,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
     public LocalityDialogController() {}
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedCity) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedCity) {
         fileTer = "/territory.fxml";
         fileType = "/typeOfCity.fxml";
         newCityEntity = (CityEntity) selectedCity;
@@ -96,7 +100,7 @@ public class LocalityDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getLocalityOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getLocalityOverviewController().getEntities());
     }

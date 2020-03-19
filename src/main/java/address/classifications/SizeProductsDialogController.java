@@ -2,14 +2,15 @@ package address.classifications;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.SizeEntity;
+import models.references.SizeEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class SizeProductsDialogController extends SuperDialogEntityController {
     private SizeEntity newSizeEntity;
     public SizeProductsDialogController(){}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedSize) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedSize) {
         newSizeEntity = (SizeEntity) selectedSize;
         if (selectedSize != null) {
             setNew(false);
@@ -31,7 +32,7 @@ public class SizeProductsDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getSizeEntitiesData().size(); i++) {
             if (getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().getId() == newEntity.getId()) {
                 getFarm().getReferences().getProductsData().get(i).getRefSizeBySizeId().setName(newEntity.getName());

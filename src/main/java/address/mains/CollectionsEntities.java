@@ -1,14 +1,14 @@
 package address.mains;
 
-import address.documents.capitalize.RefKindDocDocEntity;
-import address.documents.capitalize.RefTypeDocDocEntity;
-import address.documents.capitalize.TableCurrentRestStuffDocEntity;
-import address.documents.invoices.DocInvoiceHeadDocEntity;
-import address.documents.invoices.DocStatusInvoiceDocEntity;
-import address.documents.invoices.TableInvoiceNomDocEntity;
+import models.references.RefKindDocDocEntity;
+import models.references.RefTypeDocDocEntity;
+import models.tables.TableCurrentRestStuffDocEntity;
+import models.documents.DocInvoiceHeadDocEntity;
+import models.references.RefStatusInvoiceDocEntity;
+import models.tables.TableInvoiceNomDocEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import models.*;
+import models.references.*;
 
 public class CollectionsEntities {
     private ObservableList<TerritoryEntity> territoryData = FXCollections.observableArrayList();
@@ -27,7 +27,7 @@ public class CollectionsEntities {
     private ObservableList<LotsEntity> lotsData = FXCollections.observableArrayList();
     private ObservableList<StorageEntity> storageData = FXCollections.observableArrayList();
     private ObservableList<DocInvoiceHeadDocEntity> invoiceData = FXCollections.observableArrayList();
-    private ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData = FXCollections.observableArrayList();
+    private ObservableList<RefStatusInvoiceDocEntity> statusInvoiceData = FXCollections.observableArrayList();
     private ObservableList<TableInvoiceNomDocEntity> tableInvoiceData = FXCollections.observableArrayList();
     private ObservableList<RefTypeDocDocEntity> typeDocDocEntities = FXCollections.observableArrayList();
     private ObservableList<RefKindDocDocEntity> kindDocDocEntities = FXCollections.observableArrayList();
@@ -65,11 +65,11 @@ public class CollectionsEntities {
         this.tableInvoiceData = tableInvoiceData;
     }
 
-    public ObservableList<DocStatusInvoiceDocEntity> getStatusInvoiceData() {
+    public ObservableList<RefStatusInvoiceDocEntity> getStatusInvoiceData() {
         return statusInvoiceData;
     }
 
-    public void setStatusInvoiceData(ObservableList<DocStatusInvoiceDocEntity> statusInvoiceData) {
+    public void setStatusInvoiceData(ObservableList<RefStatusInvoiceDocEntity> statusInvoiceData) {
         this.statusInvoiceData = statusInvoiceData;
     }
 

@@ -1,15 +1,15 @@
-package models;
+package models.references;
 
-import address.documents.capitalize.DocDocsHeadDocEntity;
+import models.documents.DocDocsHeadDocEntity;
 import address.documents.capitalize.JournalOperationsStaffDocEntity;
-import address.documents.capitalize.TableCurrentRestStuffDocEntity;
+import models.tables.TableCurrentRestStuffDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_storage", schema = "public", catalog = "farm")
-public class StorageEntity extends SuperEntity {
+public class StorageEntity extends SuperReferenceEntity {
     private Integer attribute;
     private Boolean deleted;
     private Collection<DocDocsHeadDocEntity> docHeadInEntityById;

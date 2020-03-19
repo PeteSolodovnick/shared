@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import services.EntityService;
@@ -15,7 +16,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     private TextField name;
 
     private FarmFX farm;
-    private SuperEntity newEntity;
+    private SuperReferenceEntity newEntity;
     private Stage dialogStage;
     private boolean isNew;
 
@@ -31,10 +32,10 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     }
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedEntity) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedEntity) {
         this.farm = farm;
-        SuperEntity selectEnt = (SuperEntity) selectedEntity;
-        newEntity = (SuperEntity) selectedEntity;
+        SuperReferenceEntity selectEnt = (SuperReferenceEntity) selectedEntity;
+        newEntity = (SuperReferenceEntity) selectedEntity;
         if (isNew)
             name.setText("");
         else
@@ -50,7 +51,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     public void handleOkDialog() {
         if (isInputValid()) {
             createEntity();
-            EntityService<SuperEntity, Long> service = new EntityService<>();
+            EntityService<SuperReferenceEntity, Long> service = new EntityService<>();
             try {
                 if (isNew) {
                     service.create(newEntity);
@@ -66,7 +67,7 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
         }
     }
     public abstract void newEntity();
-    public abstract void editEntity(SuperEntity newEntity);
+    public abstract void editEntity(SuperReferenceEntity newEntity);
 
     protected void createEntity() {
             newEntity.setName(name.getText());
@@ -106,11 +107,11 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
         this.farm = farm;
     }
 
-    public SuperEntity getNewEntity() {
+    public SuperReferenceEntity getNewEntity() {
         return newEntity;
     }
 
-    public void setNewEntity(SuperEntity newEntity) {
+    public void setNewEntity(SuperReferenceEntity newEntity) {
         this.newEntity = newEntity;
     }
 

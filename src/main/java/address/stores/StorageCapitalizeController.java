@@ -1,17 +1,17 @@
 package address.stores;
 
-import address.documents.capitalize.DocDocsHeadDocEntity;
-import address.documents.capitalize.RefTypeDocDocEntity;
-import address.documents.capitalize.TableCurrentRestStuffDocEntity;
-import address.documents.capitalize.TableDocsStuffDocEntity;
-import address.documents.invoices.DocInvoiceHeadDocEntity;
-import address.documents.invoices.TableInvoiceNomDocEntity;
+import models.documents.DocDocsHeadDocEntity;
+import models.references.RefTypeDocDocEntity;
+import models.references.SuperReferenceEntity;
+import models.tables.TableCurrentRestStuffDocEntity;
+import models.tables.TableDocsStuffDocEntity;
+import models.documents.DocInvoiceHeadDocEntity;
+import models.tables.TableInvoiceNomDocEntity;
 import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
-import com.sun.javafx.collections.MappingChange;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import models.StorageEntity;
+import models.references.StorageEntity;
 import models.SuperEntity;
 import services.EntityService;
 
@@ -25,7 +25,7 @@ import java.util.Map;
 public class StorageCapitalizeController extends StorageOverviewController {
     private DocInvoiceHeadDocEntity selectedInvoice;
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedInvoice) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedInvoice) {
         this.selectedInvoice = (DocInvoiceHeadDocEntity) selectedInvoice;
         getEntities().addAll(farm.getReferences().getStorageData());
         super.setFarmFX(farm, selectedInvoice);
@@ -36,7 +36,7 @@ public class StorageCapitalizeController extends StorageOverviewController {
         getFarm().getReferences().getTableInvoiceData().clear();
         getFarm().getReferences().setTableInvoiceData(new FactoryListEntities<TableInvoiceNomDocEntity>(new TableInvoiceNomDocEntity()).getSomeListEntities(selectedInvoice.getId()));
         StorageEntity selectedStore = (StorageEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        EntityService<SuperEntity, Long> service = new EntityService<>();
+        EntityService<SuperReferenceEntity, Long> service = new EntityService<>();
         EntityService<TableCurrentRestStuffDocEntity, Long> serviceRest = new EntityService<>();
         if (selectedStore != null) {
             DocDocsHeadDocEntity docEntity = new DocDocsHeadDocEntity();

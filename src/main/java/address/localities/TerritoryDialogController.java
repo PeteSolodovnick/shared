@@ -4,13 +4,14 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
 import models.SuperEntity;
-import models.TerritoryEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TerritoryEntity;
 
 public class TerritoryDialogController extends SuperDialogEntityController {
     private TerritoryEntity newTerritoryEntity;
     public TerritoryDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedTerritory) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedTerritory) {
         newTerritoryEntity = (TerritoryEntity) selectedTerritory;
         if (selectedTerritory != null) {
             setNew(false);
@@ -37,7 +38,7 @@ public class TerritoryDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         if (getFarm().getConfigDialogController().getTerritoryTableController() != null) {
             getFarm().getConfigDialogController().getTerritoryTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getLocalityOverviewController().getRootItem().getChildren().clear();

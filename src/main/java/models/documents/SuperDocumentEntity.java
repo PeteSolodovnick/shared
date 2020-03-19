@@ -1,14 +1,14 @@
-package address.documents;
+package models.documents;
 
-import models.ContragentEntity;
+import models.references.ContragentEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-
 @MappedSuperclass
-public abstract class SuperDocumentEntity extends SuperEntity {
+public abstract class SuperDocumentEntity extends SuperReferenceEntity {
 
     private ContragentEntity refContragentEntityByContragentId;
     private Float sum;
@@ -79,5 +79,23 @@ public abstract class SuperDocumentEntity extends SuperEntity {
 
     public void setSum_vat(Float sum_vat) {
         this.sum_vat = sum_vat;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SuperDocumentEntity that = (SuperDocumentEntity) o;
+        return getId() == that.getId() &&
+                Objects.equals(getName(), that.getName()) &&
+                getDate().equals(getDate());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getId(), getDate());
+    }
+    @Override
+    public String toString() {
+        return super.toString()+" Date= "+ getDate();
     }
 }

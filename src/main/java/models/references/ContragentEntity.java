@@ -1,13 +1,13 @@
-package models;
+package models.references;
 
-import address.documents.invoices.DocInvoiceHeadDocEntity;
+import models.documents.DocInvoiceHeadDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_contragent", schema = "public", catalog = "farm")
-public class ContragentEntity extends SuperEntity {
+public class ContragentEntity extends SuperReferenceEntity {
     private String address;
     private String contact;
     private String phone;

@@ -1,12 +1,13 @@
-package address.documents.capitalize;
+package models.documents;
 
-import address.documents.SuperDocumentEntity;
-import models.StorageEntity;
+import address.documents.capitalize.JournalOperationsStaffDocEntity;
+import models.references.RefKindDocDocEntity;
+import models.references.RefTypeDocDocEntity;
+import models.tables.TableDocsStuffDocEntity;
+import models.references.StorageEntity;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "doc_docs_head", schema = "public", catalog = "farm")

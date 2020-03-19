@@ -1,14 +1,14 @@
-package address.documents.capitalize;
+package models.references;
 
 import models.SuperEntity;
+import models.documents.DocDocsHeadDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_kind_doc", schema = "public", catalog = "farm")
-public class RefKindDocDocEntity extends SuperEntity {
+public class RefKindDocDocEntity extends SuperReferenceEntity {
     private Collection<DocDocsHeadDocEntity> docDocsHeadsById;
   //  private Collection<JournalOperationsLotsDocEntity> journalOperationsLotsById;
 

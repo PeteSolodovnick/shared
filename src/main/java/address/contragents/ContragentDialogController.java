@@ -7,6 +7,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import models.*;
+import models.references.*;
 
 public class ContragentDialogController extends SuperDialogEntityController {
     @FXML
@@ -159,7 +160,7 @@ public class ContragentDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         getFarm().getConfigDialogController().getContragentOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getContragentOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getContragentOverviewController().getEntities());
     }

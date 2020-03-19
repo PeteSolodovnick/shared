@@ -2,6 +2,7 @@ package address.mains;
 
 import javafx.stage.Stage;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public interface ControllerReference {
     void handleNewEntity();
@@ -9,6 +10,6 @@ public interface ControllerReference {
     void handleEditEntity();
     void handleCloseReference();
     void setFarmFX(FarmFX farm);
-    void setFarmFX(FarmFX farm, SuperEntity entity);
+    void setFarmFX(FarmFX farm, SuperReferenceEntity entity);
     void setReferenceStage(Stage referenceStage);
 }

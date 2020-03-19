@@ -4,8 +4,9 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import models.ClassificationEntity;
+import models.references.ClassificationEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class ClassificationDialogController extends SuperDialogEntityController {
     @FXML
@@ -14,7 +15,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
     private ClassificationEntity newParentEntity;
     private String fileClassif;
     public ClassificationDialogController() {}
-    public void setFarmFX(FarmFX farm, SuperEntity selectedClassification) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedClassification) {
         fileClassif = "/classifClassifTable.fxml";
         newClassificationEntity = (ClassificationEntity) selectedClassification;
         if (selectedClassification != null) {
@@ -58,7 +59,7 @@ public class ClassificationDialogController extends SuperDialogEntityController 
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         if (getFarm().getConfigDialogController().getClassificationProductTableController() != null) {
             getFarm().getConfigDialogController().getClassificationProductTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();

@@ -3,7 +3,8 @@ package address.lots;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.SuperEntity;
-import models.TypeLotsEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeLotsEntity;
 
 public class TypeLotsTableController extends SuperTableEntityController {
     public TypeLotsTableController() {}
@@ -32,7 +33,7 @@ public class TypeLotsTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getTypeLotsData().remove(selectedEntity);
         getFarm().getConfigDialogController().getLotsOverviewController().getEntitiesTree().remove(selectedEntity);
         getFarm().getConfigDialogController().getLotsOverviewController().getRootItem().getChildren().clear();

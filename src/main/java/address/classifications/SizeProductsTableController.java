@@ -2,8 +2,9 @@ package address.classifications;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
-import models.SizeEntity;
+import models.references.SizeEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class SizeProductsTableController extends SuperTableEntityController {
     public SizeProductsTableController() {
@@ -35,7 +36,7 @@ public class SizeProductsTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getSizeEntitiesData().remove(selectedEntity);
     }
 }

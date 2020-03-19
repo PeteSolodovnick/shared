@@ -6,6 +6,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.*;
+import models.references.CityEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TerritoryEntity;
+import models.references.TypeCityEntity;
 
 public abstract class SuperCityTableController extends SuperTableEntityController {
     @FXML
@@ -41,7 +45,7 @@ public abstract class SuperCityTableController extends SuperTableEntityControlle
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getCitiesData().remove(selectedEntity);
     }
 }

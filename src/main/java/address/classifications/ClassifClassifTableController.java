@@ -1,6 +1,6 @@
 package address.classifications;
 
-import models.ClassificationEntity;
+import models.references.ClassificationEntity;
 
 public class ClassifClassifTableController extends ClassificationProductTableController {
     @Override

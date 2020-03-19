@@ -4,14 +4,15 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.scene.control.TreeItem;
 import models.SuperEntity;
-import models.TypeContragentEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeContragentEntity;
 
 public class TypeContragentDialogController extends SuperDialogEntityController {
     private TypeContragentEntity newTypeContragent;
     public TypeContragentDialogController(){}
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedTypeContragent) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedTypeContragent) {
         newTypeContragent = (TypeContragentEntity) selectedTypeContragent;
         if (selectedTypeContragent != null) {
             setNew(false);
@@ -38,7 +39,7 @@ public class TypeContragentDialogController extends SuperDialogEntityController 
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         if (getFarm().getConfigDialogController().getTypeContragentTableController() != null) {
             getFarm().getConfigDialogController().getTypeContragentTableController().getEntityTable().refresh();
             getFarm().getConfigDialogController().getContragentOverviewController().getRootItem().getChildren().clear();

@@ -1,11 +1,11 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_price", schema = "public", catalog = "farm")
-public class PriceEntity extends SuperEntity {
+public class PriceEntity extends SuperReferenceEntity {
     private Collection<ContragentEntity> refContragentsById;
 
     @OneToMany(mappedBy = "refPriceByPriceId")

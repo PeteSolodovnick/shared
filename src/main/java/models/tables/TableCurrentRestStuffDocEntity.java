@@ -1,30 +1,19 @@
-package address.documents.capitalize;
+package models.tables;
 
-import models.NomenklEntity;
-import models.StorageEntity;
+import models.SuperEntity;
+import models.references.NomenklEntity;
+import models.references.StorageEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "table_current_rest_stuff", schema = "public", catalog = "farm")
-public class TableCurrentRestStuffDocEntity {
-    private long id;
+public class TableCurrentRestStuffDocEntity extends SuperEntity {
     private Integer qty;
     private Float sum;
     private NomenklEntity nomenklEntityByNomId;
     private StorageEntity storageEntityById;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "qty", nullable = true)
@@ -51,14 +40,14 @@ public class TableCurrentRestStuffDocEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TableCurrentRestStuffDocEntity that = (TableCurrentRestStuffDocEntity) o;
-        return id == that.id &&
+        return getId() == that.getId() &&
                 Objects.equals(qty, that.qty) &&
                 Objects.equals(sum, that.sum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, qty, sum);
+        return Objects.hash(getId(), qty, sum);
     }
 
     @ManyToOne

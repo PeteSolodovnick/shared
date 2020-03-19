@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,21 +45,18 @@ public class InitializerWindow {
     }
 
     public void initLayout(FarmFX farm) {
-        logger.info("in init layout");
             ControllerReference controller = initScene().getController();
-            logger.info(controller.getClass().getName());
             controller.setFarmFX(farm);
             controller.setReferenceStage(stage);
     }
-    public void initLayout(FarmFX farm, SuperEntity selectedEntity, Stage stage) {
+    public void initLayout(FarmFX farm, SuperReferenceEntity selectedEntity, Stage stage) {
         ControllerReference controller = initScene().getController();
         controller.setFarmFX(farm, selectedEntity);
         controller.setReferenceStage(stage);
     }
 
-    public void initLayoutDialog(FarmFX farm, SuperEntity selectedEntity, Stage stage) {
+    public void initLayoutDialog(FarmFX farm, SuperReferenceEntity selectedEntity, Stage stage) {
         ControllerDialog controller = initScene().getController();
-        logger.info(controller.getClass().getName());
         controller.setFarmFX(farm, selectedEntity);
         controller.setDialogStage(stage);
     }

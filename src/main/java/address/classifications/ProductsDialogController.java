@@ -5,6 +5,10 @@ import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import models.*;
+import models.references.ClassificationEntity;
+import models.references.NomenklEntity;
+import models.references.SizeEntity;
+import models.references.SuperReferenceEntity;
 
 public class ProductsDialogController extends SuperDialogEntityController {
     @FXML
@@ -19,7 +23,7 @@ public class ProductsDialogController extends SuperDialogEntityController {
     private String fileClassif;
     public ProductsDialogController() {}
 
-    public void setFarmFX(FarmFX farm, SuperEntity selectedProduct) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedProduct) {
         fileSize = "/size.fxml";
         fileClassif = "/classificationTable.fxml";
         newProductEntity = (NomenklEntity) selectedProduct;
@@ -82,7 +86,7 @@ public class ProductsDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity entity) {
+    public void editEntity(SuperReferenceEntity entity) {
         getFarm().getConfigDialogController().getProductsOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getProductsOverviewController().getEntities());
     }

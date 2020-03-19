@@ -7,8 +7,9 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
-import models.StorageEntity;
+import models.references.StorageEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class StorageOverviewController extends SuperEntityController implements ControllerReference {
     @FXML
@@ -47,7 +48,7 @@ public class StorageOverviewController extends SuperEntityController implements 
         }
     }
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getStorageData().remove(selectedEntity);
     }
     @Override

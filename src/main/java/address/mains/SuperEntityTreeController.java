@@ -8,15 +8,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import models.*;
+import models.references.*;
 import services.EntityService;
 
 import java.util.Optional;
 
 public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
-    private TreeView<SuperEntity> treeView;
-    private TreeItem <SuperEntity> rootItem = new TreeItem("Entity");
-    private ObservableList<SuperEntity> entitiesTree = FXCollections.observableArrayList();
+    private TreeView<SuperReferenceEntity> treeView;
+    private TreeItem <SuperReferenceEntity> rootItem = new TreeItem("Entity");
+    private ObservableList<SuperReferenceEntity> entitiesTree = FXCollections.observableArrayList();
     private String fileTree;
 
     public SuperEntityTreeController() {}
@@ -34,40 +35,40 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     }
 
     protected void initRoot() {
-        for (SuperEntity entity:entitiesTree) {
+        for (SuperReferenceEntity entity:entitiesTree) {
             if (entity != null) {
-                rootItem.getChildren().add(new TreeItem<SuperEntity>(entity));
+                rootItem.getChildren().add(new TreeItem<SuperReferenceEntity>(entity));
             }
         }
     }
 
-    private void showEntities(TreeItem<SuperEntity> entity) {
-        ObservableList<SuperEntity> entities = FXCollections.observableArrayList();
+    private void showEntities(TreeItem<SuperReferenceEntity> entity) {
+        ObservableList<SuperReferenceEntity> entities = FXCollections.observableArrayList();
         if (entity != null) {
             if (entity.getValue().equals(rootItem.getValue())) {
                 getEntityTable().setItems(this.getEntities());
             } else {
-                for (SuperEntity someEntity : this.getEntities()) {
+                for (SuperReferenceEntity someEntity : this.getEntities()) {
                     switch (someEntity.getClass().getName()) {
-                        case "models.CityEntity":
+                        case "models.references.CityEntity":
                             CityEntity cityEntity = (CityEntity) someEntity;
                             if (cityEntity.getRefTerritoryByTerId().getId() == entity.getValue().getId()) {
                                 entities.add(cityEntity);
                             }
                             break;
-                        case "models.ContragentEntity":
+                        case "models.references.ContragentEntity":
                             ContragentEntity contragentEntity = (ContragentEntity) someEntity;
                             if (contragentEntity.getRefTypeContragentByTypeContraId().getId() == entity.getValue().getId()) {
                                 entities.add(contragentEntity);
                             }
                             break;
-                        case "models.NomenklEntity":
+                        case "models.references.NomenklEntity":
                             NomenklEntity productEntity = (NomenklEntity) someEntity;
                             if (productEntity.getRefClassificationByClassificationId().getId() == entity.getValue().getId()) {
                                 entities.add(productEntity);
                             }
                             break;
-                        case "models.LotsEntity":
+                        case "models.references.LotsEntity":
                             LotsEntity lotsEntity = (LotsEntity) someEntity;
                             if (lotsEntity.getRefTypeLotsByTypeLotsId().getId() == entity.getValue().getId()) {
                                 entities.add(lotsEntity);
@@ -83,14 +84,14 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     public void handleDeleteTreeEntity() {
         int selectedId = treeView.getSelectionModel().getSelectedIndex();
         if (selectedId>0) {
-            SuperEntity name = treeView.getTreeItem(selectedId).getValue();
+            SuperReferenceEntity name = treeView.getTreeItem(selectedId).getValue();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete " + rootItem);
             alert.setHeaderText(rootItem.getValue() +" "+ treeView.getTreeItem(selectedId).getValue() + " will be deleted");
             alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                EntityService<SuperEntity, Long> service = new EntityService<>();
+                EntityService<SuperReferenceEntity, Long> service = new EntityService<>();
                 try {
                     service.delete(name);
                     entitiesTree.remove(name);
@@ -116,7 +117,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
             alert.showAndWait();
         }
     }
-    public abstract void deletedFromTreeArray(SuperEntity selectedEntity);
+    public abstract void deletedFromTreeArray(SuperReferenceEntity selectedEntity);
     @FXML
     public void handleNewTreeEntity() {
         getFarm().showEntityDialog(null,getReferenceStage(),fileTree,getTitle());
@@ -124,7 +125,7 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
     @FXML
     public void handleEditTreeEntity() {
         int selectedId = treeView.getSelectionModel().getSelectedIndex();
-        SuperEntity selectedEntity = treeView.getSelectionModel().getSelectedItem().getValue();
+        SuperReferenceEntity selectedEntity = treeView.getSelectionModel().getSelectedItem().getValue();
         if (selectedId > 0) {
             getFarm().showEntityDialog(selectedEntity,getReferenceStage(),fileTree,getTitle());
         } else {
@@ -137,15 +138,15 @@ public abstract class SuperEntityTreeController extends SuperEntityController {
         }
     }
 
-    public TreeView<SuperEntity> getTreeView() {
+    public TreeView<SuperReferenceEntity> getTreeView() {
         return treeView;
     }
 
-    public TreeItem<SuperEntity> getRootItem() {
+    public TreeItem<SuperReferenceEntity> getRootItem() {
         return rootItem;
     }
 
-    public ObservableList<SuperEntity> getEntitiesTree() {
+    public ObservableList<SuperReferenceEntity> getEntitiesTree() {
         return entitiesTree;
     }
 

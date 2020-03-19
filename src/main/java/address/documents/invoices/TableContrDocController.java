@@ -2,7 +2,7 @@ package address.documents.invoices;
 
 import address.contragents.ContragentOverviewController;
 import javafx.fxml.FXML;
-import models.ContragentEntity;
+import models.references.ContragentEntity;
 
 public class TableContrDocController extends ContragentOverviewController {
     private int countClick = 0;

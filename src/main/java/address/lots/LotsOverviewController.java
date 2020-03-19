@@ -7,6 +7,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.*;
+import models.references.KindLotsEntity;
+import models.references.LotsEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeLotsEntity;
 
 public class LotsOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -75,10 +79,10 @@ public class LotsOverviewController extends SuperEntityTreeController implements
         super.handleEditTreeEntity();
     }
     @Override
-    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+    public void deletedFromTreeArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getTypeLotsData().remove(selectedEntity);
     }
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getLotsData().remove(selectedEntity); }
 }

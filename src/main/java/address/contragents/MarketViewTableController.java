@@ -2,8 +2,9 @@ package address.contragents;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
-import models.MarketViewEntity;
+import models.references.MarketViewEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class MarketViewTableController extends SuperTableEntityController {
     public MarketViewTableController() {
@@ -35,7 +36,7 @@ public class MarketViewTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getMarketViewData().remove(selectedEntity);
     }
 }

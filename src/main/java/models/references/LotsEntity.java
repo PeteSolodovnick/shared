@@ -1,10 +1,10 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ref_lots", schema = "public", catalog = "farm")
-public class LotsEntity extends SuperEntity { ;
+public class LotsEntity extends SuperReferenceEntity { ;
     private int startCount;
     private float startWeight;
     private int startAge;

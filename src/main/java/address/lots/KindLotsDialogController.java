@@ -2,14 +2,15 @@ package address.lots;
 
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
-import models.KindLotsEntity;
+import models.references.KindLotsEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class KindLotsDialogController extends SuperDialogEntityController {
     private KindLotsEntity newKindLots;
     public KindLotsDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedKindLot) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedKindLot) {
         newKindLots = (KindLotsEntity) selectedKindLot;
         if (selectedKindLot != null) {
             setNew(false);
@@ -32,7 +33,7 @@ public class KindLotsDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getKindLotsData().size(); i++) {
             if (getFarm().getReferences().getLotsData().get(i).getRefKindLotsByKindLotsId().getId() == newEntity.getId()) {
                 getFarm().getReferences().getLotsData().get(i).getRefKindLotsByKindLotsId().setName(newEntity.getName());

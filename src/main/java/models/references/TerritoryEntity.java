@@ -1,11 +1,11 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "ref_territory", schema = "public", catalog = "farm")
-public class TerritoryEntity extends SuperEntity {
+public class TerritoryEntity extends SuperReferenceEntity {
 
     private Set<CityEntity> refCitiesById;
     public TerritoryEntity(){

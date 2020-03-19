@@ -1,6 +1,6 @@
 package address.localities;
 
-import models.CityEntity;
+import models.references.CityEntity;
 
 public class CityTableContragentController extends SuperCityTableController {
     @Override

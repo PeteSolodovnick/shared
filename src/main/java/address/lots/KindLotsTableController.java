@@ -2,8 +2,9 @@ package address.lots;
 
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
-import models.KindLotsEntity;
+import models.references.KindLotsEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class KindLotsTableController extends SuperTableEntityController {
     public KindLotsTableController() {}
@@ -37,7 +38,7 @@ public class KindLotsTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getKindLotsData().remove(selectedEntity);
     }
 }

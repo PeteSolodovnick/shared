@@ -1,7 +1,8 @@
 package address.documents.capitalize;
 
-import models.NomenklEntity;
-import models.StorageEntity;
+import models.documents.DocDocsHeadDocEntity;
+import models.references.NomenklEntity;
+import models.references.StorageEntity;
 
 import javax.persistence.*;
 import java.sql.Date;

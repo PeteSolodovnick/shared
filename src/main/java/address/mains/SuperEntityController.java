@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import models.*;
+import models.references.SuperReferenceEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import services.EntityService;
@@ -17,22 +18,22 @@ import java.util.Optional;
 public abstract class SuperEntityController implements ControllerReference {
     protected static final Logger logger = LogManager.getLogger();
     @FXML
-    private TableView<SuperEntity> entityTable;
+    private TableView<SuperReferenceEntity> entityTable;
     @FXML
-    private TableColumn<SuperEntity,Long> idEntity;
+    private TableColumn<SuperReferenceEntity,Long> idEntity;
     @FXML
-    private TableColumn<SuperEntity, SuperEntity> nameEntity;
+    private TableColumn<SuperReferenceEntity, SuperReferenceEntity> nameEntity;
     @FXML
-    private ComboBox<SuperEntity> entitiesName;
+    private ComboBox<SuperReferenceEntity> entitiesName;
 
     private Stage referenceStage;
     private FarmFX farm;
-    private SuperEntity selectedEntity;
+    private SuperReferenceEntity selectedEntity;
 
     private String file;
     private String fileInfo;
     private String title;
-    private ObservableList<SuperEntity> entities = FXCollections.observableArrayList();
+    private ObservableList<SuperReferenceEntity> entities = FXCollections.observableArrayList();
 
     public SuperEntityController(){
 
@@ -42,20 +43,20 @@ public abstract class SuperEntityController implements ControllerReference {
     protected void initialize() {
         try {
             idEntity.setCellValueFactory(cellData -> new SimpleObjectProperty<Long>(cellData.getValue().getId()));
-            nameEntity.setCellValueFactory(cellData -> new SimpleObjectProperty<SuperEntity>(cellData.getValue()));
+            nameEntity.setCellValueFactory(cellData -> new SimpleObjectProperty<SuperReferenceEntity>(cellData.getValue()));
             entitiesName.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue)->showEntities(newValue));
-            entitiesName.setConverter(new StringConverter<SuperEntity>(){
+            entitiesName.setConverter(new StringConverter<SuperReferenceEntity>(){
                 @Override
-                public String toString(SuperEntity superEntity) {
+                public String toString(SuperReferenceEntity superEntity) {
                     if (superEntity != null) {
                         return superEntity.toString();
                     }
                     return null;
                 }
                 @Override
-                public SuperEntity fromString(String s) {
+                public SuperReferenceEntity fromString(String s) {
                     if (s != null) {
-                        for (SuperEntity item : entitiesName.getItems()) {
+                        for (SuperReferenceEntity item : entitiesName.getItems()) {
                             if (item.toString().equals(s)) {
                                 return item;
                             }
@@ -78,7 +79,7 @@ public abstract class SuperEntityController implements ControllerReference {
     }
 
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedEntity) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedEntity) {
         this.farm = farm;
         this.selectedEntity = selectedEntity;
         entityTable.setItems(entities);
@@ -91,10 +92,10 @@ public abstract class SuperEntityController implements ControllerReference {
         this.referenceStage = referenceStage;
     }
 
-    private void showEntities(SuperEntity nameEntity) {
-        ObservableList<SuperEntity> entities = FXCollections.observableArrayList();
+    private void showEntities(SuperReferenceEntity nameEntity) {
+        ObservableList<SuperReferenceEntity> entities = FXCollections.observableArrayList();
         if (nameEntity != null) {
-            for (SuperEntity someEntity : this.entities) {
+            for (SuperReferenceEntity someEntity : this.entities) {
                 if (someEntity.getName().equals(nameEntity.getName()))
                     entities.add(someEntity);
             }
@@ -106,14 +107,14 @@ public abstract class SuperEntityController implements ControllerReference {
     public void handleDeleteEntity() {
         int selectedId = entityTable.getSelectionModel().getSelectedIndex();
         if (selectedId>=0) {
-            SuperEntity selectedEntity = entityTable.getItems().get(selectedId);
+            SuperReferenceEntity selectedEntity = entityTable.getItems().get(selectedId);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete " + nameEntity.getText());
             alert.setHeaderText(nameEntity.getText()+" " + entityTable.getItems().get(selectedId).getName() + " will be deleted");
             alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
-                EntityService<SuperEntity, Long> service = new EntityService<>();
+                EntityService<SuperReferenceEntity, Long> service = new EntityService<>();
                 try {
                     service.delete(entityTable.getItems().get(selectedId));
                     entities.remove(selectedEntity);
@@ -138,7 +139,7 @@ public abstract class SuperEntityController implements ControllerReference {
             alert.showAndWait();
         }
     }
-    public abstract void deletedFromArray(SuperEntity selectedEntity);
+    public abstract void deletedFromArray(SuperReferenceEntity selectedEntity);
 
     @FXML
     public void handleNewEntity() {
@@ -152,7 +153,7 @@ public abstract class SuperEntityController implements ControllerReference {
 
     @FXML
     public void handleEditEntity() {
-        SuperEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
+        SuperReferenceEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
         if (selectedEntity != null) {
             farm.showEntityDialog(selectedEntity, referenceStage, file, title);
         } else {
@@ -166,7 +167,7 @@ public abstract class SuperEntityController implements ControllerReference {
     }
     @FXML
     public void handleInfoEntity() {
-        SuperEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
+        SuperReferenceEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
         if (selectedEntity != null) {
             farm.showEntityDialog(selectedEntity, referenceStage, fileInfo, title);
         } else {
@@ -180,19 +181,19 @@ public abstract class SuperEntityController implements ControllerReference {
 
     }
 
-    public SuperEntity getSelectedEntity() {
+    public SuperReferenceEntity getSelectedEntity() {
         return selectedEntity;
     }
 
-    public void setSelectedEntity(SuperEntity selectedEntity) {
+    public void setSelectedEntity(SuperReferenceEntity selectedEntity) {
         this.selectedEntity = selectedEntity;
     }
 
-    public ObservableList<SuperEntity> getEntities() {
+    public ObservableList<SuperReferenceEntity> getEntities() {
         return entities;
     }
 
-    public TableView<SuperEntity> getEntityTable() {
+    public TableView<SuperReferenceEntity> getEntityTable() {
         return entityTable;
     }
 
@@ -220,7 +221,7 @@ public abstract class SuperEntityController implements ControllerReference {
         this.fileInfo = fileInfo;
     }
 
-    public ComboBox<SuperEntity> getEntitiesName() {
+    public ComboBox<SuperReferenceEntity> getEntitiesName() {
         return entitiesName;
     }
 

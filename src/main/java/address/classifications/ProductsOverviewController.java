@@ -8,6 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TreeItem;
 import models.*;
+import models.references.ClassificationEntity;
+import models.references.NomenklEntity;
+import models.references.SizeEntity;
+import models.references.SuperReferenceEntity;
 
 public class ProductsOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -43,22 +47,22 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
 
     @Override
     protected void initRoot() {
-        for (SuperEntity entity : getEntitiesTree()) {
+        for (SuperReferenceEntity entity : getEntitiesTree()) {
             ClassificationEntity classification = (ClassificationEntity) entity;
             if (classification.getRefClassificationByParentId() == null) {
-                TreeItem<SuperEntity> newRoot = new TreeItem(classification);
+                TreeItem<SuperReferenceEntity> newRoot = new TreeItem(classification);
                 initializeClassification(newRoot, classification);
                 getRootItem().getChildren().add(newRoot);
                 getRootItem().setExpanded(true);
             }
         }
     }
-    private void initializeClassification(TreeItem<SuperEntity> root, ClassificationEntity classification) {
+    private void initializeClassification(TreeItem<SuperReferenceEntity> root, ClassificationEntity classification) {
         if (classification != null) {
-            for (SuperEntity entity : getEntitiesTree()) {
+            for (SuperReferenceEntity entity : getEntitiesTree()) {
                 ClassificationEntity classif = (ClassificationEntity) entity;
                 if (classif.getRefClassificationByParentId() != null && classif.getRefClassificationByParentId().getId() == classification.getId()) {
-                    TreeItem<SuperEntity> newRoot = new TreeItem(classif);
+                    TreeItem<SuperReferenceEntity> newRoot = new TreeItem(classif);
                     initializeClassification(newRoot, classif);
                     root.getChildren().add(newRoot);
                     root.setExpanded(true);
@@ -91,12 +95,12 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
     }
 
     @Override
-    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+    public void deletedFromTreeArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getClassificationData().remove(selectedEntity);
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getProductsData().remove(selectedEntity);
     }
 }

@@ -1,11 +1,11 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table(name = "ref_type_city", schema = "public", catalog = "farm")
-public class TypeCityEntity extends SuperEntity {
+public class TypeCityEntity extends SuperReferenceEntity {
     private Set<CityEntity> refCitiesById;
 
     @OneToMany(mappedBy = "refTypeCityByTypeCityId")

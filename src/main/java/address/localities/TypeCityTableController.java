@@ -3,7 +3,8 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.SuperEntity;
-import models.TypeCityEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeCityEntity;
 
 public class TypeCityTableController extends SuperTableEntityController {
     public TypeCityTableController() {}
@@ -36,7 +37,7 @@ public class TypeCityTableController extends SuperTableEntityController {
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getTypeCityData().remove(selectedEntity);
     }
 }

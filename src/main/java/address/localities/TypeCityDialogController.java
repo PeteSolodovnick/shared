@@ -3,13 +3,14 @@ package address.localities;
 import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import models.SuperEntity;
-import models.TypeCityEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TypeCityEntity;
 
 public class TypeCityDialogController extends SuperDialogEntityController {
     private TypeCityEntity newTypeCityEntity;
     public TypeCityDialogController() {}
     @Override
-    public void setFarmFX(FarmFX farm, SuperEntity selectedTypeCity) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedTypeCity) {
         newTypeCityEntity = (TypeCityEntity) selectedTypeCity;
         if (selectedTypeCity != null) {
             setNew(false);
@@ -32,7 +33,7 @@ public class TypeCityDialogController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         for (int i = 0; i < getFarm().getReferences().getTypeCityData().size(); i++) {
             if (getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().getId() == newEntity.getId()) {
                 getFarm().getReferences().getCitiesData().get(i).getRefTypeCityByTypeCityId().setName(newEntity.getName());

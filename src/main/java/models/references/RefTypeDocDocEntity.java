@@ -1,14 +1,14 @@
-package address.documents.capitalize;
+package models.references;
 
 import models.SuperEntity;
+import models.documents.DocDocsHeadDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_type_doc", schema = "public", catalog = "farm")
-public class RefTypeDocDocEntity extends SuperEntity {
+public class RefTypeDocDocEntity extends SuperReferenceEntity {
     private Collection<DocDocsHeadDocEntity> docDocsHeadsById;
 
     @OneToMany(mappedBy = "refTypeDocByTypeDocId")

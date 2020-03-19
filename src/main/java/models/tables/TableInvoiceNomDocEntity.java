@@ -1,31 +1,21 @@
-package address.documents.invoices;
+package models.tables;
 
-import models.NomenklEntity;
+import models.SuperEntity;
+import models.documents.DocInvoiceHeadDocEntity;
+import models.references.NomenklEntity;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "table_invoice_nom", schema = "public", catalog = "farm")
-public class TableInvoiceNomDocEntity {
-    private long id;
+public class TableInvoiceNomDocEntity extends SuperEntity {
     private Integer qty;
     private Float sum;
     private Float vat;
     private Float sum_vat;
     private DocInvoiceHeadDocEntity docInvoiceHeadByInvId;
     private NomenklEntity nomenklEntityByNomId;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "qty", nullable = true)
@@ -65,22 +55,6 @@ public class TableInvoiceNomDocEntity {
         this.sum_vat = sum_vat;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TableInvoiceNomDocEntity that = (TableInvoiceNomDocEntity) o;
-        return id == that.id &&
-                docInvoiceHeadByInvId.getId() == that.docInvoiceHeadByInvId.getId() &&
-                Objects.equals(qty, that.qty) &&
-                Objects.equals(sum, that.sum);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, qty, sum, docInvoiceHeadByInvId.getId());
-    }
-
     @ManyToOne
     @JoinColumn(name = "inv_id", referencedColumnName = "id", nullable = false)
     public DocInvoiceHeadDocEntity getDocInvoiceHeadByInvId() {
@@ -98,6 +72,22 @@ public class TableInvoiceNomDocEntity {
 
     public void setNomenklEntityByNomId(NomenklEntity nomenklEntityByNomId) {
         this.nomenklEntityByNomId = nomenklEntityByNomId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TableInvoiceNomDocEntity that = (TableInvoiceNomDocEntity) o;
+        return getId() == that.getId() &&
+                docInvoiceHeadByInvId.getId() == that.docInvoiceHeadByInvId.getId() &&
+                Objects.equals(qty, that.qty) &&
+                Objects.equals(sum, that.sum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), qty, sum, docInvoiceHeadByInvId.getId());
     }
 
     @Override

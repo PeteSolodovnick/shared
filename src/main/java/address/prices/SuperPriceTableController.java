@@ -3,6 +3,7 @@ package address.prices;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public abstract class SuperPriceTableController extends SuperTableEntityController {
     public SuperPriceTableController() {}
@@ -27,7 +28,7 @@ public abstract class SuperPriceTableController extends SuperTableEntityControll
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getCitiesData().remove(selectedEntity);
     }
 }

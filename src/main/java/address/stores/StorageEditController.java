@@ -4,15 +4,16 @@ import address.mains.FarmFX;
 import address.mains.SuperDialogEntityController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import models.StorageEntity;
+import models.references.StorageEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class StorageEditController extends SuperDialogEntityController {
     @FXML
     private TextField attribute;
     private StorageEntity newStorageEntity;
     public StorageEditController() {}
-    public void setFarmFX(FarmFX farm, SuperEntity selectedStorage) {
+    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedStorage) {
         newStorageEntity = (StorageEntity) selectedStorage;
         if (selectedStorage != null) {
             attribute.setText(String.valueOf(newStorageEntity.getAttribute()));
@@ -61,7 +62,7 @@ public class StorageEditController extends SuperDialogEntityController {
     }
 
     @Override
-    public void editEntity(SuperEntity newEntity) {
+    public void editEntity(SuperReferenceEntity newEntity) {
         getFarm().getConfigDialogController().getStorageOverviewController().getEntityTable().refresh();
         getFarm().getConfigDialogController().getStorageOverviewController().getEntitiesName().setItems(getFarm().getConfigDialogController().getStorageOverviewController().getEntities());
     }

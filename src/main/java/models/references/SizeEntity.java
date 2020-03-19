@@ -1,11 +1,11 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_size", schema = "public", catalog = "farm")
-public class SizeEntity extends SuperEntity {
+public class SizeEntity extends SuperReferenceEntity {
     private Collection<NomenklEntity> refNomenklsById;
 
     @OneToMany(mappedBy = "refSizeBySizeId")

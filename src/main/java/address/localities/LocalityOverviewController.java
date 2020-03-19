@@ -7,6 +7,10 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import models.*;
+import models.references.CityEntity;
+import models.references.SuperReferenceEntity;
+import models.references.TerritoryEntity;
+import models.references.TypeCityEntity;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -68,12 +72,12 @@ public class LocalityOverviewController extends SuperEntityTreeController implem
     }
 
     @Override
-    public void deletedFromTreeArray(SuperEntity selectedEntity) {
+    public void deletedFromTreeArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getTerritoryData().remove(selectedEntity);
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getCitiesData().remove(selectedEntity);
     }
 }

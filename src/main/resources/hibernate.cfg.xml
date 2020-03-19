@@ -17,31 +17,31 @@
 
     <!--  <mapping class="forDeleting.RefTerritoryEntityOldTemp"/>
       <mapping class="forDeleting.RefCityEntityOldTemp"/>-->
-    <mapping class="models.CityEntity"/>
-    <mapping class="models.TerritoryEntity"/>
-      <mapping class="models.TypeCityEntity"/>
-      <mapping class="models.ContragentEntity"/>
-      <mapping class="models.MarketViewEntity"/>
-      <mapping class="models.PriceEntity"/>
-      <mapping class="models.TypeContragentEntity"/>
-      <mapping class="models.ClassificationEntity"/>
-      <mapping class="models.NomenklEntity"/>
-      <mapping class="models.SizeEntity"/>
-      <mapping class="models.KindContragentEntity"/>
-    <mapping class="models.KindLotsEntity"/>
-    <mapping class="models.LotsEntity"/>
-    <mapping class="models.TypeLotsEntity"/>
-      <mapping class="models.StorageEntity"/>
-      <mapping class="address.documents.invoices.DocInvoiceHeadDocEntity"/>
-      <mapping class="address.documents.invoices.TableInvoiceNomDocEntity"/>
-    <mapping class="address.documents.invoices.DocStatusInvoiceDocEntity"/>
-      <mapping class="address.documents.capitalize.DocDocsHeadDocEntity"/>
+    <mapping class="models.references.CityEntity"/>
+    <mapping class="models.references.TerritoryEntity"/>
+      <mapping class="models.references.TypeCityEntity"/>
+      <mapping class="models.references.ContragentEntity"/>
+      <mapping class="models.references.MarketViewEntity"/>
+      <mapping class="models.references.PriceEntity"/>
+      <mapping class="models.references.TypeContragentEntity"/>
+      <mapping class="models.references.ClassificationEntity"/>
+      <mapping class="models.references.NomenklEntity"/>
+      <mapping class="models.references.SizeEntity"/>
+      <mapping class="models.references.KindContragentEntity"/>
+    <mapping class="models.references.KindLotsEntity"/>
+    <mapping class="models.references.LotsEntity"/>
+    <mapping class="models.references.TypeLotsEntity"/>
+      <mapping class="models.references.StorageEntity"/>
+      <mapping class="models.documents.DocInvoiceHeadDocEntity"/>
+      <mapping class="models.tables.TableInvoiceNomDocEntity"/>
+    <mapping class="models.references.RefStatusInvoiceDocEntity"/>
+      <mapping class="models.documents.DocDocsHeadDocEntity"/>
       <mapping class="address.documents.capitalize.JournalOperationsStaffDocEntity"/>
-      <mapping class="address.documents.capitalize.RefKindDocDocEntity"/>
-      <mapping class="address.documents.capitalize.RefTypeDocDocEntity"/>
+      <mapping class="models.references.RefKindDocDocEntity"/>
+      <mapping class="models.references.RefTypeDocDocEntity"/>
       <mapping class="address.documents.capitalize.RefTypeOperationsDocEntity"/>
-      <mapping class="address.documents.capitalize.TableCurrentRestStuffDocEntity"/>
-      <mapping class="address.documents.capitalize.TableDocsStuffDocEntity"/>
+      <mapping class="models.tables.TableCurrentRestStuffDocEntity"/>
+      <mapping class="models.tables.TableDocsStuffDocEntity"/>
 
 
       <!-- DB schema will be updated if needed -->

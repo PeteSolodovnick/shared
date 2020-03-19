@@ -6,6 +6,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.File;
@@ -50,7 +51,7 @@ public class FarmFX extends Application {
             referenceWindow.initLayout(this);
             logger.info("show and wait");
     }
-    public void showEntityOverview(SuperEntity selectedEntity, Stage ownerStage, String file, String title) {
+    public void showEntityOverview(SuperReferenceEntity selectedEntity, Stage ownerStage, String file, String title) {
         Stage referenceStage = new Stage();
         referenceStage.setTitle("View entities");
         referenceStage.initModality(Modality.WINDOW_MODAL);
@@ -58,7 +59,7 @@ public class FarmFX extends Application {
         InitializerWindow referenceWindow = new InitializerWindow(file, referenceStage, new AnchorPane());
         referenceWindow.initLayout(this, selectedEntity, referenceStage);
     }
-    public void showEntityDialog(SuperEntity selectedEntity, Stage ownerStage, String file, String title) {
+    public void showEntityDialog(SuperReferenceEntity selectedEntity, Stage ownerStage, String file, String title) {
         Stage dialogStage = new Stage();
         dialogStage.setTitle(title);
         dialogStage.initModality(Modality.WINDOW_MODAL);

@@ -1,6 +1,6 @@
 package address.prices;
 
-import models.PriceEntity;
+import models.references.PriceEntity;
 
 public class PriceTableContragentController extends SuperPriceTableController{
     @Override

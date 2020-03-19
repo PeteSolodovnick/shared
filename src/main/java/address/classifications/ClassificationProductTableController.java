@@ -5,8 +5,9 @@ import address.mains.SuperTableEntityController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import models.ClassificationEntity;
+import models.references.ClassificationEntity;
 import models.SuperEntity;
+import models.references.SuperReferenceEntity;
 
 public class ClassificationProductTableController extends SuperTableEntityController {
     @FXML
@@ -49,7 +50,7 @@ public class ClassificationProductTableController extends SuperTableEntityContro
     }
 
     @Override
-    public void deletedFromArray(SuperEntity selectedEntity) {
+    public void deletedFromArray(SuperReferenceEntity selectedEntity) {
         getFarm().getReferences().getClassificationData().remove(selectedEntity);
         getFarm().getConfigDialogController().getProductsOverviewController().getEntitiesTree().remove(selectedEntity);
         getFarm().getConfigDialogController().getProductsOverviewController().getRootItem().getChildren().clear();

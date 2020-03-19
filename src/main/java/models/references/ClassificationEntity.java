@@ -1,11 +1,11 @@
-package models;
+package models.references;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_classification", schema = "public", catalog = "farm")
-public class ClassificationEntity extends SuperEntity {
+public class ClassificationEntity extends SuperReferenceEntity {
     private ClassificationEntity refClassificationByParentId;
     private Collection<ClassificationEntity> refClassificationsById;
     private Collection<NomenklEntity> refNomenklsById;

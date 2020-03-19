@@ -1,16 +1,15 @@
-package models;
+package models.references;
 
 import address.documents.capitalize.JournalOperationsStaffDocEntity;
-import address.documents.capitalize.TableDocsStuffDocEntity;
-import address.documents.invoices.DocInvoiceHeadDocEntity;
-import address.documents.invoices.TableInvoiceNomDocEntity;
+import models.tables.TableDocsStuffDocEntity;
+import models.tables.TableInvoiceNomDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name = "ref_nomenkl", schema = "public", catalog = "farm")
-public class NomenklEntity extends SuperEntity {
+public class NomenklEntity extends SuperReferenceEntity {
     private ClassificationEntity refClassificationByClassificationId;
     private SizeEntity refSizeBySizeId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomDocEntities;
