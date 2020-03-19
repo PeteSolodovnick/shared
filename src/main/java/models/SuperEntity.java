@@ -23,7 +23,7 @@ public abstract class SuperEntity {
         this.id = id;
     }
 
-    @Basic
+
     @Column(name = "name", nullable = true, length = 50)
     public String getName() {
         return name;

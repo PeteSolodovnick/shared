@@ -2,6 +2,7 @@ package address.mains;
 
 import address.documents.capitalize.RefKindDocDocEntity;
 import address.documents.capitalize.RefTypeDocDocEntity;
+import address.documents.capitalize.TableCurrentRestStuffDocEntity;
 import address.documents.invoices.DocInvoiceHeadDocEntity;
 import address.documents.invoices.DocStatusInvoiceDocEntity;
 import address.documents.invoices.TableInvoiceNomDocEntity;
@@ -30,6 +31,15 @@ public class CollectionsEntities {
     private ObservableList<TableInvoiceNomDocEntity> tableInvoiceData = FXCollections.observableArrayList();
     private ObservableList<RefTypeDocDocEntity> typeDocDocEntities = FXCollections.observableArrayList();
     private ObservableList<RefKindDocDocEntity> kindDocDocEntities = FXCollections.observableArrayList();
+    private ObservableList<TableCurrentRestStuffDocEntity> currentRestStuffData = FXCollections.observableArrayList();
+
+    public ObservableList<TableCurrentRestStuffDocEntity> getCurrentRestStuffData() {
+        return currentRestStuffData;
+    }
+
+    public void setCurrentRestStuffData(ObservableList<TableCurrentRestStuffDocEntity> currentRestStuffData) {
+        this.currentRestStuffData = currentRestStuffData;
+    }
 
     public ObservableList<RefTypeDocDocEntity> getTypeDocDocEntities() {
         return typeDocDocEntities;

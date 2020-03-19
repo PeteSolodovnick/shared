@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
     private SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
@@ -52,6 +54,20 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
         try(final Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             session.update(entity);
+           // session.saveOrUpdate(entity);
+            session.getTransaction().commit();
+            session.close();
+
+
+        }
+    }
+    @Override
+    public void updateOrSave(List<Entity> entities) {
+        try(final Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            for (Entity entity: entities) {
+                session.saveOrUpdate(entity);
+            }
             session.getTransaction().commit();
             session.close();
         }
@@ -75,6 +91,7 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             cr.select(root);
             Query query = session.createQuery(cr);
             List<Entity> results = query.getResultList();
+            session.close();
             return results;
         }
     }
@@ -83,6 +100,7 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
         try (final Session session = sessionFactory.openSession()) {
             Criteria cr = session.createCriteria(entity.getClass());
             cr.add(Restrictions.between("date", startDate, finishDate));
+            session.close();
             return cr.list();
         }
     }
@@ -95,7 +113,27 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             cr.select(root).where(cb.equal(root.get("docInvoiceHeadByInvId"), key));
             Query query = session.createQuery(cr);
             List<Entity> results = query.getResultList();
+            session.close();
             return results;
+        }
+    }
+    @Override
+    public Entity readRow(Entity entity, Map<String, Key> keys) {
+        try (final Session session = sessionFactory.openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
+            Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
+            Predicate[] predicates = new Predicate[keys.size()];
+            int i = 0;
+            for (String field: keys.keySet()) {
+                predicates[i] = cb.equal(root.get(field), keys.get(field));
+                i++;
+            }
+            cr.select(root).where(predicates);
+            Query query = session.createQuery(cr);
+            entity = (Entity) query.getSingleResult();
+            session.close();
+            return  entity != null ? entity : null;
         }
     }
 }

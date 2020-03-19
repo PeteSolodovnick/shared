@@ -168,6 +168,7 @@ public class InvoiceDialogController extends SuperDialogEntityController {
     @Override
     public void handleOkDialog() {
         super.handleOkDialog();
+        getFarm().getConfigDialogController().getInvoiceHeadOverviewController().getEntityTable().refresh();
     }
     @FXML
     public void handleAddProduct() {
@@ -179,6 +180,10 @@ public class InvoiceDialogController extends SuperDialogEntityController {
         TableInvoiceNomDocEntity selectedEntity = entityTable.getSelectionModel().getSelectedItem();
         if (selectedEntity != null) {
             forDelete.add(selectedEntity);
+            newInvoice.setSum(newInvoice.getSum()-selectedEntity.getSum());
+            sumInv.setText(String.valueOf(newInvoice.getSum()));
+            sumVatInv.setText(String.valueOf(newInvoice.getSum()*(1 + FarmFX.vat/100)));
+            sum_vat.setText(String.valueOf(newInvoice.getSum()*FarmFX.vat/100));
             getFarm().getReferences().getTableInvoiceData().remove(selectedEntity);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

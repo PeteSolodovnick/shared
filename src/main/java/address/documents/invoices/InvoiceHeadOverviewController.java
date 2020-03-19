@@ -77,6 +77,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     @Override
     public void handleEditEntity() {
         DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
+        System.out.println(selectedInvoice.getTableInvoiceNomById().size());
         if (selectedInvoice.getEditable()) {
             getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
             setTitle("Edit Invoice...");

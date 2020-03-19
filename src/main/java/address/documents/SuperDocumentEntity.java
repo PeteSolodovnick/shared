@@ -28,7 +28,7 @@ public abstract class SuperDocumentEntity extends SuperEntity {
     }
 
     @Basic
-    @Column(name = "editable", nullable = true)
+    @Column(name = "editable", nullable = true, updatable = true)
     public Boolean getEditable() {
         return editable;
     }

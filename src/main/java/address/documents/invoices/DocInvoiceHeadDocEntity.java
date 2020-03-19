@@ -4,11 +4,12 @@ import address.documents.SuperDocumentEntity;
 import models.ContragentEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
 @Table(name = "doc_invoice_head", schema = "public", catalog = "farm")
-public class DocInvoiceHeadDocEntity extends SuperDocumentEntity {
+public class DocInvoiceHeadDocEntity extends SuperDocumentEntity implements Serializable {
     private DocStatusInvoiceDocEntity refStatusInvoiceByStatusId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomById;
 

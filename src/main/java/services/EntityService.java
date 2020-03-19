@@ -2,6 +2,7 @@ package services;
 
 import dao.implDAO.EntityDaoImpl;
 import java.util.List;
+import java.util.Map;
 
 public class EntityService<Entity, Key> {
     private EntityDaoImpl<Entity, Key> entity = new EntityDaoImpl();
@@ -15,6 +16,9 @@ public class EntityService<Entity, Key> {
     }
     public void update(Entity entity) {
         this.entity.update(entity);
+    }
+    public void updateOrSave(List<Entity> entity) {
+        this.entity.updateOrSave(entity);
     }
     public void delete(Entity entity) {
         this.entity.delete(entity);
@@ -30,5 +34,8 @@ public class EntityService<Entity, Key> {
     }
     public List<Entity> getSomeRows (Entity entity, Key key) {
         return this.entity.getSomeRows(entity, key);
+    }
+    public Entity readRow(Entity entity, Map<String, Key> keys) {
+        return this.entity.readRow(entity, keys);
     }
 }
