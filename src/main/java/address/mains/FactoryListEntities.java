@@ -16,9 +16,7 @@ public class FactoryListEntities<T extends SuperEntity> {
     public ObservableList<T> getListEntities() {
         ObservableList<T> entityList = FXCollections.observableArrayList();
         EntityService<T, Long> service = new EntityService<>();
-        for (T entity: service.getAllRows(t)) {
-            entityList.add(entity);
-        }
+        entityList.addAll(service.getAllRows(t));
         return entityList;
     }
     public ObservableList<T> getDateListEntities() {

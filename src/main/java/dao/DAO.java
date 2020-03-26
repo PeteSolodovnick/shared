@@ -10,6 +10,7 @@ public interface DAO<Entity, Key> {
     Entity readRow(Entity entity, Map<String, Key> keys);
     void update(Entity entity);
     void updateOrSave(List<Entity> entities);
+    void updateOrSave(Entity entities);
     void delete(Entity entity);
     List<Entity> getAllRows(Entity entity);
     List<Entity> getDateRows(Entity entity, Key startDate, Key finDate);

@@ -1,6 +1,7 @@
 package address.localities;
 
 import address.mains.ControllerReference;
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -11,6 +12,11 @@ import models.references.CityEntity;
 import models.references.SuperReferenceEntity;
 import models.references.TerritoryEntity;
 import models.references.TypeCityEntity;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import services.EntityService;
+
+import java.util.List;
 
 public class LocalityOverviewController extends SuperEntityTreeController implements ControllerReference {
     @FXML
@@ -34,9 +40,16 @@ public class LocalityOverviewController extends SuperEntityTreeController implem
     public void setFarmFX(FarmFX farm) {
         setFile("/cityEditDialog.fxml");
         setFileTree("/territoryEditDialog.fxml");
+        initArrays(farm);
         getEntitiesTree().addAll(farm.getReferences().getTerritoryData());
         getEntities().addAll(farm.getReferences().getCitiesData());
         super.setFarmFX(farm);
+    }
+    private void initArrays(FarmFX farm) {
+        if (farm.getReferences().getCitiesData().size() == 0) {
+            farm.getReferences().setCitiesData(new FactoryListEntities<>(new CityEntity()).getListEntities());
+            farm.getReferences().setTerritoryData(new FactoryListEntities<>(new TerritoryEntity()).getListEntities());
+        }
     }
     @Override
     public void handleNewEntity() {

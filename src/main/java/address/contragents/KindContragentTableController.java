@@ -1,5 +1,6 @@
 package address.contragents;
 
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.references.KindContragentEntity;
@@ -12,8 +13,12 @@ public class KindContragentTableController extends SuperTableEntityController {
     @Override
     public void setFarmFX(FarmFX farm) {
         setFile("/kindContraEditDialog.fxml");
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getKindContragentData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm) {
+        farm.getReferences().setKindContragentData(new FactoryListEntities<>(new KindContragentEntity()).getListEntities());
     }
 
     @Override

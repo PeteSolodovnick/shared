@@ -42,20 +42,4 @@ public abstract class SuperTableEntity extends SuperEntity {
     public void setDocDocsHeadByDocId(DocDocsHeadDocEntity docDocsHeadByDocId) {
         this.docDocsHeadByDocId = docDocsHeadByDocId;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        SuperTableEntity that = (SuperTableEntity) o;
-        return getId() == that.getId() &&
-                docDocsHeadByDocId.equals(docDocsHeadByDocId) &&
-                Objects.equals(qty, that.qty) &&
-                Objects.equals(sum, that.sum);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), docDocsHeadByDocId, qty, sum);
-    }
 }

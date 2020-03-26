@@ -1,5 +1,6 @@
 package address.classifications;
 
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.references.SizeEntity;
@@ -12,8 +13,12 @@ public class SizeProductsTableController extends SuperTableEntityController {
     @Override
     public void setFarmFX(FarmFX farm) {
         setFile("/sizeEditDialog.fxml");
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getSizeEntitiesData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm) {
+        farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new SizeEntity()).getListEntities());
     }
     @Override
     public void setTextEdit() {

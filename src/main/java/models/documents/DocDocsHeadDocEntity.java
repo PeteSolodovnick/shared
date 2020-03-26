@@ -8,6 +8,7 @@ import models.references.StorageEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "doc_docs_head", schema = "public", catalog = "farm")
@@ -16,8 +17,17 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
     private RefKindDocDocEntity refKindDocByKindDocId;
     private StorageEntity storageInById;
     private StorageEntity storageOutById;
-    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffsById;
-    private Collection<TableDocsStuffDocEntity> tableDocsStuffsById;
+    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffsById = new HashSet<>();
+    private Collection<TableDocsStuffDocEntity> tableDocsStuffsById = new HashSet<>();
+
+    public void addProduct(TableDocsStuffDocEntity product) {
+        product.setDocDocsHeadByDocId(this);
+        this.tableDocsStuffsById.add(product);
+    }
+    public void addJournal(JournalOperationsStaffDocEntity journal) {
+        journal.setDocDocsHeadByDocId(this);
+        this.journalOperationsStaffsById.add(journal);
+    }
 
     @ManyToOne
     @JoinColumn(name = "storage_in_id", referencedColumnName = "id")
@@ -57,7 +67,7 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
         this.refKindDocByKindDocId = refKindDocByKindDocId;
     }
 
-    @OneToMany(mappedBy = "docDocsHeadByDocId")
+    @OneToMany(mappedBy = "docDocsHeadByDocId", fetch = FetchType.LAZY)
     public Collection<JournalOperationsStaffDocEntity> getJournalOperationsStaffsById() {
         return journalOperationsStaffsById;
     }
@@ -66,7 +76,7 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
         this.journalOperationsStaffsById = journalOperationsStaffsById;
     }
 
-    @OneToMany(mappedBy = "docDocsHeadByDocId", fetch = FetchType.LAZY, orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "docDocsHeadByDocId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Collection<TableDocsStuffDocEntity> getTableDocsStuffsById() {
         return tableDocsStuffsById;
     }

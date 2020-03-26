@@ -1,7 +1,6 @@
 package dao.implDAO;
 
 import dao.DAO;
-import javafx.fxml.FXML;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,13 +10,16 @@ import utils.HibernateSessionFactoryUtil;
 import javax.persistence.Entity;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
-import javax.transaction.Transactional;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
     private SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
+
+    public SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
 
     @Override
     public void exit() {
@@ -33,6 +35,16 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             session.close();
         }
     }
+    @Override
+    public void updateOrSave(Entity entity) {
+        try (final Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.saveOrUpdate(entity);
+            session.getTransaction().commit();
+            session.close();
+        }
+    }
+
 
     @Override
     public Entity read(Entity entity, Key id) {
@@ -57,8 +69,6 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
            // session.saveOrUpdate(entity);
             session.getTransaction().commit();
             session.close();
-
-
         }
     }
     @Override
@@ -85,12 +95,16 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
     @Override
     public List<Entity> getAllRows(Entity entity) {
         try (final Session session = sessionFactory.openSession()) {
-            CriteriaBuilder cb = session.getCriteriaBuilder();
+            session.beginTransaction();
+       /*     CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
             Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
             cr.select(root);
             Query query = session.createQuery(cr);
+            List<Entity> results = query.getResultList();*/
+            Query query = session.createQuery("FROM "+ entity.getClass().getName());
             List<Entity> results = query.getResultList();
+            session.getTransaction().commit();
             session.close();
             return results;
         }
@@ -98,10 +112,18 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
     @Override
     public List<Entity> getDateRows(Entity entity, Key startDate, Key finishDate) {
         try (final Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Criteria cr = session.createCriteria(entity.getClass());
             cr.add(Restrictions.between("date", startDate, finishDate));
+            List<Entity> results = cr.list();
+            session.getTransaction().commit();
             session.close();
-            return cr.list();
+            return results;
+      /*    CriteriaBuilder cb = session.getCriteriaBuilder();
+          CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
+          Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
+          cr.select(root).where(cb.between(root.get("date"), startDate, finishDate));
+          session.close();*/
         }
     }
     @Override

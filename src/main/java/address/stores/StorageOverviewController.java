@@ -1,6 +1,7 @@
 package address.stores;
 
 import address.mains.ControllerReference;
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -23,8 +24,12 @@ public class StorageOverviewController extends SuperEntityController implements 
     @Override
     public void setFarmFX(FarmFX farm) {
         setFile("/storageEditDialog.fxml");
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getStorageData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm){
+        farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntities());
     }
     @Override
     public void handleNewEntity() {

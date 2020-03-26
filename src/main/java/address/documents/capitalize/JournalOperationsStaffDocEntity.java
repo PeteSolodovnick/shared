@@ -1,5 +1,6 @@
 package address.documents.capitalize;
 
+import models.SuperEntity;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.NomenklEntity;
 import models.references.StorageEntity;
@@ -10,28 +11,14 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "journal_operations_staff", schema = "public", catalog = "farm")
-public class JournalOperationsStaffDocEntity {
-    private long id;
+public class JournalOperationsStaffDocEntity extends SuperEntity {
     private Date recTime;
     private Integer qty;
     private Float sum;
-    private Integer restQty;
-    private Float restSum;
     private DocDocsHeadDocEntity docDocsHeadByDocId;
     private RefTypeOperationsDocEntity refTypeOperationsByTypeOperationsId;
     private StorageEntity storageEntityById;
     private NomenklEntity nomenklEntityById;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     @Basic
     @Column(name = "rec_time", nullable = true)
@@ -63,45 +50,23 @@ public class JournalOperationsStaffDocEntity {
         this.sum = sum;
     }
 
-    @Basic
-    @Column(name = "restQty", nullable = true)
-    public Integer getRestQty() {
-        return restQty;
-    }
-
-    public void setRestQty(Integer restQty) {
-        this.restQty = restQty;
-    }
-
-    @Basic
-    @Column(name = "restSum", nullable = true, precision = 0)
-    public Float getRestSum() {
-        return restSum;
-    }
-
-    public void setRestSum(Float restSum) {
-        this.restSum = restSum;
-    }
-
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         JournalOperationsStaffDocEntity that = (JournalOperationsStaffDocEntity) o;
-        return id == that.id &&
+        return getId() == that.getId() &&
                 docDocsHeadByDocId.getId() == that.docDocsHeadByDocId.getId() &&
                 Objects.equals(recTime, that.recTime) &&
                 Objects.equals(qty, that.qty) &&
                 Objects.equals(sum, that.sum) &&
-                Objects.equals(refTypeOperationsByTypeOperationsId.getId(), that.refTypeOperationsByTypeOperationsId.getId()) &&
-                Objects.equals(restQty, that.restQty) &&
-                Objects.equals(restSum, that.restSum);
+                Objects.equals(refTypeOperationsByTypeOperationsId.getId(), that.refTypeOperationsByTypeOperationsId.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, docDocsHeadByDocId.getId(), recTime, qty, sum, refTypeOperationsByTypeOperationsId.getId(), restQty, restSum);
-    }
+        return Objects.hash(getId(), docDocsHeadByDocId.getId(), recTime, qty, sum, refTypeOperationsByTypeOperationsId.getId());
+    } */
 
     @ManyToOne
     @JoinColumn(name = "doc_id", referencedColumnName = "id", nullable = false)

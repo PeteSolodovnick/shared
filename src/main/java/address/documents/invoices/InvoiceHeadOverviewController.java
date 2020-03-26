@@ -58,8 +58,12 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         setFile("/invoice_table.fxml");
         setFileInfo("/invoice_table_info.fxml");
     //    getEntities().clear();
+        initArrays(farm);
         getEntities().addAll(farm.getReferences().getInvoiceData());
         super.setFarmFX(farm);
+    }
+    private void initArrays(FarmFX farm) {
+        farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
     }
     public void showButton() {
         DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
@@ -76,7 +80,6 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     @Override
     public void handleEditEntity() {
         DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        System.out.println(selectedInvoice.getTableInvoiceNomById().size());
         if (selectedInvoice.getEditable()) {
             getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
             setTitle("Edit Invoice...");
@@ -142,7 +145,6 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     }
     @FXML
     public void handleFilter() {
-        getFarm().getReferences().getInvoiceData().clear();
         getEntities().clear();
         getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue()));
         getEntities().addAll(getFarm().getReferences().getInvoiceData());

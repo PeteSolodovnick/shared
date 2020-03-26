@@ -97,14 +97,13 @@ public class InvoiceDialogController extends SuperDialogEntityController {
     }
  @Override
     public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedInvoice) {
-        logger.info("in set table invoice");
         fileContragent = "/contragentViewer.fxml";
         fileNomenkl = "/nomenklViewer.fxml";
+        initArrays(farm);
         vat.setText(String.valueOf(FarmFX.vat));
         statusInvoiceDocEntity = farm.getReferences().getStatusInvoiceData().get(1);
         newInvoice = (DocInvoiceHeadDocEntity) selectedInvoice;
         if (selectedInvoice != null) {
-            farm.getReferences().getTableInvoiceData().clear();
             farm.getReferences().setTableInvoiceData(new FactoryListEntities<TableInvoiceNomDocEntity>(new TableInvoiceNomDocEntity()).getSomeListEntities(newInvoice.getId()));
             entityTable.setItems(farm.getReferences().getTableInvoiceData());
             date.setValue(newInvoice.getDate());
@@ -120,6 +119,9 @@ public class InvoiceDialogController extends SuperDialogEntityController {
             setNew(true);
         }
         super.setFarmFX(farm, newInvoice);
+    }
+    private void initArrays(FarmFX farm) {
+        farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new RefStatusInvoiceDocEntity()).getListEntities());
     }
     @Override
     protected boolean isInputValid() {

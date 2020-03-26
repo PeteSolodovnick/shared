@@ -1,5 +1,7 @@
 package address.stores;
 
+import address.documents.capitalize.JournalOperationsStaffDocEntity;
+import address.documents.capitalize.RefTypeOperationsDocEntity;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.RefTypeDocDocEntity;
 import models.references.SuperReferenceEntity;
@@ -13,32 +15,41 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import models.references.StorageEntity;
 import models.SuperEntity;
+import org.hibernate.Session;
 import services.EntityService;
 
 import javax.persistence.NoResultException;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class StorageCapitalizeController extends StorageOverviewController {
     private DocInvoiceHeadDocEntity selectedInvoice;
     @Override
     public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedInvoice) {
         this.selectedInvoice = (DocInvoiceHeadDocEntity) selectedInvoice;
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getStorageData());
         super.setFarmFX(farm, selectedInvoice);
     }
+    private void initArray(FarmFX farm){
+        ArrayList<Long> keys = new ArrayList();
+        keys.add(1L);
+        keys.add(2L);
+        farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntitiesbyId(keys));
+        keys.remove(1);
+        farm.getReferences().setTypeDocDocEntities(new FactoryListEntities<>(new RefTypeDocDocEntity()).getListEntitiesbyId(keys));
+    }
     @FXML
     public void handleOkCapitalize() {
-        List<TableDocsStuffDocEntity> tableDocEntities = new ArrayList<>();
-        getFarm().getReferences().getTableInvoiceData().clear();
-        getFarm().getReferences().setTableInvoiceData(new FactoryListEntities<TableInvoiceNomDocEntity>(new TableInvoiceNomDocEntity()).getSomeListEntities(selectedInvoice.getId()));
         StorageEntity selectedStore = (StorageEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        EntityService<SuperReferenceEntity, Long> service = new EntityService<>();
-        EntityService<TableCurrentRestStuffDocEntity, Long> serviceRest = new EntityService<>();
+        EntityService<SuperEntity, Long> service = new EntityService<>();
         if (selectedStore != null) {
+            Session session = service.getEntity().getSessionFactory().openSession();
+            selectedInvoice = session.load(DocInvoiceHeadDocEntity.class, selectedInvoice.getId());
+            selectedStore = session.load(StorageEntity.class, selectedStore.getId());
+            RefTypeOperationsDocEntity typeOperation = session.load(RefTypeOperationsDocEntity.class, 1L);
+            session.beginTransaction();
             DocDocsHeadDocEntity docEntity = new DocDocsHeadDocEntity();
             docEntity.setRefContragentEntityByContragentId(selectedInvoice.getRefContragentEntityByContragentId());
             docEntity.setStorageInById(selectedStore);
@@ -48,48 +59,57 @@ public class StorageCapitalizeController extends StorageOverviewController {
             docEntity.setSum(selectedInvoice.getSum());
             docEntity.setVat(selectedInvoice.getVat());
             docEntity.setSum_vat(selectedInvoice.getSum_vat());
-            getFarm().getReferences().getTypeDocDocEntities().clear();
-            getFarm().getReferences().getKindDocDocEntities().clear();
-            docEntity.setRefTypeDocByTypeDocId((RefTypeDocDocEntity) service.read(new RefTypeDocDocEntity(), 1L));
+           // getFarm().getReferences().getTypeDocDocEntities().clear();
+           // getFarm().getReferences().getKindDocDocEntities().clear();
+            docEntity.setRefTypeDocByTypeDocId(getFarm().getReferences().getTypeDocDocEntities().get(0));
             docEntity.setRefKindDocByKindDocId(null);
             docEntity.setEditable(false);
-            for (TableInvoiceNomDocEntity tableInv: getFarm().getReferences().getTableInvoiceData()) {
-                Map<String, Long> keys = new HashMap<>();
+            for (TableInvoiceNomDocEntity tableInv: selectedInvoice.getTableInvoiceNomById()) {
                 TableDocsStuffDocEntity tableDoc = new TableDocsStuffDocEntity();
-                tableDoc.setDocDocsHeadByDocId(docEntity);
                 tableDoc.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
                 tableDoc.setQty(tableInv.getQty());
                 tableDoc.setSum(tableInv.getSum());
-                tableDocEntities.add(tableDoc);
+                docEntity.addProduct(tableDoc);
+                Map<String, Long> keys = new HashMap<>();
                 keys.put("nomenklEntityByNomId", tableInv.getNomenklEntityByNomId().getId());
                 keys.put("storageEntityById", selectedStore.getId());
                 TableCurrentRestStuffDocEntity currentRestStuffDocEntity = new TableCurrentRestStuffDocEntity();
                 try {
-                    currentRestStuffDocEntity = serviceRest.readRow(new TableCurrentRestStuffDocEntity(), keys);
+                    currentRestStuffDocEntity = (TableCurrentRestStuffDocEntity) service.readRow(new TableCurrentRestStuffDocEntity(), keys);
                     if (currentRestStuffDocEntity != null) {
                         currentRestStuffDocEntity.setQty(currentRestStuffDocEntity.getQty() + tableInv.getQty());
                         currentRestStuffDocEntity.setSum(currentRestStuffDocEntity.getSum() + tableInv.getSum());
-                        serviceRest.update(currentRestStuffDocEntity);
                     } else {
                         currentRestStuffDocEntity.setStorageEntityById(selectedStore);
                         currentRestStuffDocEntity.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
                         currentRestStuffDocEntity.setQty(tableInv.getQty());
                         currentRestStuffDocEntity.setSum(tableInv.getSum());
-                        serviceRest.create(currentRestStuffDocEntity);
                     }
                 } catch (NoResultException e) {
                     currentRestStuffDocEntity.setStorageEntityById(selectedStore);
                     currentRestStuffDocEntity.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
                     currentRestStuffDocEntity.setQty(tableInv.getQty());
                     currentRestStuffDocEntity.setSum(tableInv.getSum());
-                    serviceRest.create(currentRestStuffDocEntity);
                 }
+                JournalOperationsStaffDocEntity journal = new JournalOperationsStaffDocEntity();
+                docEntity.addJournal(journal);
+                selectedStore.addJournal(journal);
+                tableInv.getNomenklEntityByNomId().addJournal(journal);
+                typeOperation.addJournal(journal);
+                journal.setRecTime(new Date(System.currentTimeMillis()));
+                journal.setQty(currentRestStuffDocEntity.getQty());
+                journal.setSum(currentRestStuffDocEntity.getSum());
+              //  service.updateOrSave(docEntity);
+             //   service.updateOrSave(currentRestStuffDocEntity);
+             //   service.create(journal);
+                session.saveOrUpdate(docEntity);
+                session.saveOrUpdate(currentRestStuffDocEntity);
+                session.save(journal);
             }
-            docEntity.setTableDocsStuffsById(tableDocEntities);
-            service.create(docEntity);
             selectedInvoice.setEditable(false);
-            selectedInvoice.setTableInvoiceNomById(null);
-            service.update(selectedInvoice);
+          //  session.update(selectedInvoice);
+            session.getTransaction().commit();
+            session.close();
             getFarm().getConfigDialogController().getInvoiceHeadOverviewController().getEntityTable().refresh();
             getReferenceStage().close();
         } else {

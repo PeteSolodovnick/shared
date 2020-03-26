@@ -94,8 +94,4 @@ public abstract class SuperDocumentEntity extends SuperReferenceEntity {
     public int hashCode() {
         return Objects.hash(getName(), getId(), getDate());
     }
-    @Override
-    public String toString() {
-        return super.toString()+" Date= "+ getDate();
-    }
 }

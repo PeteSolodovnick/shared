@@ -8,7 +8,7 @@ import java.util.Set;
 public class TypeCityEntity extends SuperReferenceEntity {
     private Set<CityEntity> refCitiesById;
 
-    @OneToMany(mappedBy = "refTypeCityByTypeCityId")
+    @OneToMany(mappedBy = "refTypeCityByTypeCityId",fetch = FetchType.LAZY)
     public Set<CityEntity> getRefCitiesById() {
         return refCitiesById;
     }

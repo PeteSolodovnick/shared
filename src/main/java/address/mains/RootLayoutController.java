@@ -28,17 +28,17 @@ public class RootLayoutController {
 
     @FXML
     private void handleLocality() {
-        farm.getReferences().getTerritoryData().clear();
+     /*   farm.getReferences().getTerritoryData().clear();
         farm.getReferences().getCitiesData().clear();
         farm.getReferences().getTypeCityData().clear();
         farm.getReferences().setCitiesData(new FactoryListEntities<>(new CityEntity()).getListEntities());
         farm.getReferences().setTerritoryData(new FactoryListEntities<>(new TerritoryEntity()).getListEntities());
-        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new TypeCityEntity()).getListEntities());
+        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new TypeCityEntity()).getListEntities());*/
         farm.showEntityOverview(localityReference);
     }
     @FXML
     private void handleContragent() {
-        farm.getReferences().getContragentData().clear();
+    /*    farm.getReferences().getContragentData().clear();
         farm.getReferences().getTypeContragentData().clear();
         farm.getReferences().getMarketViewData().clear();
         farm.getReferences().getPriceData().clear();
@@ -51,39 +51,38 @@ public class RootLayoutController {
         farm.getReferences().setPriceData(new FactoryListEntities<>(new PriceEntity()).getListEntities());
         farm.getReferences().setKindContragentData(new FactoryListEntities<>(new KindContragentEntity()).getListEntities());
         farm.getReferences().setCitiesData(new FactoryListEntities<>(new CityEntity()).getListEntities());
-        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new TypeCityEntity()).getListEntities());
+        farm.getReferences().setTypeCityData(new FactoryListEntities<>(new TypeCityEntity()).getListEntities()); */
         farm.showEntityOverview(contragentReference);
     }
     @FXML
     private void handleProduct() {
-         farm.getReferences().getProductsData().clear();
+       /*  farm.getReferences().getProductsData().clear();
          farm.getReferences().getSizeEntitiesData().clear();
          farm.getReferences().getClassificationData().clear();
          farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
          farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new SizeEntity()).getListEntities());
-         farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());
+         farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());*/
          farm.showEntityOverview(productReference);
     }
     @FXML
     private void handleLots() {
-         farm.getReferences().getLotsData().clear();
+      /*   farm.getReferences().getLotsData().clear();
          farm.getReferences().getKindLotsData().clear();
          farm.getReferences().getTypeLotsData().clear();
          farm.getReferences().setLotsData(new FactoryListEntities<>(new LotsEntity()).getListEntities());
          farm.getReferences().setKindLotsData(new FactoryListEntities<>(new KindLotsEntity()).getListEntities());
-         farm.getReferences().setTypeLotsData(new FactoryListEntities<>(new TypeLotsEntity()).getListEntities());
+         farm.getReferences().setTypeLotsData(new FactoryListEntities<>(new TypeLotsEntity()).getListEntities());*/
          farm.showEntityOverview(lotsReference);
     }
     @FXML
     private void handleStorage() {
-         farm.getReferences().getStorageData().clear();
-         farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntities());
+        /* farm.getReferences().getStorageData().clear();
+         farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntities());*/
          farm.showEntityOverview(storageReference);
     }
     @FXML
     private void handleInvoices() {
-
-         farm.getReferences().getContragentData().clear();
+   /*      farm.getReferences().getContragentData().clear();
          farm.getReferences().getStatusInvoiceData().clear();
          farm.getReferences().getInvoiceData().clear();
          farm.getReferences().getProductsData().clear();
@@ -101,9 +100,9 @@ public class RootLayoutController {
         farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
         farm.getReferences().setSizeEntitiesData(new FactoryListEntities<>(new SizeEntity()).getListEntities());
         farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());
-         farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
+  ---       farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
          farm.getReferences().setContragentData(new FactoryListEntities<>(new ContragentEntity()).getListEntities());
-         farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new RefStatusInvoiceDocEntity()).getListEntities());
+  ---       farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new RefStatusInvoiceDocEntity()).getListEntities());*/
          farm.showEntityOverview(invoiceDoc);
     }
 

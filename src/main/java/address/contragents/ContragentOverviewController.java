@@ -1,6 +1,7 @@
 package address.contragents;
 
 import address.mains.ControllerReference;
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -41,9 +42,14 @@ public class ContragentOverviewController extends SuperEntityTreeController impl
         setFile("/contragentEditDialog.fxml");
         setFileTree("/typeContraEditDialog.fxml");
         setFileInfo("/contragentInfoDialog.fxml");
+        initArrays(farm);
         getEntitiesTree().addAll(farm.getReferences().getTypeContragentData());
         getEntities().addAll(farm.getReferences().getContragentData());
         super.setFarmFX(farm);
+    }
+    private void initArrays(FarmFX farm) {
+        farm.getReferences().setContragentData(new FactoryListEntities<>(new ContragentEntity()).getListEntities());
+        farm.getReferences().setTypeContragentData(new FactoryListEntities<>(new TypeContragentEntity()).getListEntities());
     }
     @Override
     public void handleNewEntity() {

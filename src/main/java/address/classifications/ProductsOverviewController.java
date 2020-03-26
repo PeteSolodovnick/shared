@@ -1,6 +1,7 @@
 package address.classifications;
 
 import address.mains.ControllerReference;
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -34,9 +35,14 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
     public void setFarmFX(FarmFX farm) {
         setFile("/productEditDialog.fxml");
         setFileTree("/classificationEditDialog.fxml");
+        initArray(farm);
         getEntitiesTree().addAll(farm.getReferences().getClassificationData());
         getEntities().addAll(farm.getReferences().getProductsData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm) {
+        farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());
+        farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
     }
     @Override
     public void handleNewEntity() {

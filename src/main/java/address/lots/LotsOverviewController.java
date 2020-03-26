@@ -1,6 +1,7 @@
 package address.lots;
 
 import address.mains.ControllerReference;
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityTreeController;
 import javafx.beans.property.SimpleObjectProperty;
@@ -42,9 +43,14 @@ public class LotsOverviewController extends SuperEntityTreeController implements
     public void setFarmFX(FarmFX farm) {
         setFile("/lotsEditDialog.fxml");
         setFileTree("/lot'sTypeEditDialog.fxml");
+        initArray(farm);
         getEntitiesTree().addAll(farm.getReferences().getTypeLotsData());
         getEntities().addAll(farm.getReferences().getLotsData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm){
+        farm.getReferences().setTypeLotsData(new FactoryListEntities<>(new TypeLotsEntity()).getListEntities());
+        farm.getReferences().setLotsData(new FactoryListEntities<>(new LotsEntity()).getListEntities());
     }
     @Override
     public void handleNewEntity() {

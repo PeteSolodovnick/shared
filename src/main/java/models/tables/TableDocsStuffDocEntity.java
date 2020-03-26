@@ -1,5 +1,6 @@
 package models.tables;
 
+import models.documents.DocDocsHeadDocEntity;
 import models.references.NomenklEntity;
 import javax.persistence.*;
 
@@ -9,6 +10,7 @@ public class TableDocsStuffDocEntity extends SuperTableEntity {
     private Integer qty;
     private Float sum;
     private NomenklEntity nomenklEntityByNomId;
+    private DocDocsHeadDocEntity docDocsHeadByDocId;
 
     @Basic
     @Column(name = "qty", nullable = true)
@@ -38,5 +40,16 @@ public class TableDocsStuffDocEntity extends SuperTableEntity {
 
     public void setNomenklEntityByNomId(NomenklEntity nomenklEntityByNomId) {
         this.nomenklEntityByNomId = nomenklEntityByNomId;
+    }
+    @ManyToOne
+    @JoinColumn(name="doc_id", referencedColumnName = "id", nullable = false)
+    @Override
+    public DocDocsHeadDocEntity getDocDocsHeadByDocId() {
+        return docDocsHeadByDocId;
+    }
+
+    @Override
+    public void setDocDocsHeadByDocId(DocDocsHeadDocEntity docDocsHeadByDocId) {
+        this.docDocsHeadByDocId = docDocsHeadByDocId;
     }
 }

@@ -1,5 +1,6 @@
 package address.lots;
 
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.references.KindLotsEntity;
@@ -13,10 +14,13 @@ public class KindLotsTableController extends SuperTableEntityController {
     public void setFarmFX(FarmFX farm) {
         logger.info("in set kind lots table");
         setFile("/lot'sKindEditDialog.fxml");
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getKindLotsData());
         super.setFarmFX(farm);
     }
-
+    private void initArray(FarmFX farm){
+        farm.getReferences().setKindLotsData(new FactoryListEntities<>(new KindLotsEntity()).getListEntities());
+    }
     @Override
     public void setTextEdit() {
         getFarm().getConfigDialogController().getLotsDialogController().setNewKindLot((KindLotsEntity) getEntityTable().getSelectionModel().getSelectedItem());

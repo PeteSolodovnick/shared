@@ -6,6 +6,7 @@ import models.tables.TableInvoiceNomDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "ref_nomenkl", schema = "public", catalog = "farm")
@@ -14,7 +15,12 @@ public class NomenklEntity extends SuperReferenceEntity {
     private SizeEntity refSizeBySizeId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomDocEntities;
     private Collection<TableDocsStuffDocEntity> tableDocsStuffDocEntities;
-    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities;
+    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities = new HashSet<>();
+
+    public void addJournal(JournalOperationsStaffDocEntity journal) {
+        journal.setNomenklEntityById(this);
+        journalOperationsStaffDocEntities.add(journal);
+    }
 
     @OneToMany(mappedBy = "nomenklEntityById")
     public Collection<JournalOperationsStaffDocEntity> getJournalOperationsStaffDocEntities() {

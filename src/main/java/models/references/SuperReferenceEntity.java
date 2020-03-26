@@ -35,6 +35,6 @@ public abstract class SuperReferenceEntity extends SuperEntity {
     }
     @Override
     public String toString() {
-        return super.toString()+" name= "+ getName();
+        return getName();
     }
 }

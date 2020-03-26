@@ -1,5 +1,6 @@
 package address.contragents;
 
+import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperTableEntityController;
 import models.references.MarketViewEntity;
@@ -12,8 +13,12 @@ public class MarketViewTableController extends SuperTableEntityController {
     @Override
     public void setFarmFX(FarmFX farm) {
         setFile("/marketViewEditDialog.fxml");
+        initArray(farm);
         getEntities().addAll(farm.getReferences().getMarketViewData());
         super.setFarmFX(farm);
+    }
+    private void initArray(FarmFX farm) {
+        farm.getReferences().setMarketViewData(new FactoryListEntities<>(new MarketViewEntity()).getListEntities());
     }
     @Override
     public void setTextEdit() {

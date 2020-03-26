@@ -15,7 +15,7 @@ public class CityEntity extends SuperReferenceEntity {
     }
 
     @ManyToOne
-    @JoinColumns(@JoinColumn(name = "ter_id", referencedColumnName = "id", nullable = false))
+    @JoinColumn(name = "ter_id", referencedColumnName = "id", nullable = false)
     public TerritoryEntity getRefTerritoryByTerId() {
         return refTerritoryByTerId;
     }
@@ -34,7 +34,7 @@ public class CityEntity extends SuperReferenceEntity {
         this.refTypeCityByTypeCityId = refTypeCityByTypeCityId;
     }
 
-    @OneToMany(mappedBy = "refCityByCityId")
+    @OneToMany(mappedBy = "refCityByCityId", fetch = FetchType.LAZY)
     public Collection<ContragentEntity> getRefContragentsById() {
         return refContragentsById;
     }

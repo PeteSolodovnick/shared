@@ -6,6 +6,7 @@ import models.tables.TableCurrentRestStuffDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "ref_storage", schema = "public", catalog = "farm")
@@ -14,8 +15,13 @@ public class StorageEntity extends SuperReferenceEntity {
     private Boolean deleted;
     private Collection<DocDocsHeadDocEntity> docHeadInEntityById;
     private Collection<DocDocsHeadDocEntity> docHeadOutEntityById;
-    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities;
+    private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities = new HashSet<>();
     private Collection<TableCurrentRestStuffDocEntity> currentRestStuffById;
+
+    public void addJournal(JournalOperationsStaffDocEntity journal) {
+        journal.setStorageEntityById(this);
+        journalOperationsStaffDocEntities.add(journal);
+    }
 
     @OneToMany(mappedBy = "storageEntityById")
     public Collection<TableCurrentRestStuffDocEntity> getCurrentRestStuffById() {
