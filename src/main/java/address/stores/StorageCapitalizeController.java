@@ -2,6 +2,7 @@ package address.stores;
 
 import address.documents.capitalize.JournalOperationsStaffDocEntity;
 import address.documents.capitalize.RefTypeOperationsDocEntity;
+import address.mains.AutoCompleteComboBoxListener;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.RefTypeDocDocEntity;
 import models.references.SuperReferenceEntity;
@@ -25,12 +26,15 @@ import java.util.*;
 
 public class StorageCapitalizeController extends StorageOverviewController {
     private DocInvoiceHeadDocEntity selectedInvoice;
+    private FarmFX farm;
     @Override
-    public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedInvoice) {
-        this.selectedInvoice = (DocInvoiceHeadDocEntity) selectedInvoice;
+    public void setFarmFX(FarmFX farm) {
+        this.farm = farm;
+        selectedInvoice = farm.getConfigDialogController().getInvoiceHeadOverviewController().getSelectedInvoice();
         initArray(farm);
         getEntities().addAll(farm.getReferences().getStorageData());
-        super.setFarmFX(farm, selectedInvoice);
+        getEntityTable().setItems(getEntities());
+        getEntitiesName().setItems(getEntities());
     }
     private void initArray(FarmFX farm){
         ArrayList<Long> keys = new ArrayList();
@@ -39,6 +43,7 @@ public class StorageCapitalizeController extends StorageOverviewController {
         farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntitiesbyId(keys));
         keys.remove(1);
         farm.getReferences().setTypeDocDocEntities(new FactoryListEntities<>(new RefTypeDocDocEntity()).getListEntitiesbyId(keys));
+
     }
     @FXML
     public void handleOkCapitalize() {
@@ -59,9 +64,7 @@ public class StorageCapitalizeController extends StorageOverviewController {
             docEntity.setSum(selectedInvoice.getSum());
             docEntity.setVat(selectedInvoice.getVat());
             docEntity.setSum_vat(selectedInvoice.getSum_vat());
-           // getFarm().getReferences().getTypeDocDocEntities().clear();
-           // getFarm().getReferences().getKindDocDocEntities().clear();
-            docEntity.setRefTypeDocByTypeDocId(getFarm().getReferences().getTypeDocDocEntities().get(0));
+            docEntity.setRefTypeDocByTypeDocId(farm.getReferences().getTypeDocDocEntities().get(0));
             docEntity.setRefKindDocByKindDocId(null);
             docEntity.setEditable(false);
             for (TableInvoiceNomDocEntity tableInv: selectedInvoice.getTableInvoiceNomById()) {
@@ -99,18 +102,18 @@ public class StorageCapitalizeController extends StorageOverviewController {
                 journal.setRecTime(new Date(System.currentTimeMillis()));
                 journal.setQty(currentRestStuffDocEntity.getQty());
                 journal.setSum(currentRestStuffDocEntity.getSum());
-              //  service.updateOrSave(docEntity);
-             //   service.updateOrSave(currentRestStuffDocEntity);
-             //   service.create(journal);
                 session.saveOrUpdate(docEntity);
                 session.saveOrUpdate(currentRestStuffDocEntity);
                 session.save(journal);
             }
             selectedInvoice.setEditable(false);
-          //  session.update(selectedInvoice);
             session.getTransaction().commit();
             session.close();
-            getFarm().getConfigDialogController().getInvoiceHeadOverviewController().getEntityTable().refresh();
+            for (int i = 0; i <farm.getReferences().getInvoiceData().size(); i++) {
+                if (farm.getReferences().getInvoiceData().get(i).getId() == selectedInvoice.getId())
+                    farm.getReferences().getInvoiceData().get(i).setEditable(false);
+            }
+            farm.getConfigDialogController().getInvoiceHeadOverviewController().getEntityTable().refresh();
             getReferenceStage().close();
         } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);

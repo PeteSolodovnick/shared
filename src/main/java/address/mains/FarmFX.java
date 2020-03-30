@@ -34,7 +34,6 @@ public class FarmFX extends Application {
         configDialogController = new ConfigDialogController();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("FarmApp");
-        logger.info("application was run");
         initRootLayout();
     }
 
@@ -49,7 +48,6 @@ public class FarmFX extends Application {
             referenceStage.initOwner(primaryStage);
             InitializerWindow referenceWindow = new InitializerWindow(file, referenceStage, new AnchorPane());
             referenceWindow.initLayout(this);
-            logger.info("show and wait");
     }
     public void showEntityOverview(SuperReferenceEntity selectedEntity, Stage ownerStage, String file, String title) {
         Stage referenceStage = new Stage();

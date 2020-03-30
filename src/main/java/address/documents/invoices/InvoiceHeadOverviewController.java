@@ -39,6 +39,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     private Button capitalize;
 
     private String fileStore;
+    private DocInvoiceHeadDocEntity selectedInvoice;
 
     public InvoiceHeadOverviewController() {}
 
@@ -66,8 +67,8 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
     }
     public void showButton() {
-        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        if (!selectedInvoice.getEditable()) {
+        setSelectedInvoice((DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        if (!getSelectedInvoice().getEditable()) {
             capitalize.setDisable(true);
         } else capitalize.setDisable(false);
     }
@@ -79,8 +80,8 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     }
     @Override
     public void handleEditEntity() {
-        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        if (selectedInvoice.getEditable()) {
+        setSelectedInvoice((DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        if (getSelectedInvoice().getEditable()) {
             getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
             setTitle("Edit Invoice...");
             super.handleEditEntity();
@@ -95,8 +96,8 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     }
     @Override
     public void handleDeleteEntity() {
-        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        if (selectedInvoice.getEditable()) {
+       setSelectedInvoice((DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        if (getSelectedInvoice().getEditable()) {
             super.handleDeleteEntity();
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -116,12 +117,12 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     }
     public void handleCapitalize() {
         fileStore = "/storageViewer.fxml";
-        DocInvoiceHeadDocEntity selectedInvoice = (DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem();
-        if (selectedInvoice != null) {
-            if (selectedInvoice.getEditable()) {
+        setSelectedInvoice((DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem());
+        if (getSelectedInvoice() != null) {
+            if (getSelectedInvoice().getEditable()) {
                 getFarm().getConfigDialogController().setInvoiceHeadOverviewController(this);
                 setTitle("Choose store for capitalize...");
-                getFarm().showEntityOverview(selectedInvoice, getReferenceStage(), fileStore, "Choose store");
+                getFarm().showEntityOverview(fileStore);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.initOwner(getFarm().getPrimaryStage());
@@ -148,5 +149,13 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         getEntities().clear();
         getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue()));
         getEntities().addAll(getFarm().getReferences().getInvoiceData());
+    }
+
+    public DocInvoiceHeadDocEntity getSelectedInvoice() {
+        return selectedInvoice;
+    }
+
+    public void setSelectedInvoice(DocInvoiceHeadDocEntity selectedInvoice) {
+        this.selectedInvoice = selectedInvoice;
     }
 }
