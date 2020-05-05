@@ -36,10 +36,10 @@
       <mapping class="models.tables.TableInvoiceNomDocEntity"/>
     <mapping class="models.references.RefStatusInvoiceDocEntity"/>
       <mapping class="models.documents.DocDocsHeadDocEntity"/>
-      <mapping class="address.documents.capitalize.JournalOperationsStaffDocEntity"/>
+      <mapping class="models.tables.JournalOperationsStaffDocEntity"/>
       <mapping class="models.references.RefKindDocDocEntity"/>
       <mapping class="models.references.RefTypeDocDocEntity"/>
-      <mapping class="address.documents.capitalize.RefTypeOperationsDocEntity"/>
+      <mapping class="models.references.RefTypeOperationsDocEntity"/>
       <mapping class="models.tables.TableCurrentRestStuffDocEntity"/>
       <mapping class="models.tables.TableDocsStuffDocEntity"/>
 

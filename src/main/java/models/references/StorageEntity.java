@@ -1,7 +1,7 @@
 package models.references;
 
 import models.documents.DocDocsHeadDocEntity;
-import address.documents.capitalize.JournalOperationsStaffDocEntity;
+import models.tables.JournalOperationsStaffDocEntity;
 import models.tables.TableCurrentRestStuffDocEntity;
 
 import javax.persistence.*;

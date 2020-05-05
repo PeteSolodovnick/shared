@@ -46,7 +46,7 @@ public abstract class SuperDocumentEntity extends SuperReferenceEntity {
         this.date = date;
     }
     @ManyToOne
-    @JoinColumn(name = "contra_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "contra_id", referencedColumnName = "id", nullable = true)
     public ContragentEntity getRefContragentEntityByContragentId() {
         return refContragentEntityByContragentId;
     }

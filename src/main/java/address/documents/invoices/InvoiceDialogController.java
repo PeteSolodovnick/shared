@@ -84,7 +84,12 @@ public class InvoiceDialogController extends SuperDialogEntityController {
                 }
             }
         }));
-        qty.setOnEditCommit(t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setQty(t.getNewValue()));
+        qty.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableInvoiceNomDocEntity, Integer>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<TableInvoiceNomDocEntity, Integer> t) {
+                t.getTableView().getItems().get(t.getTablePosition().getRow()).setQty(t.getNewValue());
+            }
+        });
         sum.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getSum()));
         sum.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter(){
             @Override
@@ -119,7 +124,7 @@ public class InvoiceDialogController extends SuperDialogEntityController {
         statusInvoiceDocEntity = farm.getReferences().getStatusInvoiceData().get(1);
         newInvoice = (DocInvoiceHeadDocEntity) selectedInvoice;
         if (selectedInvoice != null) {
-            farm.getReferences().setTableInvoiceData(new FactoryListEntities<TableInvoiceNomDocEntity>(new TableInvoiceNomDocEntity()).getSomeListEntities(newInvoice.getId()));
+            farm.getReferences().setTableInvoiceData(new FactoryListEntities<TableInvoiceNomDocEntity>(new TableInvoiceNomDocEntity()).getSomeListEntities(newInvoice.getId(),"docInvoiceHeadByInvId"));
             entityTable.setItems(farm.getReferences().getTableInvoiceData());
             date.setValue(newInvoice.getDate());
             contragent.setText(newInvoice.getRefContragentEntityByContragentId().getName());

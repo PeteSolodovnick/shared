@@ -1,16 +1,9 @@
 package address.mains;
 
-import models.references.RefKindDocDocEntity;
-import models.references.RefTypeDocDocEntity;
-import models.documents.DocInvoiceHeadDocEntity;
-import models.references.RefStatusInvoiceDocEntity;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import models.references.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
 
 public class RootLayoutController {
     private static final Logger logger = LogManager.getLogger();
@@ -20,6 +13,7 @@ public class RootLayoutController {
     private final String lotsReference = "/lots.fxml";
     private final String storageReference = "/storage.fxml";
     private final String invoiceDoc = "/invoice.fxml";
+    private final String movingDoc = "/moving.fxml";
     private FarmFX farm;
 
      public void setFarm(FarmFX farm) {
@@ -104,6 +98,10 @@ public class RootLayoutController {
          farm.getReferences().setContragentData(new FactoryListEntities<>(new ContragentEntity()).getListEntities());
   ---       farm.getReferences().setStatusInvoiceData(new FactoryListEntities<>(new RefStatusInvoiceDocEntity()).getListEntities());*/
          farm.showEntityOverview(invoiceDoc);
+    }
+    @FXML
+    private void handleMoving() {
+         farm.showEntityOverview(movingDoc);
     }
 
     @FXML

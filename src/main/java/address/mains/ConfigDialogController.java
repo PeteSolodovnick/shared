@@ -4,6 +4,8 @@ import address.classifications.*;
 import address.contragents.*;
 import address.documents.invoices.InvoiceDialogController;
 import address.documents.invoices.InvoiceHeadOverviewController;
+import address.documents.movies.MovieDialogController;
+import address.documents.movies.MovieOverviewController;
 import address.localities.*;
 import address.lots.KindLotsTableController;
 import address.lots.LotsDialogController;
@@ -38,6 +40,24 @@ public class ConfigDialogController {
     private InvoiceHeadOverviewController invoiceHeadOverviewController;
     private InvoiceDialogController invoiceDialogController;
     private StorageCapitalizeController storageCapitalizeController;
+    private MovieDialogController movieDialogController;
+    private MovieOverviewController movieOverviewController;
+
+    public MovieOverviewController getMovieOverviewController() {
+        return movieOverviewController;
+    }
+
+    public void setMovieOverviewController(MovieOverviewController movieOverviewController) {
+        this.movieOverviewController = movieOverviewController;
+    }
+
+    public MovieDialogController getMovieDialogController() {
+        return movieDialogController;
+    }
+
+    public void setMovieDialogController(MovieDialogController movieDialogController) {
+        this.movieDialogController = movieDialogController;
+    }
 
     public StorageCapitalizeController getStorageCapitalizeController() {
         return storageCapitalizeController;

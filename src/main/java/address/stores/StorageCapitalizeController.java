@@ -1,11 +1,9 @@
 package address.stores;
 
-import address.documents.capitalize.JournalOperationsStaffDocEntity;
-import address.documents.capitalize.RefTypeOperationsDocEntity;
-import address.mains.AutoCompleteComboBoxListener;
+import models.tables.JournalOperationsStaffDocEntity;
+import models.references.RefTypeOperationsDocEntity;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.RefTypeDocDocEntity;
-import models.references.SuperReferenceEntity;
 import models.tables.TableCurrentRestStuffDocEntity;
 import models.tables.TableDocsStuffDocEntity;
 import models.documents.DocInvoiceHeadDocEntity;

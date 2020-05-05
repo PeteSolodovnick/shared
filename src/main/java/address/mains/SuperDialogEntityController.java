@@ -14,7 +14,6 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
     protected static final Logger logger = LogManager.getLogger();
     @FXML
     private TextField name;
-
     private FarmFX farm;
     private SuperReferenceEntity newEntity;
     private Stage dialogStage;
@@ -125,5 +124,13 @@ public abstract class SuperDialogEntityController implements ControllerDialog {
 
     public Stage getDialogStage() {
         return dialogStage;
+    }
+
+    public TextField getName() {
+        return name;
+    }
+
+    public void setName(TextField name) {
+        this.name = name;
     }
 }

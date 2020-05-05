@@ -3,6 +3,7 @@ package services;
 import dao.implDAO.EntityDaoImpl;
 import org.hibernate.SessionFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,11 @@ public class EntityService<Entity, Key> {
     public List<Entity> getAllRows(Entity entity) {
         return this.entity.getAllRows(entity);
     }
-    public List<Entity> getDateRows (Entity entity, Key startDate, Key endDate) {
+    public List<Entity> getDateRows (Entity entity, LocalDate startDate, LocalDate endDate) {
         return this.entity.getDateRows(entity, startDate, endDate);
     }
-    public List<Entity> getSomeRows (Entity entity, Key key) {
-        return this.entity.getSomeRows(entity, key);
+    public List<Entity> getSomeRows (Entity entity, Key key, String field) {
+        return this.entity.getSomeRows(entity, key, field);
     }
     public Entity readRow(Entity entity, Map<String, Key> keys) {
         return this.entity.readRow(entity, keys);
@@ -46,5 +47,8 @@ public class EntityService<Entity, Key> {
 
     public EntityDaoImpl<Entity, Key> getEntity() {
         return entity;
+    }
+    public List<Entity> getSomeTypeDateDocs(Entity entity, Key typeId, LocalDate startDate, LocalDate endDate) {
+        return this.entity.getSomeTypeDateDocs(entity,typeId,startDate,endDate);
     }
 }

@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,6 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             session.close();
         }
     }
-
-
     @Override
     public Entity read(Entity entity, Key id) {
         try(final Session session = sessionFactory.openSession()) {
@@ -96,12 +95,6 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
     public List<Entity> getAllRows(Entity entity) {
         try (final Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-       /*     CriteriaBuilder cb = session.getCriteriaBuilder();
-            CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
-            Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
-            cr.select(root);
-            Query query = session.createQuery(cr);
-            List<Entity> results = query.getResultList();*/
             Query query = session.createQuery("FROM "+ entity.getClass().getName());
             List<Entity> results = query.getResultList();
             session.getTransaction().commit();
@@ -110,8 +103,8 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
         }
     }
     @Override
-    public List<Entity> getDateRows(Entity entity, Key startDate, Key finishDate) {
-        try (final Session session = sessionFactory.openSession()) {
+    public List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finishDate) {
+     /*   try (final Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Criteria cr = session.createCriteria(entity.getClass());
             cr.add(Restrictions.between("date", startDate, finishDate));
@@ -119,20 +112,38 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
             session.getTransaction().commit();
             session.close();
             return results;
-      /*    CriteriaBuilder cb = session.getCriteriaBuilder();
-          CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
-          Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
-          cr.select(root).where(cb.between(root.get("date"), startDate, finishDate));
-          session.close();*/
-        }
-    }
-    @Override
-    public List<Entity> getSomeRows(Entity entity, Key key) {
+        }*/
         try (final Session session = sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
             Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
-            cr.select(root).where(cb.equal(root.get("docInvoiceHeadByInvId"), key));
+            cr.select(root).where(cb.between(root.get("date"), startDate, finishDate));
+            Query query = session.createQuery(cr);
+            List<Entity> results = query.getResultList();
+            session.close();
+            return results;
+        }
+    }
+    @Override
+    public List<Entity> getSomeTypeDateDocs(Entity entity, Key typeId, LocalDate startDate, LocalDate finishDate) {
+        try (final Session session = sessionFactory.openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
+            Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
+            cr.select(root).where(cb.and(cb.equal(root.get("refTypeDocByTypeDocId"), typeId),cb.between(root.get("date"), startDate, finishDate)));
+            Query query = session.createQuery(cr);
+            List<Entity> results = query.getResultList();
+            session.close();
+            return results;
+        }
+    }
+    @Override
+    public List<Entity> getSomeRows(Entity entity, Key key, String field) {
+        try (final Session session = sessionFactory.openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
+            Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
+            cr.select(root).where(cb.equal(root.get(field), key));
             Query query = session.createQuery(cr);
             List<Entity> results = query.getResultList();
             session.close();

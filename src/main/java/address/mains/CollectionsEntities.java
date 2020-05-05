@@ -1,10 +1,12 @@
 package address.mains;
 
+import models.documents.DocDocsHeadDocEntity;
 import models.references.RefKindDocDocEntity;
 import models.references.RefTypeDocDocEntity;
 import models.tables.TableCurrentRestStuffDocEntity;
 import models.documents.DocInvoiceHeadDocEntity;
 import models.references.RefStatusInvoiceDocEntity;
+import models.tables.TableDocsStuffDocEntity;
 import models.tables.TableInvoiceNomDocEntity;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,24 @@ public class CollectionsEntities {
     private ObservableList<RefTypeDocDocEntity> typeDocDocEntities = FXCollections.observableArrayList();
     private ObservableList<RefKindDocDocEntity> kindDocDocEntities = FXCollections.observableArrayList();
     private ObservableList<TableCurrentRestStuffDocEntity> currentRestStuffData = FXCollections.observableArrayList();
+    private ObservableList<DocDocsHeadDocEntity> docsData = FXCollections.observableArrayList();
+    private ObservableList<TableDocsStuffDocEntity> tableDocData = FXCollections.observableArrayList();
+
+    public ObservableList<TableDocsStuffDocEntity> getTableDocData() {
+        return tableDocData;
+    }
+
+    public void setTableDocData(ObservableList<TableDocsStuffDocEntity> tableDocData) {
+        this.tableDocData = tableDocData;
+    }
+
+    public ObservableList<DocDocsHeadDocEntity> getDocsData() {
+        return docsData;
+    }
+
+    public void setDocsData(ObservableList<DocDocsHeadDocEntity> docsData) {
+        this.docsData = docsData;
+    }
 
     public ObservableList<TableCurrentRestStuffDocEntity> getCurrentRestStuffData() {
         return currentRestStuffData;

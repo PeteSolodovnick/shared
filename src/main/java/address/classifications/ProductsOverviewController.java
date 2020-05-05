@@ -40,7 +40,7 @@ public class ProductsOverviewController extends SuperEntityTreeController implem
         getEntities().addAll(farm.getReferences().getProductsData());
         super.setFarmFX(farm);
     }
-    private void initArray(FarmFX farm) {
+    protected void initArray(FarmFX farm) {
         farm.getReferences().setClassificationData(new FactoryListEntities<>(new ClassificationEntity()).getListEntities());
         farm.getReferences().setProductsData(new FactoryListEntities<>(new NomenklEntity()).getListEntities());
     }

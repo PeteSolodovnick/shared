@@ -30,6 +30,4 @@ public class TableNomDocController extends ProductsOverviewController {
     public void handleMouseMoved() {
         countClick = 0;
     }
-
-
 }

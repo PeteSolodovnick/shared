@@ -17,6 +17,7 @@
           <Menu mnemonicParsing="false" text="Documents">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleInvoices" text="Invoices" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleMoving" text="Moving" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="References">

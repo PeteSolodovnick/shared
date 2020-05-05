@@ -1,13 +1,13 @@
-package address.documents.capitalize;
+package models.tables;
 
 import models.SuperEntity;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.NomenklEntity;
+import models.references.RefTypeOperationsDocEntity;
 import models.references.StorageEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "journal_operations_staff", schema = "public", catalog = "farm")
@@ -49,24 +49,6 @@ public class JournalOperationsStaffDocEntity extends SuperEntity {
     public void setSum(Float sum) {
         this.sum = sum;
     }
-
-    /*@Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        JournalOperationsStaffDocEntity that = (JournalOperationsStaffDocEntity) o;
-        return getId() == that.getId() &&
-                docDocsHeadByDocId.getId() == that.docDocsHeadByDocId.getId() &&
-                Objects.equals(recTime, that.recTime) &&
-                Objects.equals(qty, that.qty) &&
-                Objects.equals(sum, that.sum) &&
-                Objects.equals(refTypeOperationsByTypeOperationsId.getId(), that.refTypeOperationsByTypeOperationsId.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), docDocsHeadByDocId.getId(), recTime, qty, sum, refTypeOperationsByTypeOperationsId.getId());
-    } */
 
     @ManyToOne
     @JoinColumn(name = "doc_id", referencedColumnName = "id", nullable = false)

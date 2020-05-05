@@ -1,12 +1,10 @@
-package address.documents.capitalize;
+package models.references;
 
-import models.SuperEntity;
-import models.references.SuperReferenceEntity;
+import models.tables.JournalOperationsStaffDocEntity;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 
 @Entity
 @Table(name = "ref_type_operations", schema = "public", catalog = "farm")

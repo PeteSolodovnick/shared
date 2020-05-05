@@ -1,6 +1,6 @@
 package models.references;
 
-import address.documents.capitalize.JournalOperationsStaffDocEntity;
+import models.tables.JournalOperationsStaffDocEntity;
 import models.tables.TableDocsStuffDocEntity;
 import models.tables.TableInvoiceNomDocEntity;
 

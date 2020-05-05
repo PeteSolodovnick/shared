@@ -1,5 +1,6 @@
 package dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public interface DAO<Entity, Key> {
     void updateOrSave(Entity entities);
     void delete(Entity entity);
     List<Entity> getAllRows(Entity entity);
-    List<Entity> getDateRows(Entity entity, Key startDate, Key finDate);
-    List<Entity> getSomeRows(Entity entity, Key key);
+    List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finDate);
+    List<Entity> getSomeRows(Entity entity, Key key, String field);
+    List<Entity> getSomeTypeDateDocs(Entity entity, Key type, LocalDate startDate, LocalDate endDate);
 }
