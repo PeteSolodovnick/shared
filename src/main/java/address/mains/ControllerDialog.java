@@ -1,7 +1,6 @@
 package address.mains;
 
 import javafx.stage.Stage;
-import models.SuperEntity;
 import models.references.SuperReferenceEntity;
 
 public interface ControllerDialog {

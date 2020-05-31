@@ -5,50 +5,33 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="314.0" prefWidth="578.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.lots.LotsDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="343.0" prefWidth="474.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.lots.LotsDialogController">
    <children>
-      <GridPane layoutX="3.0" prefHeight="262.0" prefWidth="523.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="5.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label text="Name" />
-            <TextField fx:id="name" prefHeight="26.0" prefWidth="174.0" GridPane.columnIndex="1" />
-            <Label text="Type lot" GridPane.rowIndex="1" />
-            <Label text="Kind lot" GridPane.rowIndex="2" />
-            <TextField fx:id="type" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="kind" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Start age" GridPane.rowIndex="3" />
-            <Label text="Count units" GridPane.rowIndex="4" />
-            <Label text="Start weight" GridPane.rowIndex="5" />
-            <TextField fx:id="age" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="count" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="weight" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Number lot" GridPane.rowIndex="6" />
-            <TextField fx:id="number" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-         </children>
-      </GridPane>
-      <ButtonBar layoutX="7.0" layoutY="439.0" prefHeight="40.0" prefWidth="549.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="7.0">
+      <ButtonBar layoutX="7.0" layoutY="439.0" prefHeight="40.0" prefWidth="455.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="7.0">
         <buttons>
           <Button mnemonicParsing="false" onAction="#handleOkDialog" prefHeight="26.0" text="Ok" />
-            <Button mnemonicParsing="false" onAction="#handleCloseDialog" prefHeight="26.0" prefWidth="265.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#handleCloseDialog" prefHeight="26.0" prefWidth="552.0" text="Cancel" />
         </buttons>
       </ButtonBar>
-      <Button layoutX="530.0" layoutY="45.0" mnemonicParsing="false" onAction="#handleTypeChoose" prefHeight="26.0" prefWidth="29.0" text="Button" />
-      <Button layoutX="530.0" layoutY="79.0" mnemonicParsing="false" onAction="#handleKindChoose" prefHeight="26.0" prefWidth="29.0" text="Button" />
+      <Button layoutX="198.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleTypeChoose" prefHeight="26.0" prefWidth="29.0" text="Button" />
+      <Button layoutX="411.0" layoutY="94.0" mnemonicParsing="false" onAction="#handleKindChoose" prefHeight="26.0" prefWidth="29.0" text="Button" />
+      <Button layoutX="409.0" layoutY="37.0" mnemonicParsing="false" onAction="#handleNomenklChoose" prefHeight="26.0" prefWidth="29.0" text="Button" />
+      <Label layoutX="238.0" layoutY="139.0" prefHeight="16.0" prefWidth="308.0" text="Остаток на центральном складе" />
+      <TextField fx:id="rest" editable="false" layoutX="238.0" layoutY="159.0" />
+      <Label layoutX="25.0" layoutY="16.0" text="Name" />
+      <TextField fx:id="name" layoutX="25.0" layoutY="37.0" prefHeight="26.0" prefWidth="174.0" />
+      <Label layoutX="240.0" layoutY="16.0" text="Animal" />
+      <TextField fx:id="nomenkl" layoutX="238.0" layoutY="37.0" />
+      <Label layoutX="24.0" layoutY="75.0" text="Type lot" />
+      <TextField fx:id="type" editable="false" layoutX="27.0" layoutY="94.0" />
+      <Label layoutX="240.0" layoutY="77.0" text="Kind lot" />
+      <TextField fx:id="kind" editable="false" layoutX="240.0" layoutY="94.0" />
+      <Label layoutX="240.0" layoutY="204.0" text="Start age" />
+      <TextField fx:id="age" layoutX="238.0" layoutY="220.0" />
+      <Label layoutX="27.0" layoutY="139.0" text="Count units" />
+      <TextField fx:id="count" layoutX="27.0" layoutY="159.0" />
+      <Label layoutX="25.0" layoutY="204.0" text="Start weight" />
+      <TextField fx:id="weight" layoutX="27.0" layoutY="220.0" />
    </children>
 </AnchorPane>

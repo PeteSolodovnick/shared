@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="746.0" prefWidth="937.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.lots.NomenklLotsTableController">
+   <children>
+      <AnchorPane layoutX="9.0" layoutY="37.0" prefHeight="614.0" prefWidth="816.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <SplitPane dividerPositions="0.3603448275862069" layoutY="28.0" prefHeight="327.0" prefWidth="582.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="35.0">
+               <items>
+                  <AnchorPane prefHeight="322.0" prefWidth="205.0">
+                     <children>
+                        <TreeView fx:id="treeView" prefHeight="356.0" prefWidth="205.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#handleNewTreeEntity" text="Add New" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleEditTreeEntity" text="Edit selected" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleDeleteTreeEntity" text="Delete" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu></TreeView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="400.0" prefWidth="400.0">
+                     <children>
+                        <TableView fx:id="entityTable" onMouseClicked="#handleChooseTer" prefHeight="657.0" prefWidth="589.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-13.0" AnchorPane.topAnchor="5.0">
+                          <columns>
+                            <TableColumn fx:id="idEntity" prefWidth="41.0" text="Id" />
+                            <TableColumn fx:id="nameEntity" prefWidth="302.0" text="Name" />
+                              <TableColumn fx:id="size" prefWidth="58.0" text="Size" />
+                              <TableColumn fx:id="classification" prefWidth="173.0" text="Classification" />
+                          </columns>
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#handleNewEntity" text="Add" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleEditEntity" text="Edit" />
+                                    <MenuItem mnemonicParsing="false" onAction="#handleDeleteEntity" text="Delete" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </TableView>
+                     </children></AnchorPane>
+               </items>
+            </SplitPane>
+            <ComboBox fx:id="entitiesName" editable="true" layoutX="-2.0" layoutY="1.0" prefHeight="26.0" prefWidth="911.0" promptText="Search..." />
+         </children>
+      </AnchorPane>
+       <fx:define>
+           <Image fx:id="addImage" url="imagine/addButton.png" />
+       </fx:define>
+      <Button layoutX="773.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleCloseReference" prefHeight="26.0" prefWidth="139.0" text="Close">
+         <graphic>
+            <ImageView fitHeight="17.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagine/closeButton.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button layoutX="22.0" layoutY="7.0" mnemonicParsing="false" onAction="#handleChooseTer" prefHeight="26.0" prefWidth="139.0" text="Select">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@imagine/OkButton.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

@@ -7,12 +7,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "table_docs_stuff", schema = "public", catalog = "farm")
 public class TableDocsStuffDocEntity extends SuperTableEntity {
-    private Integer qty;
-    private Float sum;
+ //   private Integer qty;
+ //   private Float sum;
     private NomenklEntity nomenklEntityByNomId;
     private DocDocsHeadDocEntity docDocsHeadByDocId;
 
-    @Basic
+/*    @Basic
     @Column(name = "qty", nullable = true)
     public Integer getQty() {
         return qty;
@@ -30,7 +30,7 @@ public class TableDocsStuffDocEntity extends SuperTableEntity {
 
     public void setSum(Float sum) {
         this.sum = sum;
-    }
+    } */
 
     @ManyToOne
     @JoinColumn(name = "nomenkl_id", referencedColumnName = "id", nullable = false)

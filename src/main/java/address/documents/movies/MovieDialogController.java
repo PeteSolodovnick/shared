@@ -1,17 +1,13 @@
 package address.documents.movies;
 
 import address.mains.*;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import models.SuperEntity;
 import models.documents.DocDocsHeadDocEntity;
-import models.documents.DocInvoiceHeadDocEntity;
 import models.references.*;
 import models.tables.JournalOperationsStaffDocEntity;
 import models.tables.TableCurrentRestStuffDocEntity;
@@ -21,9 +17,7 @@ import services.EntityService;
 
 import javax.persistence.NoResultException;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MovieDialogController extends SuperDialogEntityController {
@@ -54,7 +48,7 @@ public class MovieDialogController extends SuperDialogEntityController {
     @FXML
     private TableColumn<TableCurrentRestStuffDocEntity, Float> restSum;
 
-    private FarmFX farm;
+ //   private FarmFX farm;
     private DocDocsHeadDocEntity newDoc;
     private StorageEntity store;
     private StorageEntity storeInSelect;
@@ -62,7 +56,7 @@ public class MovieDialogController extends SuperDialogEntityController {
     private String fileStore;
     private String fileNomenkl;
     private boolean in;
-    private List<TableCurrentRestStuffDocEntity> forDelete = new ArrayList<>();
+    //private List<TableCurrentRestStuffDocEntity> forDelete = new ArrayList<>();
 
     public MovieDialogController() {}
     @FXML
@@ -77,8 +71,7 @@ public class MovieDialogController extends SuperDialogEntityController {
             @Override
             public Integer fromString(String s) {
                 try {
-                    Integer result = Integer.parseInt(s);
-                    return result;
+                    return Integer.parseInt(s);
                 } catch (NumberFormatException e) {
                     String title = "Error!!!";
                     String headerText = "Element isn't integer number";
@@ -88,12 +81,7 @@ public class MovieDialogController extends SuperDialogEntityController {
                 }
             }
         }));
-        qty.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<TableDocsStuffDocEntity, Integer>>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent<TableDocsStuffDocEntity, Integer> t) {
-                t.getTableView().getItems().get(t.getTablePosition().getRow()).setQty(t.getNewValue());
-            }
-        });
+        qty.setOnEditCommit(t -> t.getTableView().getItems().get(t.getTablePosition().getRow()).setQty(t.getNewValue()));
         restQty.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getQty()));
         restSum.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getSum()));
     }
@@ -101,10 +89,10 @@ public class MovieDialogController extends SuperDialogEntityController {
     public void setFarmFX(FarmFX farm, SuperReferenceEntity selectedDoc) {
         fileStore = "/storageSelectViewer.fxml";
         fileNomenkl = "/nomenklViewerStore.fxml";
-        this.farm = farm;
+    //    this.farm = farm;
         newDoc = (DocDocsHeadDocEntity) selectedDoc;
         if (selectedDoc != null) {
-            farm.getReferences().setTableDocData(new FactoryListEntities<TableDocsStuffDocEntity>(new TableDocsStuffDocEntity()).getSomeListEntities(newDoc.getId(), "docDocsHeadByDocId"));
+            farm.getReferences().setTableDocData(new FactoryListEntities<>(new TableDocsStuffDocEntity()).getSomeListEntities(newDoc.getId(), "docDocsHeadByDocId"));
             entityTable.setItems(farm.getReferences().getTableDocData());
             date.setValue(newDoc.getDate());
             storeOut.setText(newDoc.getStorageOutById().getName());
@@ -144,13 +132,10 @@ public class MovieDialogController extends SuperDialogEntityController {
             for (TableCurrentRestStuffDocEntity currentRest:restEntityTable.getItems()) {
                 int index = restEntityTable.getItems().indexOf(currentRest);
                 if (entityTable.getItems().get(index).getQty()>currentRest.getQty() || entityTable.getItems().get(index).getQty() ==0) {
-                    errorMessage += "incorrect qty in table\n";
+                    errorMessage = "incorrect qty in table\n";
                 }
             }
-            if (isError(errorMessage)) {
-                return false;
-            }
-            return true;
+            return !isError(errorMessage);
         }
         return false;
     }
@@ -198,7 +183,6 @@ public class MovieDialogController extends SuperDialogEntityController {
             RefTypeOperationsDocEntity typeOperation = session.load(RefTypeOperationsDocEntity.class, 2L);
             RefTypeDocDocEntity typeDocDocEntity = session.load(RefTypeDocDocEntity.class, 2L);
             session.beginTransaction();
-         //   DocDocsHeadDocEntity docEntity = new DocDocsHeadDocEntity();
             newDoc.setRefContragentEntityByContragentId(null);
             newDoc.setStorageInById(storeInSelect);
             newDoc.setStorageOutById(storeOutSelect);
@@ -223,19 +207,12 @@ public class MovieDialogController extends SuperDialogEntityController {
                 keys.put("nomenklEntityByNomId", restCurrent.getNomenklEntityByNomId().getId());
                 keys.put("storageEntityById", storeInSelect.getId());
                 restCurrent.setQty(restCurrent.getQty() - qty.getCellData(index));
-                restCurrent.setSum(restCurrent.getSum() - restCurrent.getQty() * price);
+                restCurrent.setSum(restCurrent.getSum() - qty.getCellData(index) * price);
                 TableCurrentRestStuffDocEntity currentRestStuffDocEntity = new TableCurrentRestStuffDocEntity();
                 try {
-                    currentRestStuffDocEntity = (TableCurrentRestStuffDocEntity) service.readRow(new TableCurrentRestStuffDocEntity(), keys);
-                    if (currentRestStuffDocEntity != null) {
+                        currentRestStuffDocEntity = (TableCurrentRestStuffDocEntity) service.readRow(new TableCurrentRestStuffDocEntity(), keys);
                         currentRestStuffDocEntity.setQty(currentRestStuffDocEntity.getQty() + qty.getCellData(index));
                         currentRestStuffDocEntity.setSum(currentRestStuffDocEntity.getSum() + qty.getCellData(index) * price);
-                    } else {
-                        currentRestStuffDocEntity.setStorageEntityById(storeInSelect);
-                        currentRestStuffDocEntity.setNomenklEntityByNomId(restCurrent.getNomenklEntityByNomId());
-                        currentRestStuffDocEntity.setQty(qty.getCellData(index));
-                        currentRestStuffDocEntity.setSum(qty.getCellData(index) * price);
-                    }
                 } catch (NoResultException e) {
                         currentRestStuffDocEntity.setStorageEntityById(storeInSelect);
                         currentRestStuffDocEntity.setNomenklEntityByNomId(restCurrent.getNomenklEntityByNomId());
@@ -286,16 +263,8 @@ public class MovieDialogController extends SuperDialogEntityController {
 
     }
 
-    public StorageEntity getStore() {
-        return store;
-    }
-
     public void setStore(StorageEntity store) {
         this.store = store;
-    }
-
-    public StorageEntity getStoreInSelect() {
-        return storeInSelect;
     }
 
     public void setStoreInSelect(StorageEntity storeInSelect) {
@@ -334,24 +303,11 @@ public class MovieDialogController extends SuperDialogEntityController {
         return btnStoreOut;
     }
 
-    public void setBtnStoreOut(Button btnStoreOut) {
-        this.btnStoreOut = btnStoreOut;
-    }
-
     public DocDocsHeadDocEntity getNewDoc() {
         return newDoc;
-    }
-
-    public void setNewDoc(DocDocsHeadDocEntity newDoc) {
-        this.newDoc = newDoc;
     }
 
     public TableView<TableCurrentRestStuffDocEntity> getRestEntityTable() {
         return restEntityTable;
     }
-
-    public void setRestEntityTable(TableView<TableCurrentRestStuffDocEntity> restEntityTable) {
-        this.restEntityTable = restEntityTable;
-    }
-
 }

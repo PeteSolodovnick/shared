@@ -15,6 +15,7 @@ public class NomenklEntity extends SuperReferenceEntity {
     private SizeEntity refSizeBySizeId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomDocEntities;
     private Collection<TableDocsStuffDocEntity> tableDocsStuffDocEntities;
+    private Collection<LotsEntity> refLotsEntities;
     private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities = new HashSet<>();
 
     public void addJournal(JournalOperationsStaffDocEntity journal) {
@@ -26,9 +27,16 @@ public class NomenklEntity extends SuperReferenceEntity {
     public Collection<JournalOperationsStaffDocEntity> getJournalOperationsStaffDocEntities() {
         return journalOperationsStaffDocEntities;
     }
-
     public void setJournalOperationsStaffDocEntities(Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities) {
         this.journalOperationsStaffDocEntities = journalOperationsStaffDocEntities;
+    }
+
+    @OneToMany(mappedBy = "refNomenklEntityById")
+    public Collection<LotsEntity> getRefLotsEntities() {
+        return refLotsEntities;
+    }
+    public void setRefLotsEntities(Collection<LotsEntity> refLotsEntities) {
+        this.refLotsEntities = refLotsEntities;
     }
 
     @OneToMany(mappedBy = "nomenklEntityByNomId")

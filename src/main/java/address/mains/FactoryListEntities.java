@@ -43,6 +43,14 @@ public class FactoryListEntities<T extends SuperEntity> {
         }
         return entityList;
     }
+    public ObservableList<T> getSomeListEntities(Boolean editable, String field) {
+        ObservableList<T> entityList = FXCollections.observableArrayList();
+        EntityService<T, Boolean> service = new EntityService<>();
+        for (T entity: service.getSomeRows(t, editable, field)) {
+            entityList.add(entity);
+        }
+        return entityList;
+    }
     public ObservableList<T> getSomeTypeDateDocs(Long id, LocalDate startDate, LocalDate endDate) {
         ObservableList<T> entityList = FXCollections.observableArrayList();
         EntityService<T, Long> service = new EntityService<>();

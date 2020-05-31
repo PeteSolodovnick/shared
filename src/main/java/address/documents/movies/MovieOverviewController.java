@@ -3,14 +3,11 @@ package address.documents.movies;
 import address.mains.FactoryListEntities;
 import address.mains.FarmFX;
 import address.mains.SuperEntityController;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import models.documents.DocDocsHeadDocEntity;
-import models.documents.DocInvoiceHeadDocEntity;
 import models.references.*;
 
 import java.time.LocalDate;

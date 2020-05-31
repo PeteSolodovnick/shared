@@ -1,6 +1,5 @@
 package models.references;
 
-import models.SuperEntity;
 import models.documents.DocDocsHeadDocEntity;
 
 import javax.persistence.*;

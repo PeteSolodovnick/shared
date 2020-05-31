@@ -25,8 +25,12 @@
                 <MenuItem mnemonicParsing="false" onAction="#handleLocality" text="Locality" />
                   <MenuItem mnemonicParsing="false" onAction="#handleContragent" text="Contragents" />
                   <MenuItem mnemonicParsing="false" onAction="#handleProduct" text="Classifications" />
-                  <MenuItem mnemonicParsing="false" onAction="#handleLots" text="Lots" />
                   <MenuItem mnemonicParsing="false" onAction="#handleStorage" text="Storage" />
+              </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Manufacture">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleLots" text="Create Lot" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">
