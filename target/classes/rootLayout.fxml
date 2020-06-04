@@ -31,6 +31,10 @@
             <Menu mnemonicParsing="false" text="Manufacture">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleLots" text="Create Lot" />
+                  <MenuItem mnemonicParsing="false" text="Расход на производство" />
+                  <MenuItem mnemonicParsing="false" text="Параметри Лота" />
+                  <MenuItem mnemonicParsing="false" text="Убой" />
+                  <MenuItem mnemonicParsing="false" text="Разделка" />
               </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help">

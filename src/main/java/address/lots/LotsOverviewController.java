@@ -99,7 +99,7 @@ public class LotsOverviewController extends SuperEntityTreeController implements
             alert.setHeaderText(selectedLot.getName()+ " will be deleted");
             alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
+            if (result. get() == ButtonType.OK) {
                 try {
                     EntityService<SuperEntity, Long> service = new EntityService<>();
                     Session session = service.getEntity().getSessionFactory().openSession();
