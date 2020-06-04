@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import services.EntityService;
 
 import javax.persistence.NoResultException;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,6 +112,7 @@ public class LotsDialogController extends SuperDialogEntityController {
         newLotEntity.setStartAge(Integer.parseInt(getAge().getText()));
         newLotEntity.setStartCount(Integer.parseInt(getCount().getText()));
         newLotEntity.setStartWeight(Float.parseFloat(getWeight().getText()));
+        newLotEntity.setDate(new Date(System.currentTimeMillis()));
         newLotEntity.setEditable(true);
         newLotEntity.setDeleted(false);
         setNewEntity(newLotEntity);

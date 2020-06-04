@@ -1,44 +1,37 @@
 package models.tables;
 
-import models.documents.DocDocsHeadDocEntity;
-import models.references.LotsEntity;
-import models.references.NomenklEntity;
 
+import models.SuperEntity;
+import models.references.NomenklEntity;
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "table_doc_lots", schema = "public", catalog = "farm")
-public class TableDocLotsDocEntity extends SuperTableEntity{
+public class TableDocLotsDocEntity extends SuperEntity {
     private NomenklEntity nomenklEntityByNomId;
-    private DocDocsHeadDocEntity docDocsHeadByDocId;
-    private LotsEntity lotsEntity;
-    private Collection<JournalOperationsLotsDocEntity> journalOperationsLotsById;
+    private JournalOperationsLotsDocEntity journalOperationsLotsById;
+    private Integer qty;
+    private Float sum;
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        TableDocLotsDocEntity that = (TableDocLotsDocEntity) o;
-        return getId() == that.getId() &&
-                Objects.equals(getQty(), that.getQty()) &&
-                Objects.equals(getSum(), that.getSum());
+    @Basic
+    @Column(name = "qty", nullable = true)
+    public Integer getQty() {
+        return qty;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getQty(), getSum());
+    public void setQty(Integer qty) {
+        this.qty = qty;
     }
 
-    @OneToMany(mappedBy = "tableDocLotsByTableLotsId")
-    public Collection<JournalOperationsLotsDocEntity> getJournalOperationsLotsById() {
-        return journalOperationsLotsById;
+    @Basic
+    @Column(name = "sum", nullable = true, precision = 0)
+    public Float getSum() {
+        return sum;
     }
 
-    public void setJournalOperationsLotsById(Collection<JournalOperationsLotsDocEntity> journalOperationsLotsById) {
-        this.journalOperationsLotsById = journalOperationsLotsById;
+    public void setSum(Float sum) {
+        this.sum = sum;
     }
 
     @ManyToOne
@@ -51,24 +44,12 @@ public class TableDocLotsDocEntity extends SuperTableEntity{
         this.nomenklEntityByNomId = nomenklEntityByNomId;
     }
     @ManyToOne
-    @JoinColumn(name="doc_id", referencedColumnName = "id", nullable = false)
-    @Override
-    public DocDocsHeadDocEntity getDocDocsHeadByDocId() {
-        return docDocsHeadByDocId;
+    @JoinColumn(name = "journal_operation_lots_id", referencedColumnName = "id")
+    public JournalOperationsLotsDocEntity getJournalOperationsLotsById() {
+        return journalOperationsLotsById;
     }
 
-    @Override
-    public void setDocDocsHeadByDocId(DocDocsHeadDocEntity docDocsHeadByDocId) {
-        this.docDocsHeadByDocId = docDocsHeadByDocId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name="lots_id", referencedColumnName = "id", nullable = false)
-    public LotsEntity getLotsEntity() {
-        return lotsEntity;
-    }
-
-    public void setLotsEntity(LotsEntity lotsEntity) {
-        this.lotsEntity = lotsEntity;
+    public void setJournalOperationsLotsById(JournalOperationsLotsDocEntity journalOperationsLotsById) {
+        this.journalOperationsLotsById = journalOperationsLotsById;
     }
 }

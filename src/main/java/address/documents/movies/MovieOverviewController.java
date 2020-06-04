@@ -5,6 +5,7 @@ import address.mains.FarmFX;
 import address.mains.SuperEntityController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import models.documents.DocDocsHeadDocEntity;
@@ -45,9 +46,13 @@ public class MovieOverviewController extends SuperEntityController {
     }
     @FXML
     public void handleFilter() {
-        getEntities().clear();
-        getFarm().getReferences().setDocsData(new FactoryListEntities<>(new DocDocsHeadDocEntity()).getSomeTypeDateDocs(2L, startDate.getValue(), endDate.getValue()));
-        getEntities().addAll(getFarm().getReferences().getDocsData());
+        try {
+            getEntities().clear();
+            getFarm().getReferences().setDocsData(new FactoryListEntities<>(new DocDocsHeadDocEntity()).getSomeTypeDateDocs(2L, startDate.getValue(), endDate.getValue()));
+            getEntities().addAll(getFarm().getReferences().getDocsData());
+        } catch (Exception e) {
+
+        }
     }
     @FXML
     @Override

@@ -1,9 +1,9 @@
 package models.documents;
 
+import models.tables.JournalOperationsLotsDocEntity;
 import models.tables.JournalOperationsStaffDocEntity;
 import models.references.RefKindDocDocEntity;
 import models.references.RefTypeDocDocEntity;
-import models.tables.TableDocLotsDocEntity;
 import models.tables.TableDocsStuffDocEntity;
 import models.references.StorageEntity;
 
@@ -20,7 +20,7 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
     private StorageEntity storageOutById;
     private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffsById = new HashSet<>();
     private Collection<TableDocsStuffDocEntity> tableDocsStuffsById = new HashSet<>();
-    private Collection<TableDocLotsDocEntity> tableDocLotsDocEntities = new HashSet<>();
+    private Collection<JournalOperationsLotsDocEntity> journalOperationsLotsDocEntities = new HashSet<>();
 
     public void addProduct(TableDocsStuffDocEntity product) {
         product.setDocDocsHeadByDocId(this);
@@ -30,9 +30,9 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
         journal.setDocDocsHeadByDocId(this);
         this.journalOperationsStaffsById.add(journal);
     }
-    public void addLot(TableDocLotsDocEntity lot) {
-        lot.setDocDocsHeadByDocId(this);
-        this.tableDocLotsDocEntities.add(lot);
+    public void addJournalLotOperation(JournalOperationsLotsDocEntity operation) {
+        operation.setHeadDocEntity(this);
+        this.journalOperationsLotsDocEntities.add(operation);
     }
 
     @ManyToOne
@@ -91,12 +91,12 @@ public class DocDocsHeadDocEntity extends SuperDocumentEntity {
         this.tableDocsStuffsById = tableDocsStuffsById;
     }
 
-    @OneToMany(mappedBy = "docDocsHeadByDocId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    public Collection<TableDocLotsDocEntity> getTableDocLotsDocEntities() {
-        return tableDocLotsDocEntities;
+    @OneToMany(mappedBy = "headDocEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Collection<JournalOperationsLotsDocEntity> getJournalOperationsLotsDocEntities() {
+        return journalOperationsLotsDocEntities;
     }
 
-    public void setTableDocLotsDocEntities(Collection<TableDocLotsDocEntity> tableDocLotsDocEntities) {
-        this.tableDocLotsDocEntities = tableDocLotsDocEntities;
+    public void setJournalOperationsLotsDocEntities(Collection<JournalOperationsLotsDocEntity> journalOperationsLotsDocEntities) {
+        this.journalOperationsLotsDocEntities = journalOperationsLotsDocEntities;
     }
 }

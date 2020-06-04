@@ -13,7 +13,6 @@ import javafx.scene.control.TableColumn;
 import models.documents.DocInvoiceHeadDocEntity;
 import models.references.RefStatusInvoiceDocEntity;
 import models.references.ContragentEntity;
-import models.SuperEntity;
 import models.references.SuperReferenceEntity;
 
 import java.time.LocalDate;
@@ -146,9 +145,13 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     }
     @FXML
     public void handleFilter() {
-        getEntities().clear();
-        getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue()));
-        getEntities().addAll(getFarm().getReferences().getInvoiceData());
+        try {
+            getEntities().clear();
+            getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue()));
+            getEntities().addAll(getFarm().getReferences().getInvoiceData());
+        } catch (Exception e) {
+
+        }
     }
 
     public DocInvoiceHeadDocEntity getSelectedInvoice() {

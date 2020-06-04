@@ -1,6 +1,7 @@
 package models.references;
 
 import models.tables.JournalOperationsStaffDocEntity;
+import models.tables.TableDocLotsDocEntity;
 import models.tables.TableDocsStuffDocEntity;
 import models.tables.TableInvoiceNomDocEntity;
 
@@ -15,7 +16,7 @@ public class NomenklEntity extends SuperReferenceEntity {
     private SizeEntity refSizeBySizeId;
     private Collection<TableInvoiceNomDocEntity> tableInvoiceNomDocEntities;
     private Collection<TableDocsStuffDocEntity> tableDocsStuffDocEntities;
-    private Collection<LotsEntity> refLotsEntities;
+    private Collection<TableDocLotsDocEntity> tableDocLotsDocEntities;
     private Collection<JournalOperationsStaffDocEntity> journalOperationsStaffDocEntities = new HashSet<>();
 
     public void addJournal(JournalOperationsStaffDocEntity journal) {
@@ -31,12 +32,13 @@ public class NomenklEntity extends SuperReferenceEntity {
         this.journalOperationsStaffDocEntities = journalOperationsStaffDocEntities;
     }
 
-    @OneToMany(mappedBy = "refNomenklEntityById")
-    public Collection<LotsEntity> getRefLotsEntities() {
-        return refLotsEntities;
+    @OneToMany(mappedBy = "nomenklEntityByNomId")
+    public Collection<TableDocLotsDocEntity> getTableDocLotsDocEntities() {
+        return tableDocLotsDocEntities;
     }
-    public void setRefLotsEntities(Collection<LotsEntity> refLotsEntities) {
-        this.refLotsEntities = refLotsEntities;
+
+    public void setTableDocLotsDocEntities(Collection<TableDocLotsDocEntity> tableDocLotsDocEntities) {
+        this.tableDocLotsDocEntities = tableDocLotsDocEntities;
     }
 
     @OneToMany(mappedBy = "nomenklEntityByNomId")

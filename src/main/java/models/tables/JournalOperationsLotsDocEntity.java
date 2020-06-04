@@ -1,19 +1,29 @@
 package models.tables;
 
 import models.SuperEntity;
+import models.documents.DocDocsHeadDocEntity;
+import models.references.LotsEntity;
 import models.references.RefTypeOperationsDocEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "journal_operations_lots", schema = "public", catalog = "farm")
 public class JournalOperationsLotsDocEntity extends SuperEntity {
     private Date recTime;
-    private Integer qty;
     private Float sum;
-    private TableDocLotsDocEntity tableDocLotsByTableLotsId;
+    private LotsEntity refLotsId;
     private RefTypeOperationsDocEntity refTypeOperationsByTypeOperationsId;
+    private DocDocsHeadDocEntity headDocEntity;
+    private Collection<TableDocLotsDocEntity> tableDocLotsDocEntities = new HashSet<>();
+
+    public void addProduct(TableDocLotsDocEntity tableDocLotsDocEntity) {
+        tableDocLotsDocEntity.setJournalOperationsLotsById(this);
+        this.tableDocLotsDocEntities.add(tableDocLotsDocEntity);
+    }
 
     @Basic
     @Column(name = "rec_time")
@@ -23,16 +33,6 @@ public class JournalOperationsLotsDocEntity extends SuperEntity {
 
     public void setRecTime(Date recTime) {
         this.recTime = recTime;
-    }
-
-    @Basic
-    @Column(name = "qty")
-    public Integer getQty() {
-        return qty;
-    }
-
-    public void setQty(Integer qty) {
-        this.qty = qty;
     }
 
     @Basic
@@ -46,14 +46,15 @@ public class JournalOperationsLotsDocEntity extends SuperEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "table_lots_id", referencedColumnName = "id", nullable = false)
-    public TableDocLotsDocEntity getTableDocLotsByTableLotsId() {
-        return tableDocLotsByTableLotsId;
+    @JoinColumn(name = "lots_id", referencedColumnName = "id", nullable = false)
+    public LotsEntity getRefLotsId() {
+        return refLotsId;
     }
 
-    public void setTableDocLotsByTableLotsId(TableDocLotsDocEntity tableDocLotsByTableLotsId) {
-        this.tableDocLotsByTableLotsId = tableDocLotsByTableLotsId;
+    public void setRefLotsId(LotsEntity refLotsId) {
+        this.refLotsId = refLotsId;
     }
+
     @ManyToOne
     @JoinColumn(name = "type_operation_id", referencedColumnName = "id")
     public RefTypeOperationsDocEntity getRefTypeOperationsByTypeOperationsId() {
@@ -62,5 +63,25 @@ public class JournalOperationsLotsDocEntity extends SuperEntity {
 
     public void setRefTypeOperationsByTypeOperationsId(RefTypeOperationsDocEntity refTypeOperationsByTypeOperationsId) {
         this.refTypeOperationsByTypeOperationsId = refTypeOperationsByTypeOperationsId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "doc_id", referencedColumnName = "id")
+
+    public DocDocsHeadDocEntity getHeadDocEntity() {
+        return headDocEntity;
+    }
+
+    public void setHeadDocEntity(DocDocsHeadDocEntity headDocEntity) {
+        this.headDocEntity = headDocEntity;
+    }
+
+    @OneToMany(mappedBy = "journalOperationsLotsById", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    public Collection<TableDocLotsDocEntity> getTableDocLotsDocEntities() {
+        return tableDocLotsDocEntities;
+    }
+
+    public void setTableDocLotsDocEntities(Collection<TableDocLotsDocEntity> tableDocLotsDocEntities) {
+        this.tableDocLotsDocEntities = tableDocLotsDocEntities;
     }
 }

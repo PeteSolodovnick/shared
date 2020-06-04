@@ -186,10 +186,8 @@ public class LotsOverviewController extends SuperEntityTreeController implements
                     //------------create table lots and add lot to table and to doc-------------------------
                     TableDocLotsDocEntity tableDocLotsDocEntity = new TableDocLotsDocEntity();
                     tableDocLotsDocEntity.setNomenklEntityByNomId(selectedLot.getRefNomenklEntityById());
-                    tableDocLotsDocEntity.setLotsEntity(selectedLot);
                     tableDocLotsDocEntity.setQty(selectedLot.getStartCount());
                     tableDocLotsDocEntity.setSum(selectedLot.getStartCount()*price);
-                    docHead.addLot(tableDocLotsDocEntity);
                     //----------changing lot's parameters----------------------------------
                     selectedLot.setEditable(false);
                     selectedLot.setCurrentAge(selectedLot.getStartAge());
@@ -206,28 +204,22 @@ public class LotsOverviewController extends SuperEntityTreeController implements
                     //----------- create joutnal Lot operations --------------------------------------
                     RefTypeOperationsDocEntity typeOperation = session.load(RefTypeOperationsDocEntity.class, 6L);
                     JournalOperationsLotsDocEntity journalOperationLots = new JournalOperationsLotsDocEntity();
-                    journalOperationLots.setQty(selectedLot.getStartCount());
                     journalOperationLots.setSum(selectedLot.getStartCount()*price);
-                    journalOperationLots.setTableDocLotsByTableLotsId(tableDocLotsDocEntity);
+                    journalOperationLots.setRefLotsId(selectedLot);
                     journalOperationLots.setRecTime(new Date(System.currentTimeMillis()));
+                    journalOperationLots.addProduct(tableDocLotsDocEntity);
+                    docHead.addJournalLotOperation(journalOperationLots);
                     typeOperation.addJournalLot(journalOperationLots);
                     typeOperation.addJournal(journalOperationsStaff);
-                    //--------create journal Care lot --------------------------------------
-                    JournalCareLotDocEntity journalCareLotDocEntity = new JournalCareLotDocEntity();
-                    journalCareLotDocEntity.setLotsEntity(selectedLot);
-                    journalCareLotDocEntity.setAge(selectedLot.getStartAge());
-                    journalCareLotDocEntity.setCount(selectedLot.getStartCount());
-                    journalCareLotDocEntity.setWeight(selectedLot.getStartWeight());
-                    journalCareLotDocEntity.setRecTime(new Date(System.currentTimeMillis()));
                     session.saveOrUpdate(selectedLot);
                     session.saveOrUpdate(reserveRest);
                     session.saveOrUpdate(docHead);
                     session.saveOrUpdate(journalOperationsStaff);
-                    session.saveOrUpdate(journalOperationLots);
-                    session.saveOrUpdate(journalCareLotDocEntity);
                     session.getTransaction().commit();
+                    logger.info("COMMMIT");
                     session.close();
                 } catch (Exception e) {
+                    logger.info("Exception");
                     Alert alertError = new Alert(Alert.AlertType.ERROR);
                     alertError.setTitle("Error!!! " + selectedLot.getName());
                     alertError.setHeaderText(selectedLot.getName() + " Something being wrong");
@@ -236,7 +228,6 @@ public class LotsOverviewController extends SuperEntityTreeController implements
                 getEntityTable().refresh();
             }
         }
-
     }
     @Override
     public void handleDeleteTreeEntity() {
