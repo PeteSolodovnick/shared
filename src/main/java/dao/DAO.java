@@ -14,7 +14,7 @@ public interface DAO<Entity, Key> {
     void updateOrSave(Entity entities);
     void delete(Entity entity);
     List<Entity> getAllRows(Entity entity);
-    List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finDate);
+    List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finDate, String field);
     List<Entity> getSomeRows(Entity entity, Key key, String field);
     List<Entity> getSomeTypeDateDocs(Entity entity, Key type, LocalDate startDate, LocalDate endDate);
 }

@@ -3,6 +3,7 @@ package address.mains;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.RefKindDocDocEntity;
 import models.references.RefTypeDocDocEntity;
+import models.tables.JournalOperationsLotsDocEntity;
 import models.tables.TableCurrentRestStuffDocEntity;
 import models.documents.DocInvoiceHeadDocEntity;
 import models.references.RefStatusInvoiceDocEntity;
@@ -36,6 +37,15 @@ public class CollectionsEntities {
     private ObservableList<TableCurrentRestStuffDocEntity> currentRestStuffData = FXCollections.observableArrayList();
     private ObservableList<DocDocsHeadDocEntity> docsData = FXCollections.observableArrayList();
     private ObservableList<TableDocsStuffDocEntity> tableDocData = FXCollections.observableArrayList();
+    private ObservableList<JournalOperationsLotsDocEntity> journalOperationsLotsDocEntities = FXCollections.observableArrayList();
+
+    public ObservableList<JournalOperationsLotsDocEntity> getJournalOperationsLotsDocEntities() {
+        return journalOperationsLotsDocEntities;
+    }
+
+    public void setJournalOperationsLotsDocEntities(ObservableList<JournalOperationsLotsDocEntity> journalOperationsLotsDocEntities) {
+        this.journalOperationsLotsDocEntities = journalOperationsLotsDocEntities;
+    }
 
     public ObservableList<TableDocsStuffDocEntity> getTableDocData() {
         return tableDocData;

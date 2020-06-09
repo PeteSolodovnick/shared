@@ -19,18 +19,18 @@ public class FactoryListEntities<T extends SuperEntity> {
         entityList.addAll(service.getAllRows(t));
         return entityList;
     }
-    public ObservableList<T> getDateListEntities() {
+    public ObservableList<T> getDateListEntities(String field) {
         ObservableList<T> entityList = FXCollections.observableArrayList();
         EntityService<T, LocalDate> service = new EntityService<>();
-        for (T entity: service.getDateRows(t, LocalDate.now().minusWeeks(1), LocalDate.now())) {
+        for (T entity: service.getDateRows(t, LocalDate.now().minusWeeks(1), LocalDate.now(), field)) {
             entityList.add(entity);
         }
         return entityList;
     }
-    public ObservableList<T> getSetDateListEntities(LocalDate startDate, LocalDate endDate) {
+    public ObservableList<T> getSetDateListEntities(LocalDate startDate, LocalDate endDate, String field) {
         ObservableList<T> entityList = FXCollections.observableArrayList();
         EntityService<T, LocalDate> service = new EntityService<>();
-        for (T entity: service.getDateRows(t, startDate, endDate)) {
+        for (T entity: service.getDateRows(t, startDate, endDate, field)) {
             entityList.add(entity);
         }
         return entityList;

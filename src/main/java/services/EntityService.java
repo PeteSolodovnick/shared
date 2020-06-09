@@ -35,8 +35,8 @@ public class EntityService<Entity, Key> {
     public List<Entity> getAllRows(Entity entity) {
         return this.entity.getAllRows(entity);
     }
-    public List<Entity> getDateRows (Entity entity, LocalDate startDate, LocalDate endDate) {
-        return this.entity.getDateRows(entity, startDate, endDate);
+    public List<Entity> getDateRows (Entity entity, LocalDate startDate, LocalDate endDate, String field) {
+        return this.entity.getDateRows(entity, startDate, endDate, field);
     }
     public List<Entity> getSomeRows (Entity entity, Key key, String field) {
         return this.entity.getSomeRows(entity, key, field);

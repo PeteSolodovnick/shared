@@ -13,20 +13,18 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="438.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.documents.invoices.InvoiceHeadOverviewController">
+<AnchorPane prefHeight="438.0" prefWidth="993.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="address.documents.journals.JournalOperationLotOverview">
    <children>
       <AnchorPane layoutX="9.0" layoutY="37.0" prefHeight="400.0" prefWidth="582.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0">
          <children>
             <TableView fx:id="entityTable" layoutX="-2.0" layoutY="30.0" prefHeight="367.0" prefWidth="923.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="30.0">
               <columns>
                 <TableColumn fx:id="idEntity" prefWidth="84.0" text="Id" />
-                <TableColumn fx:id="nameEntity" prefWidth="121.0" text="Number" />
-                  <TableColumn fx:id="date" prefWidth="136.0" text="Date" />
-                  <TableColumn fx:id="contragent" prefWidth="190.0" text="Contragent" />
-                  <TableColumn fx:id="sum" prefWidth="100.0" text="Sum" />
-                  <TableColumn fx:id="sumVat" prefWidth="101.0" text="Sum Vat" />
-                  <TableColumn fx:id="status" prefWidth="146.0" text="Status" />
-                  <TableColumn fx:id="editable" prefWidth="119.0" text="Editable" />
+                <TableColumn fx:id="lot" prefWidth="338.0" text="Lot" />
+                  <TableColumn fx:id="date" prefWidth="160.0" text="Date" />
+                  <TableColumn fx:id="typeOperation" prefWidth="163.0" text="Type Operation" />
+                  <TableColumn fx:id="sum" prefWidth="93.0" text="Sum" />
+                  <TableColumn fx:id="editable" minWidth="0.0" prefWidth="143.0" text="Editable" />
               </columns>
                <contextMenu>
                   <ContextMenu>
@@ -114,7 +112,7 @@
             <Tooltip text="Edit" />
          </tooltip>
       </Button>
-      <Button fx:id="capitalize" layoutX="594.0" layoutY="6.0" mnemonicParsing="false" onAction="#handleCapitalize" prefHeight="29.0" prefWidth="193.0" text="Провести видачу">
+      <Button fx:id="deliver" layoutX="594.0" layoutY="6.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="193.0" text="Провести видачу">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

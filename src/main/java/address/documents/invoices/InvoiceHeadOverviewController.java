@@ -63,7 +63,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
         super.setFarmFX(farm);
     }
     private void initArrays(FarmFX farm) {
-        farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities());
+        farm.getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getDateListEntities("date"));
     }
     public void showButton() {
         setSelectedInvoice((DocInvoiceHeadDocEntity) getEntityTable().getSelectionModel().getSelectedItem());
@@ -147,7 +147,7 @@ public class InvoiceHeadOverviewController extends SuperEntityController {
     public void handleFilter() {
         try {
             getEntities().clear();
-            getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue()));
+            getFarm().getReferences().setInvoiceData(new FactoryListEntities<>(new DocInvoiceHeadDocEntity()).getSetDateListEntities(startDate.getValue(), endDate.getValue(),"date"));
             getEntities().addAll(getFarm().getReferences().getInvoiceData());
         } catch (Exception e) {
 

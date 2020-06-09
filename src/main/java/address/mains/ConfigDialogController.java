@@ -4,6 +4,7 @@ import address.classifications.*;
 import address.contragents.*;
 import address.documents.invoices.InvoiceDialogController;
 import address.documents.invoices.InvoiceHeadOverviewController;
+import address.documents.journals.JournalOperationLotOverview;
 import address.documents.movies.MovieDialogController;
 import address.documents.movies.MovieOverviewController;
 import address.localities.*;
@@ -42,6 +43,15 @@ public class ConfigDialogController {
     private StorageCapitalizeController storageCapitalizeController;
     private MovieDialogController movieDialogController;
     private MovieOverviewController movieOverviewController;
+    private JournalOperationLotOverview journalOperationLotOverview;
+
+    public JournalOperationLotOverview getJournalOperationLotOverview() {
+        return journalOperationLotOverview;
+    }
+
+    public void setJournalOperationLotOverview(JournalOperationLotOverview journalOperationLotOverview) {
+        this.journalOperationLotOverview = journalOperationLotOverview;
+    }
 
     public MovieOverviewController getMovieOverviewController() {
         return movieOverviewController;

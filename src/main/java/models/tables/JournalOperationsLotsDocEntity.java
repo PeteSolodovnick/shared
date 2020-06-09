@@ -1,9 +1,9 @@
 package models.tables;
 
-import models.SuperEntity;
 import models.documents.DocDocsHeadDocEntity;
 import models.references.LotsEntity;
 import models.references.RefTypeOperationsDocEntity;
+import models.references.SuperReferenceEntity;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -12,17 +12,28 @@ import java.util.HashSet;
 
 @Entity
 @Table(name = "journal_operations_lots", schema = "public", catalog = "farm")
-public class JournalOperationsLotsDocEntity extends SuperEntity {
+public class JournalOperationsLotsDocEntity extends SuperReferenceEntity {
     private Date recTime;
     private Float sum;
     private LotsEntity refLotsId;
     private RefTypeOperationsDocEntity refTypeOperationsByTypeOperationsId;
     private DocDocsHeadDocEntity headDocEntity;
     private Collection<TableDocLotsDocEntity> tableDocLotsDocEntities = new HashSet<>();
+    private Boolean editable;
 
     public void addProduct(TableDocLotsDocEntity tableDocLotsDocEntity) {
         tableDocLotsDocEntity.setJournalOperationsLotsById(this);
         this.tableDocLotsDocEntities.add(tableDocLotsDocEntity);
+    }
+
+    @Basic
+    @Column(name = "editable")
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
     }
 
     @Basic

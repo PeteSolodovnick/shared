@@ -1,22 +1,18 @@
 package dao.implDAO;
 
 import dao.DAO;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
 import utils.HibernateSessionFactoryUtil;
 
-import javax.persistence.Entity;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
-    private SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
+    private final SessionFactory sessionFactory = HibernateSessionFactoryUtil.getSessionFactory();
 
     public SessionFactory getSessionFactory() {
         return sessionFactory;
@@ -103,21 +99,12 @@ public class EntityDaoImpl<Entity, Key> implements DAO<Entity, Key> {
         }
     }
     @Override
-    public List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finishDate) {
-     /*   try (final Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            Criteria cr = session.createCriteria(entity.getClass());
-            cr.add(Restrictions.between("date", startDate, finishDate));
-            List<Entity> results = cr.list();
-            session.getTransaction().commit();
-            session.close();
-            return results;
-        }*/
+    public List<Entity> getDateRows(Entity entity, LocalDate startDate, LocalDate finishDate, String field) {
         try (final Session session = sessionFactory.openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Entity> cr = (CriteriaQuery<Entity>) cb.createQuery(entity.getClass());
             Root<Entity> root = (Root<Entity>) cr.from(entity.getClass());
-            cr.select(root).where(cb.between(root.get("date"), startDate, finishDate));
+            cr.select(root).where(cb.between(root.get(field), startDate, finishDate));
             Query query = session.createQuery(cr);
             List<Entity> results = query.getResultList();
             session.close();

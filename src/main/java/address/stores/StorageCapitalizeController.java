@@ -35,7 +35,7 @@ public class StorageCapitalizeController extends StorageOverviewController {
         getEntitiesName().setItems(getEntities());
     }
     private void initArray(FarmFX farm){
-        ArrayList<Long> keys = new ArrayList();
+        ArrayList<Long> keys = new ArrayList<>();
         keys.add(1L);
         keys.add(2L);
         farm.getReferences().setStorageData(new FactoryListEntities<>(new StorageEntity()).getListEntitiesbyId(keys));
@@ -77,15 +77,16 @@ public class StorageCapitalizeController extends StorageOverviewController {
                 TableCurrentRestStuffDocEntity currentRestStuffDocEntity = new TableCurrentRestStuffDocEntity();
                 try {
                     currentRestStuffDocEntity = (TableCurrentRestStuffDocEntity) service.readRow(new TableCurrentRestStuffDocEntity(), keys);
-                    if (currentRestStuffDocEntity != null) {
+             //       if (currentRestStuffDocEntity != null) {
+                        assert currentRestStuffDocEntity != null:new NoResultException();
                         currentRestStuffDocEntity.setQty(currentRestStuffDocEntity.getQty() + tableInv.getQty());
                         currentRestStuffDocEntity.setSum(currentRestStuffDocEntity.getSum() + tableInv.getSum());
-                    } else {
-                        currentRestStuffDocEntity.setStorageEntityById(selectedStore);
-                        currentRestStuffDocEntity.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
-                        currentRestStuffDocEntity.setQty(tableInv.getQty());
-                        currentRestStuffDocEntity.setSum(tableInv.getSum());
-                    }
+             //       } else {
+             //           currentRestStuffDocEntity.setStorageEntityById(selectedStore);
+             //           currentRestStuffDocEntity.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
+             //           currentRestStuffDocEntity.setQty(tableInv.getQty());
+             //           currentRestStuffDocEntity.setSum(tableInv.getSum());
+             //       }
                 } catch (NoResultException e) {
                     currentRestStuffDocEntity.setStorageEntityById(selectedStore);
                     currentRestStuffDocEntity.setNomenklEntityByNomId(tableInv.getNomenklEntityByNomId());
